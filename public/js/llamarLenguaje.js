@@ -1,4 +1,4 @@
-$("#avatar").dataTable({
+$("#avatar2").dataTable({
       "language": {
         "url": "DataTables/lenguaje.js"
       },

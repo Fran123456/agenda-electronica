@@ -55,7 +55,7 @@
                               <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong>
                               </span> <span class="text-muted text-xs block">{{ Auth::user()->email }} <b class="caret"></b></span> </span> </a>
                           <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                              <li><a href="profile.html">Profile</a></li>
+                              <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Mi perfil</a></li>
                               <li class="divider"></li>
                               <li>
                                 <a href="{{ route('logout') }}"

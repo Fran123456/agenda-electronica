@@ -24,3 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //rutas para avatar 
 Route::resource('avatar', 'Avatar\AvatarController');
 //rutas para avatar 
+
+
+//perfil y edicion de perfil
+Route::resource('Perfil', 'user\perfilController');
+route::post('/updatePerfil/{id}','user\perfilController@update')->name('updatePerfil');
+//perfil y edicion de perfil

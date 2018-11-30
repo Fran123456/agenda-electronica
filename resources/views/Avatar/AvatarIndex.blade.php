@@ -41,7 +41,7 @@
 
    
 
-    <table class="table table-bordered table-hover table-striped" id="avatar">
+    <table class="table table-bordered table-hover table-striped" id="avatar2">
 
         <thead>
             <tr class="">
