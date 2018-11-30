@@ -28,7 +28,16 @@
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
+    <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
+
+    <!-- Toastr style -->
+    <link href="{{asset('css/plugins/toastr/toastr.min.css')}}" rel="stylesheet">
+
+    <!-- Toastr -->
+    <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
+ 
 <!--PLANTILLA------------------------------------------------------------------------>
+
 
 
 </head>
@@ -40,7 +49,7 @@
               <ul class="nav metismenu" id="side-menu">
                   <li class="nav-header">
                       <div class="dropdown profile-element"> <span>
-                              <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                              <img alt="image" class="img-circle" height="50px" width="50px" src="{{asset(Auth::user()->avatar_img)}}" />
                                </span>
                           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                               <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong>
@@ -65,11 +74,10 @@
                           TRIP
                       </div>
                   </li>
+
+
                   <li>
-                      <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level collapse">
-                          <li><a href="index.html">Dashboard v.1</a></li>
-                      </ul>
+                    <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                   </li>
               </ul>
           </div>
@@ -121,7 +129,7 @@
 <!--PLANTILLA----------------------------------------------->
 
 <!-- Mainly scripts -->
-    <script src="{{asset('js/jquery-3.1.1.min.js')}}"></script>
+    
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -156,8 +164,16 @@
     <!-- ChartJS-->
     <script src="{{asset('js/plugins/chartJs/Chart.min.js')}}"></script>
 
-    <!-- Toastr -->
-    <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
+    
+
+
+
+
+
+    <!--DATATABLE-->
+    <link rel="stylesheet" type="text/css" href="{{asset('DataTables/datatables.min.css')}}"/>
+    <script type="text/javascript" src="{{asset('DataTables/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/llamarLenguaje.js')}}"></script>
 
 
 <!--PLANTILLA----------------------------------------------->

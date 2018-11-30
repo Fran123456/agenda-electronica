@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//rutas para avatar 
+Route::resource('avatar', 'Avatar\AvatarController');
+//rutas para avatar 
