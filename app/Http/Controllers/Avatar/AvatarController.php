@@ -10,6 +10,11 @@ use App\Avatar;
 
 class AvatarController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +48,7 @@ class AvatarController extends Controller
             'nombre' => $request['nombre'],
             'url'=>$request->file('url'),
         ]);
-        
+
         if($request->file('url')){
              $path = Storage::disk('public')->put('avatars',$request->file('url'));
              $guide->fill(['url'=> asset($path)])->save();

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\Dias;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Avatar;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-class perfilController extends Controller
+use App\DiasAsueto;
+
+class DiasAsuetoController extends Controller
 {
 
     public function __construct()
@@ -21,7 +20,8 @@ class perfilController extends Controller
      */
     public function index()
     {
-        //
+        $days = DiasAsueto::all();
+        return view('Asueto.AsuetoIndex', compact('days'));
     }
 
     /**
@@ -30,8 +30,8 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   $fecha_actual=date("d/m/Y");
+        return view('Asueto.AsuetoCreate', compact('days'));
     }
 
     /**
@@ -42,7 +42,8 @@ class perfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dia = DiasAsueto::create($request->all());
+        return redirect()->route('dayOFF.index')->with('agregado' , 'Elemento agregado correctamente');
     }
 
     /**
@@ -53,7 +54,7 @@ class perfilController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -64,11 +65,8 @@ class perfilController extends Controller
      */
     public function edit($id)
     {
-        $perfil = User::find($id);
-        $urls = Avatar::all();
-        //$urls = array('perfil/plume.png','perfil/pvz2.png','perfil/pyrojump.png','perfil/quadropus.png','perfil/scribblenauts.png','perfil/seesmic.png','perfil/sonic.png');
-
-        return view('users.verPerfil', compact('perfil','urls'));
+        $dia = DiasAsueto::where('id' , $id)->first();
+        return view('Asueto.AsuetoEdit', compact('dia'));
     }
 
     /**
@@ -80,15 +78,9 @@ class perfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $perfil = User::find($id);
-        $perfil->fill($request->all())->save();
-      /*$perfil->name = $request->get('name');
-        $perfil->email = $request->get('email');
-        $perfil->img = $request->get('img');*/
-
-      return redirect()->route('Perfil.edit', $id)->with('agregado', 'Perfil editado correctamente');
-
+            $category = DiasAsueto::find($id);
+            $category->fill($request->all())->save();
+            return redirect()->route('dayOFF.index')->with('editado' , 'Elemento agregado correctamente');
     }
 
     /**
@@ -99,6 +91,7 @@ class perfilController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $del = DiasAsueto::find($id)->delete();
+      return back()->with('eliminado','Eliminado con exito');
     }
 }

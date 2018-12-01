@@ -42,7 +42,7 @@
                            <input type="text" disabled="true" id="name" name="name" value="{{$perfil->name}}" class="form-control">
                            <br>
                        </div>
-                       
+
                        <div class="col-md-12">
                            <label>Correo electronico:</label>
                            <input type="text" name="email" id="email" readonly="" value="{{$perfil->email}}" class="form-control">
@@ -72,12 +72,12 @@
                        <div class="col-md-12 text-right">
                         <div id="b"><button  onclick="editar();" type="button" class="btn btn-info">Editar</button></div>
                         <div id="c"></div>
-                           
+
                        </div>
                    </div>
-                  
+
               </div>
-             
+
             </form>
 
         </div>
@@ -85,9 +85,9 @@
 </div>
 <script type="text/javascript">
 
- 
+
     function editar(){
-       
+
         $('#name').prop('disabled', false);
         $('#avatar').prop('disabled', false);
 

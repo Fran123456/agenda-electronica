@@ -35,7 +35,7 @@
 
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
- 
+
 <!--PLANTILLA------------------------------------------------------------------------>
 
 
@@ -75,6 +75,9 @@
                       </div>
                   </li>
 
+                  <li>
+                    <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
+                  </li>
 
                   <li>
                     <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
@@ -129,7 +132,7 @@
 <!--PLANTILLA----------------------------------------------->
 
 <!-- Mainly scripts -->
-    
+
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
@@ -164,7 +167,7 @@
     <!-- ChartJS-->
     <script src="{{asset('js/plugins/chartJs/Chart.min.js')}}"></script>
 
-    
+
 
 
 
