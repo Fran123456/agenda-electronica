@@ -23,7 +23,7 @@
       </script>
         @if(session('agregado'))
           <script type="text/javascript">
-                        toastr.success("Agregado correctamente", "Exito");
+                        toastr.success("Tarea asignada correctamente", "Exito");
           </script>
        @endif
 
@@ -44,10 +44,11 @@
 
 
     <div class="col-md-6">
-        <h3>Gestión de días no laborales</h3>
+        <h3>Gestión de tareas</h3>
     </div>
     <div class="col-md-6 text-right">
-        <a href="{{route('dayOFF.create')}}" class="btn btn-success">Agrega</a>
+        <a href="{{route('Tareas.create')}}" class="btn btn-success"> <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+ Asignar tarea</a>
         <br>
         <br>
     </div>
@@ -55,18 +56,20 @@
         <thead>
             <tr class="">
                 <th width="60">N°</th>
-                <th width="80">Fecha</th>
-                <th>Descripción</th>
+                <th width="80">Título</th>
+                <th>Estado</th>
+                <th>Fecha finalización</th>
                 <th width="100">Editar</th>
                 <th width="100">Eliminar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($days as $key => $value)
+            @foreach($tareas as $key => $value)
             <tr>
                 <td>{{$key +1}}</td>
-                <td>{{$value->fecha}}</td>
-                <td>{{ $value->descripcion}}</td>
+                <td>{{$value->Titulo}}</td>
+                <td>{{ $value->estado}}</td>
+                <td>{{ $value->fecha_finalizacion}}</td>
                 <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
                   <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                 <td>

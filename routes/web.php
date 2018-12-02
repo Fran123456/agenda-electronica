@@ -39,3 +39,4 @@ route::post('/destroyDays/{id}','Dias\DiasAsuetoController@destroy')->name('dest
 
 
 Route::resource('Tareas', 'tarea\TareaController');
+Route::get('listarUsers', 'tarea\TareaController@list_users')->name('listarUsers');

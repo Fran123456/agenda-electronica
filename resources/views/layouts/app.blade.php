@@ -75,6 +75,20 @@
                       </div>
                   </li>
 
+
+                  <li>
+                      <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-second-level collapse">
+                          <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
+                          <li><a href="dashboard_2.html">Tareas sin iniciar</a></li>
+                          <li><a href="dashboard_2.html">Tareas en proceso</a></li>
+                          <li><a href="dashboard_3.html">Tareas finalizadas</a></li>
+                          <li><a href="dashboard_4_1.html">Tareas no cumplidas</a></li>
+                          <li><a href="dashboard_5.html"></a></li>
+                      </ul>
+                  </li>
+
+
                   <li>
                     <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
                   </li>
@@ -82,6 +96,8 @@
                   <li>
                     <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                   </li>
+
+
               </ul>
           </div>
       </nav>

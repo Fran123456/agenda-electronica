@@ -22,7 +22,7 @@ class AvatarController extends Controller
      */
     public function index()
     {
-        $avatars = Avatar::paginate(10);
+        $avatars = Avatar::all();
         return view('Avatar.Avatarindex', compact('avatars'));
     }
 
