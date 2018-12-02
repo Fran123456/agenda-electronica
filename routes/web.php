@@ -36,3 +36,6 @@ Route::resource('dayOFF', 'Dias\DiasAsuetoController');
 route::post('/updateDay/{id}','Dias\DiasAsuetoController@update')->name('updateDay');
 route::post('/destroyDays/{id}','Dias\DiasAsuetoController@destroy')->name('destroyDays');
 //rutas para dias libre
+
+
+Route::resource('Tareas', 'tarea\TareaController');
