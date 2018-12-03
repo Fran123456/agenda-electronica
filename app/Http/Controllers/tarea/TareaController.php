@@ -10,6 +10,7 @@ use App\Tarea_Usuario;
 use App\User;
 use App\Tarea;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TareaController extends Controller
 {
@@ -101,7 +102,17 @@ class TareaController extends Controller
      */
     public function show($id)
     {
-        //
+        $tarea = Tarea::where('codigo_tarea', $id)->first();
+        $colaboradores = Tarea_Usuario::where('tarea_id', $id)->get();
+ 
+       $perfiles = array();
+       foreach ($colaboradores as $key => $value) {
+         $perfiles[$key] = User::where('id', $value->user_id)->first();
+       }
+
+       $jefe = User::where('id', $tarea->creador)->first();
+
+       return view('Tarea.TareaShow', compact('tarea', 'perfiles', 'jefe'));
     }
 
     /**
@@ -154,6 +165,21 @@ class TareaController extends Controller
     $number2 = rand(99999,10000);
     $variable = $prefijo . "-". $uno . "-" . $number . "-". $dos . "-". $number2. "-". $tres;
     return $variable;
+   }
+
+   public function cambio_estado_finalizado($id){
+      DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Finalizado"]);
+      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+   }
+
+   public function cambio_estado_proceso($id){
+      DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Proceso"]);
+      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+   }
+
+   public function cambio_estado_inicio($id){
+      DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Inicio"]);
+      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
    }
 
 }

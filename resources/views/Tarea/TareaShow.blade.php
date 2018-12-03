@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
 <style type="text/css">
   .bordes{
     border: solid 1px #4ACC9F;
@@ -29,36 +31,11 @@
                         </div>
                         <div class="ibox-content">
                                       
-
-
-
                             <div class=" animated fadeInRight">
-                            <div class="mail-box-header">
-                                <div class="pull-right tooltip-demo">
-                                    <a href="mailbox.html" class="btn btn-white btn-sm" ><i class="fa fa-trash-o"></i> </a>
-                                </div>
-                                <div class="mail-tools tooltip-demo m-t-md">
-                                    <h3>
-                                        <span class="font-normal"></span>{{$notificacion->titulo}}
-                                    </h3>
-                                    <h5>
-                                        <span class="pull-right font-normal">{{ $notificacion->created_at }}</span>
-                                        <span class="font-normal">Enviado por: </span>{{ $creador->name}}
-                                        <br>
-                                        <br>
-                                        <span class="font-normal">Correo: </span>{{$creador->email}}
-                                    </h5>
-                                </div>
-                            </div>
-                                <div class="mail-box">
 
-                                          <div class="mail-body">
-                                            {!! $notificacion->cuerpo !!}
-                                          </div>
+                                <div class="mail-box">
                                     @if($tarea != "")
                                           <div class="mail-attachment">
-                                             
-                                              <h4>Tarea asignada:</h4> 
                                                   <div class="panel panel-primary">
                                                       <div class="panel-heading">
                                                           <h4>{{$tarea->Titulo}}</h4>
@@ -74,7 +51,7 @@
                                                       </div>
                                                   </div>
                                                
-                                                  <div class="well"><H4>COLABORADORES:</H4>
+                                                  <div class="well"><H4>INTEGRANTES</H4>
                                                       
                                                       <div class="container">
                                                           <div class="row">
@@ -88,9 +65,27 @@
                                                                     <span>
                                                                           Correo: {{$perfiles[$i]->email}}
                                                                     </span>
+                                                                    <span>
+                                                                          COLABORADOR
+                                                                    </span>
                                                                      </div>
                                                               </div>
                                                               @endfor
+
+                                                              <div class="col-md-2 bordes">
+                                                                    <div class="espacios text-center">
+                                                                        <h5 class="">{{$jefe->name}}</h5>
+                                                                        <img width="50px" height="50px" src="{{ $jefe->avatar_img }}">
+                                                                    </div>
+                                                                    <div class="ibox-content text-center">
+                                                                    <span>
+                                                                          Correo: {{$jefe->email}}
+                                                                    </span>
+                                                                    <span>
+                                                                          ASIGNO TAREA
+                                                                    </span>
+                                                                     </div>
+                                                              </div>
                                                           </div>
                                                         </div>                                                        
 
@@ -108,6 +103,7 @@
           </div>
     </div>
 </div>
+
 
 
 @endsection

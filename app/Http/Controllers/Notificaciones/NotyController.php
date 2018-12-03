@@ -39,7 +39,7 @@ class NotyController extends Controller
      */
     public function create()
     {
-        //
+        return view('MyNotificaciones.NotificacionCreate');
     }
 
     /**
@@ -49,8 +49,29 @@ class NotyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  //CREACION DE NOTIFICACION //
+        $codigoNoti = $this->code('Noty');
+        $Notificacion = Notificacion::create([
+          'codigo_noty' => $codigoNoti,
+          'titulo'=>$request['titulo'],
+          'cuerpo'=>$request['mensaje'],
+          'creador'=>Auth::user()->id,
+      ]);
+      //CREACION DE NOTIFICACION//
+
+    //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
+     $users = $request->users;
+     for ($i=0; $i <count($users) ; $i++) {
+          $notyUsuarios =  Notificacion_Usuario::create([
+           'notificacion_id' => $codigoNoti,
+           'user_id' => $users[$i],
+           'estado' => 'SIN LEER'
+          ]);
+     }
+
+      return redirect()->route('Notificaciones.index')->with('agregado' , 'Elemento agregado correctamente');
+
+
     }
 
     /**
@@ -61,7 +82,16 @@ class NotyController extends Controller
      */
     public function show($id)
     {
-        //
+        $noti = Notificacion::where('id', $id)->first();
+
+        $notixuser = Notificacion_Usuario::where('notificacion_id', $noti->codigo_noty)->get();
+
+        $perfiles = array();
+        foreach ($notixuser as $key => $value) { 
+          $perfiles[$key] = User::where('id', $value->user_id)->first();
+        }
+
+        return view('MyNotificaciones.Show', compact('noti', 'perfiles'));
     }
 
     /**
@@ -117,4 +147,28 @@ class NotyController extends Controller
 
        return view('Notificaciones.NotificacionCreate', compact('notificacion', 'creador', 'tarea', 'perfiles'));
     }
+
+
+    public function send_noty(){
+       
+        $misNotis = Notificacion::where('creador', Auth::user()->id)->get();
+       /* $noty = Notificacion_Usuario::orderBy('created_at','desc')->where('user_id' , Auth::user()->id)->get();
+        $notyAll = array();
+        foreach ($noty as $key => $value) {
+         $notyAll[$key] = Notificacion::where('codigo_noty' , $value->notificacion_id)->first();
+        }
+*/
+        return view('MyNotificaciones.SendIndex', compact('misNotis'));
+    }
+
+
+    public function code($prefijo) {
+    $uno = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+    $dos = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+    $tres = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+    $number = rand(1000000, 9999999). "-" . rand(1000, 9999);
+    $number2 = rand(99999,10000);
+    $variable = $prefijo . "-". $uno . "-" . $number . "-". $dos . "-". $number2. "-". $tres;
+    return $variable;
+   }
 }

@@ -52,8 +52,9 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-
+    {   $perfil = User::find($id);
+        $urls = Avatar::all();
+        return view('users.All', compact('perfil','urls'));
     }
 
     /**

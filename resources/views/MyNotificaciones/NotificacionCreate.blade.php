@@ -13,7 +13,9 @@
     margin-bottom: 10px;
   }
 </style>
+<script src="{{asset('ckeditor/ckeditor.js')}}">
 
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -28,83 +30,64 @@
                             </div>
                         </div>
                         <div class="ibox-content">
+                            <form class="form-horizontal " action="{{route('Notificaciones.store')}}" method="post" enctype="multipart/form-data">
+                              {{ csrf_field() }}
+                                <div class="form-group">
+                                   <label class="col-lg-2 control-label">Titulo:</label>
+                                    <div class="col-lg-10">
+                                           <input required type="text" name="titulo" class="form-control">
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <label class="col-lg-2 control-label">Mensaje de notificación:</label>
+                                     <div class="col-lg-10">
+                                        <textarea required name="mensaje" class="form-control" rows="8" required></textarea>
+                                     </div>
+                                  </div>
+                                 <div class="form-group">
+                                   <label class="col-lg-2 control-label">Usuarios a enviar:</label>
+                                    <div class="col-lg-10">
+                                              <select required id="select" required class="form-control" name="users[]" multiple>
+
+                                              </select>
+                                    </div>
+                                 </div>
+                                 <div class="form-group">
+                                    <div class="col-lg-12 text-center">
+                                      <br>
+                                          <button class="btn btn-success" type="submit">Enviar</button>
+                                    </div>
+                                 </div>
+                            </form>
+                              
                                       
-
-
-
-                            <div class=" animated fadeInRight">
-                            <div class="mail-box-header">
-                                <div class="pull-right tooltip-demo">
-                                    <a href="mailbox.html" class="btn btn-white btn-sm" ><i class="fa fa-trash-o"></i> </a>
-                                </div>
-                                <div class="mail-tools tooltip-demo m-t-md">
-                                    <h3>
-                                        <span class="font-normal"></span>{{$notificacion->titulo}}
-                                    </h3>
-                                    <h5>
-                                        <span class="pull-right font-normal">{{ $notificacion->created_at }}</span>
-                                        <span class="font-normal">Enviado por: </span>{{ $creador->name}}
-                                        <br>
-                                        <br>
-                                        <span class="font-normal">Correo: </span>{{$creador->email}}
-                                    </h5>
-                                </div>
-                            </div>
-                                <div class="mail-box">
-
-                                          <div class="mail-body">
-                                            {!! $notificacion->cuerpo !!}
-                                          </div>
-
-                                          <div class="mail-attachment">
-                                              <h4>Tarea asignada:</h4> 
-                                                  <div class="panel panel-primary">
-                                                      <div class="panel-heading">
-                                                          <h4>{{$tarea->Titulo}}</h4>
-                                                      </div>
-                                                      <div class="panel-body">
-                                                          {!! $tarea->Cuerpo !!}
-                                                      </div>
-                                                      <div class="panel-footer">
-                                                          Fecha finalización: {{ $tarea->fecha_finalizacion}}
-                                                      </div>
-                                                      <div class="panel-footer">
-                                                          Estado: <span class="label label-default">{{ $tarea->estado}}</span>
-                                                      </div>
-                                                  </div>
-                                                  <div class="well"><H4>COLABORADORES:</H4>
-                                                      
-                                                      <div class="container">
-                                                          <div class="row">
-                                                            @for($i = 0; $i <count($perfiles); $i++)
-                                                            <div class="col-md-3 bordes">
-                                                                    <div class="espacios text-center">
-                                                                        <h5 class="">{{$perfiles[$i]->name}}</h5>
-                                                                        <img width="50px" height="50px" src="{{ $perfiles[$i]->avatar_img }}">
-                                                                    </div>
-                                                                    <div class="ibox-content text-center">
-                                                                    <span>
-                                                                          Correo: {{$perfiles[$i]->email}}
-                                                                    </span>
-                                                                     </div>
-                                                              </div>
-                                                              @endfor
-                                                          </div>
-                                                        </div>                                                        
-
-                                                  </div>
-
-                                          </div>
-                                                  <div class="clearfix"></div>
-                                          </div>
-                                      </div>
-
-
                         </div>
               </div>
           </div>
     </div>
 </div>
-
+<script type="text/javascript">
+   CKEDITOR.replace( 'editor1' );
+</script>
+<script type="text/javascript">
+  var html = "";
+$.ajax({
+   type: 'ajax',
+   method: 'get',
+   url: '{{route('listarUsers')}}',
+   async: false,
+   dataType: 'json',
+   success: function(data){
+    for (var i = 0; i < data.length; i++) {
+      html = html + '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+    }
+    console.log(html);
+    $('#select').append(html);
+   },
+   error: function(){
+       alert("error");
+   }
+});
+</script>
 
 @endsection

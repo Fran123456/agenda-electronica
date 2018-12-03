@@ -55,7 +55,9 @@
                               <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong>
                               </span> <span class="text-muted text-xs block">{{ Auth::user()->email }} <b class="caret"></b></span> </span> </a>
                           <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                              <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Mi perfil</a></li>
+                              <li><a href="{{route('Perfil.show', Auth::user()->id) }}">Mi perfil</a></li>
+                              <li class="divider"></li>
+                              <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Edita perfil</a></li>
                               <li class="divider"></li>
                               <li>
                                 <a href="{{ route('logout') }}"
@@ -75,20 +77,24 @@
                       </div>
                   </li>
 
-
+                
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
+                        @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
                           <li><a href="dashboard_2.html">Tareas sin iniciar</a></li>
                           <li><a href="dashboard_2.html">Tareas en proceso</a></li>
                           <li><a href="dashboard_3.html">Tareas finalizadas</a></li>
                           <li><a href="dashboard_4_1.html">Tareas no cumplidas</a></li>
-                          <li><a href="dashboard_5.html"></a></li>
+                          <li><a href="dashboard_5.html">Mis tareas</a></li>
+                        @else
+                        <li><a href="dashboard_5.html">Mis tareas</a></li>
+                        @endif
                       </ul>
                   </li>
 
-
+                  @if(Auth::user()->rol =="super")
                   <li>
                     <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
                   </li>
@@ -96,10 +102,16 @@
                   <li>
                     <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                   </li>
+                  @endif
 
 
                   <li>
-                    <a href="{{ route('Notificaciones.index')}}"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Mis notificaciones</span></a>
+
+                    <a href="Tareas1.index"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-second-level collapse">
+                          <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
+                          <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
+                      </ul>
                   </li>
 
 

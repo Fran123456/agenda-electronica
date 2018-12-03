@@ -44,7 +44,7 @@
 
 
     <div class="col-md-6">
-        <h3>Gestión de notificaciones recibidas</h3>
+        <h3>Gestión de notificaciones enviadas</h3>
     </div>
     <div class="col-md-6 text-right">
         <a href="{{route('Notificaciones.create')}}" class="btn btn-success"> <i class="fa fa-thumb-tack" aria-hidden="true"></i>
@@ -57,20 +57,18 @@
             <tr class="">
                 <th width="60">N°</th>
                 <th >Título</th>
-                <th>Estado</th>
                  <th>Fecha</th>
                 <th width="100">Ver</th>
                 <th width="100">Eliminar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($noty as $key => $value)
+            @foreach($misNotis as $key => $value)
             <tr>
                 <td>{{$key+1}}</td>
-                <td>{{$notyAll[$key]->titulo}}</td>
-                <td>{{ $value->estado}}</td>
+                <td>{{$value->titulo}}</td>
                 <td>{{$value->created_at}}</td>
-                <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->notificacion_id)}}">
+                <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->codigo_noty)}}">
                   <i class="fa fa-eye" aria-hidden="true"></i></a></td>
                 <td>
                    {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}

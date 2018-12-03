@@ -37,11 +37,16 @@ route::post('/updateDay/{id}','Dias\DiasAsuetoController@update')->name('updateD
 route::post('/destroyDays/{id}','Dias\DiasAsuetoController@destroy')->name('destroyDays');
 //rutas para dias libre
 
-
+//tareas
 Route::resource('Tareas', 'tarea\TareaController');
 Route::get('listarUsers', 'tarea\TareaController@list_users')->name('listarUsers');
+Route::get('cambiar-estado-finalizado/{id}', 'tarea\TareaController@cambio_estado_finalizado')->name('cambiar-estado-finalizado');
+Route::get('cambiar-estado-proceso/{id}', 'tarea\TareaController@cambio_estado_proceso')->name('cambiar-estado-proceso');
+Route::get('cambiar-estado-inicio/{id}', 'tarea\TareaController@cambio_estado_inicio')->name('cambiar-estado-inicio');
+//tareas
 
 
 //rutas para administracion de notificaciones
 Route::resource('Notificaciones', 'Notificaciones\NotyController');
 Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notificacion')->name('nueva-notificacion');
+Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')->name('notificaciones-enviadas');
