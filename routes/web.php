@@ -40,3 +40,8 @@ route::post('/destroyDays/{id}','Dias\DiasAsuetoController@destroy')->name('dest
 
 Route::resource('Tareas', 'tarea\TareaController');
 Route::get('listarUsers', 'tarea\TareaController@list_users')->name('listarUsers');
+
+
+//rutas para administracion de notificaciones
+Route::resource('Notificaciones', 'Notificaciones\NotyController');
+Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notificacion')->name('nueva-notificacion');

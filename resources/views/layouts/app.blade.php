@@ -98,6 +98,11 @@
                   </li>
 
 
+                  <li>
+                    <a href="{{ route('Notificaciones.index')}}"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Mis notificaciones</span></a>
+                  </li>
+
+
               </ul>
           </div>
       </nav>

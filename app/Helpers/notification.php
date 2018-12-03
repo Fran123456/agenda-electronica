@@ -13,11 +13,12 @@ class Noty {
     public static function notification($user_id) {
         $noty = DB::table('notificacion_user')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
         $html ="";
-       foreach ($noty as $key => $value) {
+    if(count($noty) > 0){
+         foreach ($noty as $key => $value) {
          $informacion = DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
          $html = $html.'<li class="divider"></li>'.
          '<li>'.
-             '<a href="profile.html">'.
+             '<a href="'. route('nueva-notificacion',$value->notificacion_id) .'">'.
                  '<div>'.
                      '<i class="fa fa-comment-o" aria-hidden="true"></i> ' . $informacion->titulo .
                      '<span class="pull-right text-muted small">'. substr($informacion->created_at, 0, 10) .' a las: '. substr($informacion->created_at, 10, 15) .'</span><br>'.
@@ -25,6 +26,10 @@ class Noty {
              '</a>'.
          '</li><li class="divider"></li>';
        }
+    }else{
+    $html ="NO HAY NOTIFICACIONES";
+    }
+       
        return $html;
     }
 
