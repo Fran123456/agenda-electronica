@@ -69,8 +69,8 @@ form input[type='email'], form input[type="text"], form input[type='password'] {
     -webkit-appearance: none;
     box-sizing: border-box;
     width: 100%;
-    height: 65px;
-    font-size: 1.55em;
+    height: 40px;
+    font-size: 1.0em;
     color: #4b647c;
     font-weight: 600;
     font-family: inherit;
@@ -85,7 +85,7 @@ form input[type='email']:focus, form input[type="text"]:focus, form input[type='
 }
 
 form label {
-    margin: 0 0 12px;
+    margin: 0 0 5px;
     display: block;
     font-size: 1.25em;
     color: #3d5062;
