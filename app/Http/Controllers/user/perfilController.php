@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Avatar;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Notificacion_Usuario;
+use App\Notificacion;
+use App\Tarea_Usuario;
+use App\Tarea;
+use Illuminate\Support\Facades\DB;
+
 class perfilController extends Controller
 {
 
@@ -52,9 +58,25 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   $perfil = User::find($id);
-        $urls = Avatar::all();
-        return view('users.All', compact('perfil','urls'));
+    {   
+       $allTask = count(Tarea_Usuario::where('user_id', $id)->get());
+       $Task = Tarea_Usuario::where('user_id', $id)->get();
+
+      $fin = 0;
+      $proceso = 0;
+       foreach ($Task as $key => $value) {
+           $aux = Tarea::where('codigo_tarea', $value->tarea_id)->first();
+            if($aux->estado = "Finalizado"){
+               $fin++;
+            }
+
+            if($aux->estado = "Proceso"){
+               $proceso++;
+            }
+
+       }
+
+        return view('users.All', compact('allTask', 'fin', 'proceso', 'id'));
     }
 
     /**
