@@ -135,7 +135,7 @@
           </div>--->
 
           <div class="navbar-header">
-              <a class="navbar-minimalize minimalize-styl-2 " href="#"> <img width="45" height="45" src="yeti.png" alt=""> YETI-TASK</a>
+              <a class="navbar-minimalize minimalize-styl-2 " href="#"> <img width="45" height="45" src="{{asset('yeti.png')}}" alt=""> YETI-TASK</a>
           </div>
 
           <!--<div class="navbar-header">
