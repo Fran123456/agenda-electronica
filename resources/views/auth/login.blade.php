@@ -198,12 +198,24 @@ form button:hover, form button:active {
     <div class="inputGroup inputGroup1">
       <label for="email1">Correo</label>
       <input required type="text" id="email" name="email" class="email" maxlength="256"/>
+
+      @if ($errors->has('email'))
+          <span class="help-block">
+              <strong>{{ $errors->first('email') }}</strong>
+          </span>
+      @endif
       <p class="helper helper1"></p>
       <span class="indicator"></span>
     </div>
     <div class="inputGroup inputGroup2">
       <label for="password">Contraseña</label>
-      <input required type="password" id="password" name="password" class="password" />
+      <input  value="{{ old('email') }}" required type="password" id="password" name="password" class="password" />
+
+      @if ($errors->has('password'))
+          <span class="help-block">
+              <strong>{{ $errors->first('password') }}</strong>
+          </span>
+      @endif
     </div>
     <div class="inputGroup inputGroup3">
       <button id="login" type="submit">Ingresa</button>

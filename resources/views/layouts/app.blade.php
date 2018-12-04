@@ -37,7 +37,14 @@
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
 
 <!--PLANTILLA------------------------------------------------------------------------>
-
+<style media="screen">
+.minimalize-styl-2 {
+  padding: 4px 12px;
+  margin: 5px 5px 5px 5px;
+  font-size: 14px;
+  float: left;
+}
+</style>
 
 
 </head>
@@ -73,11 +80,11 @@
                           </ul>
                       </div>
                       <div class="logo-element">
-                          TRIP
+                          YETI
                       </div>
                   </li>
 
-                
+
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
@@ -106,7 +113,6 @@
 
 
                   <li>
-
                     <a href="Tareas1.index"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
@@ -116,16 +122,29 @@
 
 
               </ul>
+
           </div>
+
       </nav>
 
       <div id="page-wrapper" class="gray-bg">
           <div class="row border-bottom">
           <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-          <div class="navbar-header">
+          <!--<div class="navbar-header">
               <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+          </div>--->
+
+          <div class="navbar-header">
+              <a class="navbar-minimalize minimalize-styl-2 " href="#"> <img width="45" height="45" src="yeti.png" alt=""> YETI-TASK</a>
           </div>
+
+          <!--<div class="navbar-header">
+              <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+          </div>-->
+
               <ul class="nav navbar-top-links navbar-right">
+
+
 
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
