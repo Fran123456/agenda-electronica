@@ -26,7 +26,14 @@
 
 
 </head>
-<body class="gray-bg">
+<style media="screen">
+.body{
+  background-image: url("login2/login.jpg");
+  background-repeat: no-repeat;
+background-position: 50% 50%;
+}
+</style>
+<body class="body">
 
 
   @yield('content')
