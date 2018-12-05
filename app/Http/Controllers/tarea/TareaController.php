@@ -26,8 +26,9 @@ class TareaController extends Controller
      */
     public function index()
     {
-       $tareas = Tarea::all();
-        return view('Tarea.TareaIndex' , compact('tareas'));
+        $tareas = Tarea::all();
+        $titulo = "Gestión de tareas";
+        return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
     }
 
     /**
@@ -156,6 +157,18 @@ class TareaController extends Controller
     echo json_encode($users);
   }
 
+  public function MyTask(){
+      $titulo ="Gestión de mis tareas asignadas";
+        $tareasxuser = Tarea_Usuario::where('user_id', Auth::user()->id)->get();
+        
+        $tareas = array();
+        foreach ($tareasxuser as $key => $value) {
+          $tareas[$key] = Tarea::where('codigo_tarea', $value->tarea_id)->first();
+        }
+        
+        return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
+  }
+
 
   public function code($prefijo) {
     $uno = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
@@ -169,17 +182,65 @@ class TareaController extends Controller
 
    public function cambio_estado_finalizado($id){
       DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Finalizado"]);
+
+     //generamos mensaje
+      $mensaje = Auth::user()->name . " ha cambiado el estado de la tarea ha FINALIZADO.";
+      $titulo = "CAMBIO DE ESTADO EN TAREA";
+      $this->SendNotificacionAll($id, $mensaje, $titulo);
+
       return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
    }
 
    public function cambio_estado_proceso($id){
       DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Proceso"]);
+
+
+      //generamos mensaje
+      $mensaje = Auth::user()->name . " ha cambiado el estado de la tarea ha EN PROCESO.";
+      $titulo = "CAMBIO DE ESTADO EN TAREA";
+      $this->SendNotificacionAll($id, $mensaje, $titulo);
+
       return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
    }
 
    public function cambio_estado_inicio($id){
       DB::table('tareas')->where('codigo_tarea', $id)->update(['estado' => "Inicio"]);
+
+      //generamos mensaje
+      $mensaje = Auth::user()->name . " ha cambiado el estado de la tarea ha INICIO.";
+      $titulo = "CAMBIO DE ESTADO EN TAREA";
+      $this->SendNotificacionAll($id, $mensaje, $titulo);
       return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+   }
+
+   //genera notificacion al cambiar de estado
+   public function SendNotificacionAll($id_tarea, $mensaje = null, $titulo = null){
+      $tarea = Tarea::where('codigo_tarea', $id_tarea)->first();
+
+      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
+        $codigoNoty = $this->code('Noty');
+        $tituloGenerico = $titulo;
+        $noty = Notificacion::create([
+         'codigo_noty' => $codigoNoty,
+         'titulo' => $tituloGenerico,
+         'cuerpo' => $mensaje,
+         'creador' => Auth::user()->id,
+         'tarea_id' => $tarea->codigo_tarea
+       ]);
+     //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
+
+
+     $users = Tarea_Usuario::where('tarea_id', $tarea->codigo_tarea)->get();
+    //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
+     foreach ($users as $key => $value) {
+       $notyUsuarios =  Notificacion_Usuario::create([
+           'notificacion_id' => $codigoNoty,
+           'user_id' => $value->user_id,
+           'estado' => 'SIN LEER'
+          ]);
+     }
+   //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
+
    }
 
 }

@@ -60,7 +60,7 @@
 
 
     <div class="col-md-6">
-        <h3>Gestión de tareas</h3>
+        <h3>{{ $titulo }}</h3>
     </div>
     <div class="col-md-6 text-right">
         <a href="{{route('Tareas.create')}}" class="btn btn-success"> <i class="fa fa-thumb-tack" aria-hidden="true"></i>
@@ -79,8 +79,10 @@
                 <th class="text-center" width="40">En proceso</th>
                 <th class="text-center" width="40">Finalizar</th>
                 <th class="text-center" width="30">Ver</th>
+                 @if(Auth::user()->rol =="super")
                 <th class="text-center" width="30">Editar</th>
                 <th class="text-center" width="30">Eliminar</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -108,6 +110,8 @@
 
                 <td><a class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
                   <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+
+                @if(Auth::user()->rol =="super")
                 <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
                   <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                 <td>
@@ -117,6 +121,7 @@
                         </button>
                     {!! Form::close() !!}
                  </td>
+                 @endif
             </tr>
             @endforeach
         </tbody>

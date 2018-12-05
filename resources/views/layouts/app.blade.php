@@ -94,9 +94,9 @@
                           <li><a href="dashboard_2.html">Tareas en proceso</a></li>
                           <li><a href="dashboard_3.html">Tareas finalizadas</a></li>
                           <li><a href="dashboard_4_1.html">Tareas no cumplidas</a></li>
-                          <li><a href="dashboard_5.html">Mis tareas</a></li>
+                         <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @else
-                        <li><a href="dashboard_5.html">Mis tareas</a></li>
+                        <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @endif
                       </ul>
                   </li>

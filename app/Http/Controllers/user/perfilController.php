@@ -11,6 +11,7 @@ use App\Notificacion_Usuario;
 use App\Notificacion;
 use App\Tarea_Usuario;
 use App\Tarea;
+use App\DiasAsueto;
 use Illuminate\Support\Facades\DB;
 
 class perfilController extends Controller
@@ -76,7 +77,11 @@ class perfilController extends Controller
 
        }
 
-        return view('users.All', compact('allTask', 'fin', 'proceso', 'id'));
+       $dias = DiasAsueto::paginate(10);
+       $userschidos = User::paginate(10);
+
+       $miProfile = User::find($id);
+        return view('users.All', compact('allTask', 'fin', 'proceso', 'id','dias', 'userschidos', 'miProfile'));
     }
 
     /**

@@ -24,7 +24,7 @@ class Noty {
                      '<span class="pull-right text-muted small">'. substr($informacion->created_at, 0, 10) .' a las: '. substr($informacion->created_at, 10, 15) .'</span><br>'.
                  '</div>'.
              '</a>'.
-         '</li><li class="divider"></li>';
+         '</li><br><li class="divider"></li>';
        }
     }else{
     $html ="NO HAY NOTIFICACIONES";
