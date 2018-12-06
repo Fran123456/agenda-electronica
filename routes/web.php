@@ -46,12 +46,18 @@ Route::get('cambiar-estado-inicio/{id}', 'tarea\TareaController@cambio_estado_in
 
 Route::get('Mis-tareas', 'tarea\TareaController@MyTask')->name('Mis-tareas');
 
+
+//rutas para tareas no finalizadas
+Route::get('tareas-no-finalizadas', 'tarea\TareaController@__off')->name('tareas-no-finalizadas');
+
+
 //administracion de tareas
 Route::get('Tareas-sin-iniciar', 'tarea\TareaController@MyTask_incio')->name('Tareas-sin-iniciar');
 //tareas
-
 
 //rutas para administracion de notificaciones
 Route::resource('Notificaciones', 'Notificaciones\NotyController');
 Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notificacion')->name('nueva-notificacion');
 Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')->name('notificaciones-enviadas');
+
+

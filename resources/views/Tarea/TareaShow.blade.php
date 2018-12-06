@@ -47,7 +47,7 @@
                                                           Fecha finalización: {{ $tarea->fecha_finalizacion}}
                                                       </div>
                                                       <div class="panel-footer">
-                                                          Estado: <span class="label label-default">{{ $tarea->estado}}</span>
+                                                          {{$cont ='Estado'}}: <span class="label label-default">{{ $tarea->estado}}</span>
                                                       </div>
                                                   </div>
                                                
@@ -66,12 +66,17 @@
                                                                           Correo: {{$perfiles[$i]->email}}
                                                                     </span>
                                                                     <span>
-                                                                          COLABORADOR
+                                                                          COLABORADOR 
+                                                                          @if($perfiles[$i]->id == $jefe->id)
+                                                                            {{ $cont = '/'}}
+                                                                              ASIGNO TAREA
+                                                                            
+                                                                          @endif
                                                                     </span>
                                                                      </div>
                                                               </div>
-                                                              @endfor
-
+                                                            @endfor
+                                                             @if($cont != '/')
                                                               <div class="col-md-2 bordes">
                                                                     <div class="espacios text-center">
                                                                         <h5 class="">{{$jefe->name}}</h5>
@@ -86,6 +91,8 @@
                                                                     </span>
                                                                      </div>
                                                               </div>
+                                                              @endif
+                                                              
                                                           </div>
                                                         </div>                                                        
 

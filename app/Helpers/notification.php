@@ -1,5 +1,4 @@
 <?php
-//app/Helpers/Envato/User.php
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;

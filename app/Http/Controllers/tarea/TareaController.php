@@ -11,6 +11,7 @@ use App\User;
 use App\Tarea;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class TareaController extends Controller
 {
@@ -188,7 +189,8 @@ class TareaController extends Controller
       $titulo = "CAMBIO DE ESTADO EN TAREA";
       $this->SendNotificacionAll($id, $mensaje, $titulo);
 
-      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+     return back()->with('editado', "Elemento agregado correctamente");
+      
    }
 
    public function cambio_estado_proceso($id){
@@ -200,7 +202,7 @@ class TareaController extends Controller
       $titulo = "CAMBIO DE ESTADO EN TAREA";
       $this->SendNotificacionAll($id, $mensaje, $titulo);
 
-      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+       return back()->with('editado', "Elemento agregado correctamente");
    }
 
    public function cambio_estado_inicio($id){
@@ -210,7 +212,8 @@ class TareaController extends Controller
       $mensaje = Auth::user()->name . " ha cambiado el estado de la tarea ha INICIO.";
       $titulo = "CAMBIO DE ESTADO EN TAREA";
       $this->SendNotificacionAll($id, $mensaje, $titulo);
-      return redirect()->route('Tareas.index')->with('editado', "Elemento agregado correctamente");
+
+      return back()->with('editado', "Elemento agregado correctamente");
    }
 
    //genera notificacion al cambiar de estado
@@ -232,15 +235,31 @@ class TareaController extends Controller
 
      $users = Tarea_Usuario::where('tarea_id', $tarea->codigo_tarea)->get();
     //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
+
+
      foreach ($users as $key => $value) {
-       $notyUsuarios =  Notificacion_Usuario::create([
-           'notificacion_id' => $codigoNoty,
-           'user_id' => $value->user_id,
-           'estado' => 'SIN LEER'
-          ]);
-     }
+      if(Auth::user()->id != $value->user_id){
+         $notyUsuarios =  Notificacion_Usuario::create([
+             'notificacion_id' => $codigoNoty,
+             'user_id' => $value->user_id,
+             'estado' => 'SIN LEER'
+            ]);
+        }
+      }
    //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
 
+   }
+
+   //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO 
+   //LO HARA COMPRANDO LAS FECHAS
+
+   public function __off(){
+       $hoy = getdate();
+       $year = $hoy['year'];
+       $mouth = $hoy['mon'];
+       $day = $hoy['mday'];
+       $actual = $year . '-' . $mouth . '-' . $day;
+       echo $actual;
    }
 
 }
