@@ -80,7 +80,8 @@ class TareaController extends Controller
          'titulo' => $tituloGenerico,
          'cuerpo' => $request['mensaje'],
          'creador' => Auth::user()->id,
-         'tarea_id' => $codigoTarea
+         'tarea_id' => $codigoTarea,
+         'tipo_noti' => 'tarea'
        ]);
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
 
@@ -229,7 +230,9 @@ class TareaController extends Controller
          'titulo' => $tituloGenerico,
          'cuerpo' => $mensaje,
          'creador' => Auth::user()->id,
-         'tarea_id' => $tarea->codigo_tarea
+         'tarea_id' => $tarea->codigo_tarea,
+         'tipo_noti' => 'cambio
+         '
        ]);
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
 

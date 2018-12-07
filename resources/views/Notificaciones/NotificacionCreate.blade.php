@@ -30,8 +30,6 @@
                         <div class="ibox-content">
                                       
 
-
-
                             <div class=" animated fadeInRight">
                             <div class="mail-box-header">
                                 <div class="pull-right tooltip-demo">
@@ -50,8 +48,20 @@
                                     </h5>
                                 </div>
                             </div>
-                                <div class="mail-box">
 
+                           @if($notificacion->tipo_noti == 'generada' or $notificacion->tipo_noti == 'generada-users')
+                           <div style="padding-left: 20px;padding-bottom: 20px">
+                                  <img height="80" width="80" src="{{asset('yeti-malo.png')}}">DEBES TERMINAR TUS TAREAS
+                                  <br>
+                                  <br>
+                                  <a href="{{route('Tareas.show', $notificacion->tarea_id)}}" class="btn btn-success">Ver tarea</a>
+                           </div>
+
+
+                           @endif
+
+                            @if($notificacion->tipo_noti != 'generada' and $notificacion->tipo_noti != 'generada-users')
+                                <div class="mail-box">
                                           <div class="mail-body">
                                             {!! $notificacion->cuerpo !!}
                                           </div>
@@ -100,6 +110,7 @@
                                            @endif
                                                   <div class="clearfix"></div>
                                           </div>
+                                        @endif
                                       </div>
 
 

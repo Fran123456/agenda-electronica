@@ -56,6 +56,7 @@ class NotyController extends Controller
           'titulo'=>$request['titulo'],
           'cuerpo'=>$request['mensaje'],
           'creador'=>Auth::user()->id,
+          'tipo_noti' => 'propia'
       ]);
       //CREACION DE NOTIFICACION//
 

@@ -97,7 +97,8 @@ class Noty {
          'titulo' => $tituloGenerico,
          'cuerpo' => $mensaje,
          'creador' =>  7,
-         'tarea_id' => $tarea->codigo_tarea
+         'tarea_id' => $tarea->codigo_tarea,
+         'tipo_noti' => 'generada-users'
        ]);
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
 
@@ -126,7 +127,8 @@ class Noty {
          'titulo' => $tituloGenerico,
          'cuerpo' => $mensaje,
          'creador' =>  7,
-         'tarea_id' => $id_tarea
+         'tarea_id' => $id_tarea,
+         'tipo_noti' => 'generada'
        ]);
 
         $notyUsuarios =  Notificacion_Usuario::create([
