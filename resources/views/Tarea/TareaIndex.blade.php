@@ -16,6 +16,9 @@
   .c{
     background-color: #ACF5BA;
   }
+  .d{
+    background-color: #EF9292;
+  }
 </style>
 <div class="container">
 
@@ -94,22 +97,39 @@
                  <td class="a"><h3><span class="label label-default">{{ $value->estado}}</span></h3></td>
                @elseif($value->estado == "Proceso")
                   <td class="b"><h3><span class="label label-warning">{{ $value->estado}}</span></h3></td>
-               @else
+               @elseif($value->estado == "Finalizado")
                   <td class="c"><h3><span class="label label-primary">{{ $value->estado}}</span></h3></td>
+               @else
+                <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
               @endif
                 <td>{{ $value->fecha_finalizacion}}</td>
 
-                <td><a class="btn btn-danger btn-circle dim btn-outline" href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}">
+             @if($value->estado =="No terminada")
+                 <td><button disabled="" class="btn btn-danger btn-circle btn-outline" href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}">
+                 <i class="fa fa-play" aria-hidden="true"></i> </button></td>
+
+
+                  <td><button disabled  class="btn btn-warning btn-circle" href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}">
+                 <i class="fa fa-clock-o" aria-hidden="true"></i> </button></td>
+
+                <td><button disabled  class="btn btn-primary btn-circle" href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}">
+                  <i class="fa fa-check" aria-hidden="true"></i></button></td>
+              @else
+                 <td><a  class="btn btn-danger btn-circle dim btn-outline" href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}">
                  <i class="fa fa-play" aria-hidden="true"></i> </a></td>
 
-                  <td><a class="btn btn-warning btn-circle" href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}">
+                  <td><a  class="btn btn-warning btn-circle" href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}">
                  <i class="fa fa-clock-o" aria-hidden="true"></i> </a></td>
 
-                <td><a class="btn btn-primary btn-circle" href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}">
+                <td><a  class="btn btn-primary btn-circle" href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}">
                   <i class="fa fa-check" aria-hidden="true"></i></a></td>
 
-                <td><a class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
+               
+              @endif
+
+               <td><a  class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
                   <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+
 
                 @if(Auth::user()->rol =="super")
                 <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">

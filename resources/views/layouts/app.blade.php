@@ -46,7 +46,7 @@
 }
 </style>
 
-
+{!!Noty::__off()!!}
 </head>
 <body>
 

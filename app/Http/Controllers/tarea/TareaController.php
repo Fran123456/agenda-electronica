@@ -212,9 +212,10 @@ class TareaController extends Controller
       $mensaje = Auth::user()->name . " ha cambiado el estado de la tarea ha INICIO.";
       $titulo = "CAMBIO DE ESTADO EN TAREA";
       $this->SendNotificacionAll($id, $mensaje, $titulo);
-
       return back()->with('editado', "Elemento agregado correctamente");
    }
+
+   
 
    //genera notificacion al cambiar de estado
    public function SendNotificacionAll($id_tarea, $mensaje = null, $titulo = null){
@@ -252,14 +253,22 @@ class TareaController extends Controller
 
    //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO 
    //LO HARA COMPRANDO LAS FECHAS
-
-   public function __off(){
+    public function __off(){
        $hoy = getdate();
        $year = $hoy['year'];
        $mouth = $hoy['mon'];
        $day = $hoy['mday'];
-       $actual = $year . '-' . $mouth . '-' . $day;
-       echo $actual;
-   }
+       $actual = $year . '-' . $mouth . '-' . $day; //fecha actual de hoy
+
+       $tareas= Tarea::where('fecha_finalizacion','<',$actual)
+       ->where('estado' ,'!=', 'Finalizado')
+       ->Where('estado' ,'!=', 'No terminada')
+       ->get();//tareas que ya finalizaron pero no estan terminadas
+       foreach ($tareas as $key => $value) {
+         echo $value->id;
+       }
+    }
+
+
 
 }
