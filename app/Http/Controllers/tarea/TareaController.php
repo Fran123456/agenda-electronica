@@ -256,20 +256,19 @@ class TareaController extends Controller
 
    //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO 
    //LO HARA COMPRANDO LAS FECHAS
-    public function __off(){
+    public function __today(){
        $hoy = getdate();
        $year = $hoy['year'];
        $mouth = $hoy['mon'];
        $day = $hoy['mday'];
        $actual = $year . '-' . $mouth . '-' . $day; //fecha actual de hoy
 
-       $tareas= Tarea::where('fecha_finalizacion','<',$actual)
-       ->where('estado' ,'!=', 'Finalizado')
-       ->Where('estado' ,'!=', 'No terminada')
+       $tareas= Tarea::where('fecha_finalizacion',$actual)
+      // ->where('estado' ,'!=', 'Finalizado')
+      // ->Where('estado' ,'!=', 'No terminada')
        ->get();//tareas que ya finalizaron pero no estan terminadas
-       foreach ($tareas as $key => $value) {
-         echo $value->id;
-       }
+      
+      return $tareas;
     }
 
 
