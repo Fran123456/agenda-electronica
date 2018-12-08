@@ -48,7 +48,8 @@ Route::get('Mis-tareas', 'tarea\TareaController@MyTask')->name('Mis-tareas');
 
 
 //rutas de tareas que finalizan hoy (DIA ACTUAL)
-Route::get('tareasHoy', 'tarea\TareaController@__today')->name('tareasHoy');
+Route::get('alv', 'HomeController@__todayForUser')->name('alv');
+
 
 
 //administracion de tareas

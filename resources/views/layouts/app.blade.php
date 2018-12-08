@@ -84,9 +84,17 @@
                       </div>
                   </li>
 
+                       <li>
+                    <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+
 
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
+
+                   
+
+
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
