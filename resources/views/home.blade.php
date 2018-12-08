@@ -7,9 +7,19 @@
     padding: 10px 10px 10px;
 }
 </style>
-<div class="container">
-    
 
+
+<div class="container" >
+    <div class="text-center"><h3>Chat grupal</h3></div>
+    <div class="row">
+            <div class="col-md-12" >
+                <iframe style="border: 2px solid #C1EBD5" src="https://www4.cbox.ws/box/?boxid=4341309&boxtag=Fq3FmW" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe> 
+            </div>
+        </div> 
+</div>
+
+
+<div class="container" style="padding-bottom: 50px; padding-top: 30px">
 @if(Auth::user()->rol == "super")
 @if(count($actividadesHoyA) > 0)
 <div class="row">
@@ -65,6 +75,8 @@
 @endif
 @endif
 
+
+
     <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
@@ -114,6 +126,8 @@
                     </div>
                 </div>
             </div>
-        </div>                
+        </div>  
 </div>
+
+
 @endsection
