@@ -256,6 +256,13 @@ class TareaController extends Controller
 
    //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO 
    //LO HARA COMPRANDO LAS FECHAS
+
+
+   public function tareas_No_finalizada(){
+        $tareas = Tarea::where('estado','No terminada')->get();
+        $titulo = "Tareas no finalizadas";
+        return view('Tarea.TareaNoFinIndex' , compact('tareas', 'titulo'));
+   }
     
 
 

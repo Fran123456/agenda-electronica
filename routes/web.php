@@ -45,11 +45,7 @@ Route::get('cambiar-estado-proceso/{id}', 'tarea\TareaController@cambio_estado_p
 Route::get('cambiar-estado-inicio/{id}', 'tarea\TareaController@cambio_estado_inicio')->name('cambiar-estado-inicio');
 
 Route::get('Mis-tareas', 'tarea\TareaController@MyTask')->name('Mis-tareas');
-
-
-//rutas de tareas que finalizan hoy (DIA ACTUAL)
-Route::get('alv', 'HomeController@__todayForUser')->name('alv');
-
+Route::get('tareas-no-finalizadas', 'tarea\TareaController@tareas_No_finalizada')->name('tareas-no-finalizadas');
 
 
 //administracion de tareas
