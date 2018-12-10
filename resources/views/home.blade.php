@@ -21,7 +21,7 @@
 
 <div class="container" style="padding-bottom: 50px; padding-top: 30px">
 @if(Auth::user()->rol == "super")
-@if(count($actividadesHoyA) > 0)
+
 <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="ibox-content">
                             <div class="project-list">
-                            
+                            @if(count($actividadesHoyA) > 0)
                                 <table class="table table-hover">
                                     <tbody>
                                         @foreach($actividadesHoyA as $key => $value)
@@ -65,14 +65,17 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                
+                                @else
+                                <h3>No hay tareas</h3>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>                
-@endif
+        </div>   
+
+
 @endif
 
 
@@ -86,7 +89,7 @@
                         </div>
                         <div class="ibox-content">
                             <div class="project-list">
-                            
+                              @if(count($actividadesHoy) > 0)
                                 <table class="table table-hover">
                                     <tbody>
                                         @foreach($actividadesHoy as $key => $value)
@@ -120,7 +123,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                
+                                @else
+                                <h3>No hay tareas</h3>
+                                @endif
                             </div>
                         </div>
                     </div>

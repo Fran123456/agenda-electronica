@@ -47,14 +47,21 @@ class HomeController extends Controller
        
   
         $actividadesHoy = $this->__todayForUser();
-        foreach ($actividadesHoy as $key => $value) {
-         $integrantes = Tarea_Usuario::where('tarea_id', $value->codigo_tarea)->get();
+        if($actividadesHoy != null){
+             foreach ($actividadesHoy as $key => $value) {
+             $integrantes = Tarea_Usuario::where('tarea_id', $value->codigo_tarea)->get();
 
-         foreach ($integrantes as $key2 => $value2) {
-            $users[$key][$key2] = User::where('id' , $value2->user_id)->first();
+             foreach ($integrantes as $key2 => $value2) {
+              $users[$key][$key2] = User::where('id' , $value2->user_id)->first();
+            }
          }
+        }else{
+          $users = array();
         }
+       
        return view('home', compact('actividadesHoy','users','actividadesHoyA','usersA'));
+
+
     }
 
 
@@ -65,8 +72,9 @@ class HomeController extends Controller
       return $tareas;
     }
 
-    public function __todayForUser(){
-        $userActivo = Auth::user()->id;
+   public function __todayForUser(){
+       $actual = $this->__ActualDate();
+       $userActivo = Auth::user()->id;
         $tareasUsuarioA = Tarea_Usuario::where('user_id', $userActivo)->get();
         $idTareas = array();
         foreach ($tareasUsuarioA as $key => $value) {
@@ -74,8 +82,14 @@ class HomeController extends Controller
         }
 
         $tareasActuales = array();
-        for ($i=0; $i <count($idTareas) ; $i++) { 
-            $tareasActuales[$i] = Tarea::where('codigo_tarea', $idTareas[$i])->first();
+        $cont = 0;
+        for ($i=0; $i <count($idTareas) ; $i++) {
+           $aux =  Tarea::where('codigo_tarea', $idTareas[$i])->where('fecha_finalizacion', $actual)->first();
+           if($aux != null){
+            $tareasActuales[$cont] = $aux;
+            $cont++;
+           }
+            
         }
 
       return $tareasActuales;
