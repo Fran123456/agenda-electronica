@@ -10,6 +10,8 @@ use App\Notificacion_Usuario;
 use App\User;
 use App\Tarea;
 use Illuminate\Support\Facades\DB;
+use App\Tarea_Usuario;
+use Illuminate\Support\Facades\Route;
 
 
 class NotyController extends Controller
@@ -172,4 +174,29 @@ class NotyController extends Controller
     $variable = $prefijo . "-". $uno . "-" . $number . "-". $dos . "-". $number2. "-". $tres;
     return $variable;
    }
+
+
+
+
+
+
+
+
+
+   public  function notificationPUSH() {
+       $user_id = Auth::user()->id;
+        $noty = DB::table('notificacion_user')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
+        $html ="";
+      if(count($noty) > 0){
+         foreach ($noty as $key => $value) {
+         $informacion = DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
+       }
+    }else{
+     $informacion ="NO HAY NOTIFICACIONES";
+    }
+       
+       echo json_encode($informacion);
+      // return Response::json($informacion);
+    }
+
 }

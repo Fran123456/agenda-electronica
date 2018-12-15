@@ -58,3 +58,7 @@ Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notifi
 Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')->name('notificaciones-enviadas');
 
 
+//PUSH
+Route::get('push', 'Notificaciones\NotyController@notificationPUSH')->name('push');
+
+

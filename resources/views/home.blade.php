@@ -125,6 +125,7 @@
                                 </table>
                                 @else
                                 <h3>No hay tareas</h3>
+                                <button onclick="click1();">Notificacion</button>
                                 @endif
                             </div>
                         </div>

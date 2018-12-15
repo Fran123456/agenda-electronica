@@ -45,6 +45,14 @@ class Noty {
        return $html;
     }
 
+
+
+    
+
+
+
+
+
     public static function n_noty($user_id){
          $noty = DB::table('notificacion_user')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
          $noty = count($noty);

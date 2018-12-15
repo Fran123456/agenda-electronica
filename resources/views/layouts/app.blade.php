@@ -47,6 +47,71 @@
 </style>
 
 {!!Noty::__off()!!}
+
+<script type="text/javascript" src="{{asset('js/push.min.js')}}"></script>
+
+<!--Pedimos permisos-->
+<script type="text/javascript">
+  window.onload = function (){
+    Push.Permission.request();
+  }
+
+ function click1(){
+   Push.create('Notificacion de prueba',{
+      body: 'Esta es una notificacion de prueba',
+      icon:  '{{Auth::user()->avatar_img}}',
+      timeout : 5000,
+      vibrate: ['100', '100', '100'],
+    })
+ }
+</script>
+
+<script type="text/javascript">
+ /* setInterval(function(){ get_noty(); }, 300000000000000);
+  function get_noty(){
+     
+
+      $.ajax({
+       type: 'ajax',
+       method: 'post',
+       url: 'push',
+       async: false,
+       dataType:  'json',
+       success: function(data){
+         console.log(data);
+       },
+       error: function(){
+           alert("error");
+       }
+
+    });
+  }*/
+
+
+  function obtener(){
+     $.ajax({
+       type: 'ajax',
+       method: 'get',
+       url: '/push',
+       async: false,
+       dataType:  'json',
+       success: function(data){
+         console.log(data);
+       },
+       error: function(){
+           alert("error");
+       }
+
+    });
+  }
+
+  obtener();
+</script>
+
+
+
+
+<!--Pedimos permisos-->
 </head>
 <body>
 
@@ -160,7 +225,10 @@
                         <i class="fa fa-bell"></i>  <span class="label label-primary">{!!Noty::n_noty(Auth::user()->id)!!}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                      {!!$noti = Noty::notification(Auth::user()->id)!!}
+                      <script type="text/javascript">
+                       
+                      </script>
+                    {!! $noti = Noty::notification(Auth::user()->id)!!}
                     </ul>
                 </li>
 
