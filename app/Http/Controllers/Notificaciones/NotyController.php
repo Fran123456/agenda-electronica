@@ -192,7 +192,7 @@ class NotyController extends Controller
          $informacion[$key] =  DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
        }
     }else{
-     $informacion ="NO HAY NOTIFICACIONES";
+     $informacion = array();
     }
 
        echo json_encode($informacion);

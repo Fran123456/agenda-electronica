@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<style type="text/css">
+    .container {
+  padding-right:0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
+#page-wrapper {
+  padding: 0 0px;
+  min-height: 568px;
+  position: relative !important;
+}
+</style>
 
 
 <div class="container">
@@ -30,10 +43,10 @@
     </div>
 
     
-    <div class="col-md-6">
+    <div class="col-md-6 col-ms-6 col-xs-6">
         <h3>Gestión de avatars</h3>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-6 col-ms-6 col-xs-6 text-right">
         <a href="{{route('avatar.create')}}" class="btn btn-success">Agrega</a>
         <br>
         <br>
@@ -41,31 +54,47 @@
 
    
 
-    <table class="table table-bordered table-hover table-striped" id="avatar2">
+ <div class="col-lg-12 col-ms-12 col-xs-12">
+               <div class="ibox float-e-margins" >
+                        <div class="ibox-content" >
+                            <div class="table-responsive">
+                              <table class="table table-bordered table-hover table-striped" id="avatar2">
 
-        <thead>
-            <tr class="">
-                <th width="60">N°</th>
-                <th width="80">Multimedia</th>
-                <th>Tipo</th>
-                <th width="100">Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($avatars as $key => $value)
-            <tr>
-                <td>{{$key +1}}</td>
-                <td class="text-center">
-                   <img height="60px" width="60px" src="{{ $value->url }}"></a>
-                </td>
-                <td>{{$value->nombre}}</td>             
-                <td>
-                 <button type="submit" class="btn btn-sm btn-danger"> Eliminar</button> 
-                 </td>                       
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                                  <thead>
+                                      <tr class="">
+                                          <th width="60">N°</th>
+                                          <th width="80">Multimedia</th>
+                                          <th>Tipo</th>
+                                          <th width="100">Eliminar</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      @foreach($avatars as $key => $value)
+                                      <tr>
+                                          <td>{{$key +1}}</td>
+                                          <td class="text-center">
+                                             <img height="60px" width="60px" src="{{ $value->url }}"></a>
+                                          </td>
+                                          <td>{{$value->nombre}}</td>             
+                                          <td>
+                                           <button type="submit" class="btn btn-sm btn-danger"> Eliminar</button> 
+                                           </td>                       
+                                      </tr>
+                                      @endforeach
+                                  </tbody>
+                              </table>
+                            </div>
+                        </div>
+             </div>
+       </div>
+
+
+
+
+
+
+
+
                            
 </div>
 

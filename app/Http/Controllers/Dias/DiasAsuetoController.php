@@ -30,7 +30,7 @@ class DiasAsuetoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   $fecha_actual=date("d/m/Y");
+    {   $days=date("d/m/Y");
         return view('Asueto.AsuetoCreate', compact('days'));
     }
 

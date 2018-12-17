@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style type="text/css">
+    .container {
+  padding-right:0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#page-wrapper {
+  padding: 0 0px;
+  min-height: 568px;
+  position: relative !important;
+}
+</style>
 <div class="container">
 
     <div>
@@ -52,36 +67,47 @@
         <br>
         <br>
     </div>
-    <table class="table table-bordered table-hover table-striped" id="asueto">
-        <thead>
-            <tr class="">
-                <th width="60">N°</th>
-                <th >Título</th>
-                 <th>Fecha</th>
-                <th width="100">Ver</th>
-                <th width="100">Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($misNotis as $key => $value)
-            <tr>
-                <td>{{$key+1}}</td>
-                <td>{{$value->titulo}}</td>
-                <td>{{$value->created_at}}</td>
-                <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->codigo_noty)}}">
-                  <i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                <td>
-                   {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                        <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    {!! Form::close() !!}
-                 </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
 
+
+
+
+          <div class="col-lg-12 col-ms-12 col-xs-12">
+                   <div class="ibox float-e-margins" >
+                            <div class="ibox-content" >
+                                <div class="table-responsive">
+                                   <table class="table table-bordered table-hover table-striped" id="asueto">
+                                        <thead>
+                                            <tr class="">
+                                                <th width="60">N°</th>
+                                                <th >Título</th>
+                                                 <th>Fecha</th>
+                                                <th width="100">Ver</th>
+                                                <th width="100">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($misNotis as $key => $value)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{$value->titulo}}</td>
+                                                <td>{{$value->created_at}}</td>
+                                                <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->codigo_noty)}}">
+                                                  <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                                <td>
+                                                   {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                        <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
+                                                              <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    {!! Form::close() !!}
+                                                 </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                 </div>
+           </div>
 </div>
 
 

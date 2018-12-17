@@ -19,6 +19,21 @@
   .d{
     background-color: #EF9292;
   }
+
+
+  
+  .container {
+  padding-right:0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#page-wrapper {
+  padding: 0 0px;
+  min-height: 568px;
+  position: relative !important;
+}
 </style>
 <div class="container">
 
@@ -71,52 +86,65 @@
         <br>
         <br>
     </div>
-    <table class="table table-bordered table-hover table-striped" id="asueto">
-        <thead>
-            <tr class="">
-                <th width="50">N°</th>
-                <th >Título</th>
-                <th class="text-center" width="60">Estado</th>
-                <th class="text-center" width="100">Fecha finalización</th>
-                <th class="text-center" width="40">Reprogramar</th>
-                <th class="text-center" width="30">Ver</th>
-                 @if(Auth::user()->rol =="super")
-                <th class="text-center" width="30">Editar</th>
-                <th class="text-center" width="30">Eliminar</th>
-                @endif
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($tareas as $key => $value)
-            <tr class="text-center">
-                <td>{{$key +1}}</td>
-                <td>{{$value->Titulo}}</td>
-                  <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
-
-                <td>{{$value->fecha_finalizacion}}</td>
-                  
-              <td><a  class="btn btn-info" href="">
-                  <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
-              
-               <td><a  class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
-                  <i class="fa fa-eye" aria-hidden="true"></i></a></td>
 
 
-                @if(Auth::user()->rol =="super")
-                <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
-                  <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                <td>
-                   {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                        <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    {!! Form::close() !!}
-                 </td>
-                 @endif
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+  <div class="col-lg-12 col-ms-12 col-xs-12">
+               <div class="ibox float-e-margins" >
+                        <div class="ibox-content" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped" id="asueto">
+                                    <thead>
+                                        <tr class="">
+                                            <th width="50">N°</th>
+                                            <th >Título</th>
+                                            <th class="text-center" width="60">Estado</th>
+                                            <th class="text-center" width="100">Fecha finalización</th>
+                                            <th class="text-center" width="40">Reprogramar</th>
+                                            <th class="text-center" width="30">Ver</th>
+                                             @if(Auth::user()->rol =="super")
+                                            <th class="text-center" width="30">Editar</th>
+                                            <th class="text-center" width="30">Eliminar</th>
+                                            @endif
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($tareas as $key => $value)
+                                        <tr class="text-center">
+                                            <td>{{$key +1}}</td>
+                                            <td>{{$value->Titulo}}</td>
+                                              <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
+
+                                            <td>{{$value->fecha_finalizacion}}</td>
+                                              
+                                          <td><a  class="btn btn-info" href="">
+                                              <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
+                                          
+                                           <td><a  class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
+                                              <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+
+
+                                            @if(Auth::user()->rol =="super")
+                                            <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
+                                              <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                            <td>
+                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
+                                                          <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                {!! Form::close() !!}
+                                             </td>
+                                             @endif
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+             </div>
+       </div>
+
+
+
 
 </div>
 

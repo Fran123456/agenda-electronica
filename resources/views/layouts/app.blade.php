@@ -135,6 +135,15 @@
                   </li>
 
 
+                   <li>
+                    <a href=""><i class="fa fa-user" aria-hidden="true"></i> <span class="nav-label">Mi perfil</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-second-level collapse">
+                          <li><a href="{{route('Perfil.show', Auth::user()->id) }}">Mi perfil</a></li>
+                          <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Editar perfil</a></li>
+                      </ul>
+                  </li>
+
+
               </ul>
 
           </div>
@@ -293,9 +302,11 @@ function obtener(){
      dataType:  'json',
      success: function(data){
        con = data.length;
-      $("#num").append(con);
- console.log(data[0]);
-       for (var i = 0; i < data.length; i++) {
+
+         $("#num").append(con);
+       
+      if(con > 0 && con != 0){
+         for (var i = 0; i < data.length; i++) {
          html2 = html2 + '<li>'+
            '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'">'+
            '<div>'+
@@ -308,6 +319,11 @@ function obtener(){
 
        }
        $("#notisalv").append(html2);
+     }else{
+      $('#notisalv').append('<h3>No hay notificaciones</h3>');
+     }
+ 
+      
 
      },
      error: function(){
