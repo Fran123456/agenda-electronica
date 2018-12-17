@@ -90,7 +90,7 @@ class NotyController extends Controller
         $notixuser = Notificacion_Usuario::where('notificacion_id', $noti->codigo_noty)->get();
 
         $perfiles = array();
-        foreach ($notixuser as $key => $value) { 
+        foreach ($notixuser as $key => $value) {
           $perfiles[$key] = User::where('id', $value->user_id)->first();
         }
 
@@ -138,7 +138,7 @@ class NotyController extends Controller
        $creador = User::where('id' , $notificacion->creador)->first();
        $tarea = Tarea::where('codigo_tarea', $notificacion->tarea_id)->first();
        $colaboradores = Notificacion_Usuario::where('notificacion_id', $id)->get();
- 
+
 
        $perfiles = array();
        foreach ($colaboradores as $key => $value) {
@@ -153,7 +153,7 @@ class NotyController extends Controller
 
 
     public function send_noty(){
-       
+
         $misNotis = Notificacion::where('creador', Auth::user()->id)->get();
        /* $noty = Notificacion_Usuario::orderBy('created_at','desc')->where('user_id' , Auth::user()->id)->get();
         $notyAll = array();
@@ -185,16 +185,16 @@ class NotyController extends Controller
 
    public  function notificationPUSH() {
        $user_id = Auth::user()->id;
-        $noty = DB::table('notificacion_user')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
+        $noty = DB::table('notificacion_user')->orderBy('id','desc')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
         $html ="";
       if(count($noty) > 0){
          foreach ($noty as $key => $value) {
-         $informacion = DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
+         $informacion[$key] =  DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
        }
     }else{
      $informacion ="NO HAY NOTIFICACIONES";
     }
-       
+
        echo json_encode($informacion);
       // return Response::json($informacion);
     }

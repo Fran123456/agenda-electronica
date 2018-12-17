@@ -50,66 +50,6 @@
 
 <script type="text/javascript" src="{{asset('js/push.min.js')}}"></script>
 
-<!--Pedimos permisos-->
-<script type="text/javascript">
-  window.onload = function (){
-    Push.Permission.request();
-  }
-
- function click1(){
-   Push.create('Notificacion de prueba',{
-      body: 'Esta es una notificacion de prueba',
-      icon:  '{{Auth::user()->avatar_img}}',
-      timeout : 5000,
-      vibrate: ['100', '100', '100'],
-    })
- }
-</script>
-
-<script type="text/javascript">
- /* setInterval(function(){ get_noty(); }, 300000000000000);
-  function get_noty(){
-     
-
-      $.ajax({
-       type: 'ajax',
-       method: 'post',
-       url: 'push',
-       async: false,
-       dataType:  'json',
-       success: function(data){
-         console.log(data);
-       },
-       error: function(){
-           alert("error");
-       }
-
-    });
-  }*/
-
-
-  function obtener(){
-     $.ajax({
-       type: 'ajax',
-       method: 'get',
-       url: '/push',
-       async: false,
-       dataType:  'json',
-       success: function(data){
-         console.log(data);
-       },
-       error: function(){
-           alert("error");
-       }
-
-    });
-  }
-
-  obtener();
-</script>
-
-
-
 
 <!--Pedimos permisos-->
 </head>
@@ -157,7 +97,7 @@
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
 
-                   
+
 
 
                       <ul class="nav nav-second-level collapse">
@@ -220,16 +160,17 @@
 
 
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">{!!Noty::n_noty(Auth::user()->id)!!}</span>
+                <li class="dropdown" id="mayor">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" id="padreA">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary" id="num"></span>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                      <script type="text/javascript">
-                       
-                      </script>
-                    {!! $noti = Noty::notification(Auth::user()->id)!!}
-                    </ul>
+
+                     <ul class="dropdown-menu dropdown-alerts" id="notisalv">
+                     </ul>
+
+
+
+
                 </li>
 
                   <li>
@@ -320,11 +261,129 @@
 
 <!--PLANTILLA----------------------------------------------->
 
+<script type="text/javascript">
+  window.onload = function (){
+    Push.Permission.request();
+  }
+
+ function Bienvenida(){
+   Push.create('Bienvenido {{Auth::user()->name}}',{
+      body: 'Hola de nuevo, te saluda YETI-TASK',
+      icon:  'yeti.png',
+      timeout : 9000,
+      vibrate: ['100', '100', '100'],
+    })
+ }
+
+
+
+function obtener(){
+ $('#notisalv').remove();
+ $('#mayor').append('<ul class="dropdown-menu dropdown-alerts" id="notisalv"></ul>');
+
+ $('#num').remove();
+ $('#padreA').append('<span class="label label-primary" id="num"></span>');
+  var html2 = "";
+  var con = 0;
+   $.ajax({
+     type: 'ajax',
+     method: 'get',
+     url: '/push',
+     async: false,
+     dataType:  'json',
+     success: function(data){
+       con = data.length;
+      $("#num").append(con);
+ console.log(data[0]);
+       for (var i = 0; i < data.length; i++) {
+         html2 = html2 + '<li>'+
+           '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'">'+
+           '<div>'+
+                 '<i class="fa fa-comment-o" aria-hidden="true"></i> '+ data[i].titulo +
+                 '<br><span class="pull-right text-muted small">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
+                 '</span><br>'+
+               '</div>'+
+            ' </a>'+
+         '</li><li class="divider"></li>';
+
+       }
+       $("#notisalv").append(html2);
+
+     },
+     error: function(){
+         alert("error");
+     }
+  });
+}
+obtener();
 
 
 
 
 
+
+
+function obtenerSecuencia(){
+ var numeroNoti = $('#num').text();
+
+  var html2 = "";
+  var con = 0;
+   $.ajax({
+     type: 'ajax',
+     method: 'get',
+     url: '/push',
+     async: false,
+     dataType:  'json',
+     success: function(data){
+       con = data.length;
+
+       if(con > numeroNoti){
+
+         $('#notisalv').remove();
+         $('#mayor').append('<ul class="dropdown-menu dropdown-alerts" id="notisalv"></ul>');
+
+         $('#num').remove();
+         $('#padreA').append('<span class="label label-primary" id="num"></span>');
+
+
+
+         $("#num").append(con);
+          for (var i = 0; i < data.length; i++) {
+            html2 = html2 + '<li>'+
+              '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'">'+
+              '<div>'+
+                    '<i class="fa fa-comment-o" aria-hidden="true"></i> '+ data[i].titulo +
+                    '<br><span class="pull-right text-muted small">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
+                    '</span><br>'+
+                  '</div>'+
+               ' </a>'+
+            '</li><li class="divider"></li>';
+
+          }
+          $("#notisalv").append(html2);
+          //Bienvenida();
+
+          Push.create('YETI-TASK dice: Nueva notificación',{
+             body: data[0].titulo,
+             icon:  'yeti.png',
+             timeout : 15000,
+             onclick: function(){
+              //  window.location='"{{Request::root()}}/nueva-notificacion/'+data[0].codigo_noty+'"';
+             },
+             vibrate: ['100', '100', '100'],
+           })
+
+       }
+
+     },
+     error: function(){
+         alert("error");
+     }
+  });
+}
+setInterval(function(){ obtenerSecuencia(); }, 9000);
+
+</script>
 
 </body>
 </html>
