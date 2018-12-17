@@ -318,11 +318,6 @@ function obtener(){
 obtener();
 
 
-
-
-
-
-
 function obtenerSecuencia(){
  var numeroNoti = $('#num').text();
 
@@ -381,7 +376,7 @@ function obtenerSecuencia(){
      }
   });
 }
-setInterval(function(){ obtenerSecuencia(); }, 9000);
+setInterval(function(){ obtenerSecuencia(); }, 10000);
 
 </script>
 
