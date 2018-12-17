@@ -44,6 +44,11 @@
   font-size: 14px;
   float: left;
 }
+
+.navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, .navbar-top-links .dropdown-alerts {
+  width: 370px;
+  min-width: 0;
+}
 </style>
 
 {!!Noty::__off()!!}
@@ -285,6 +290,9 @@
  }
 
 
+                         
+
+
 
 function obtener(){
  $('#notisalv').remove();
@@ -301,20 +309,41 @@ function obtener(){
      async: false,
      dataType:  'json',
      success: function(data){
+      console.log(data);
        con = data.length;
 
          $("#num").append(con);
        
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
-         html2 = html2 + '<li>'+
-           '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'">'+
-           '<div>'+
-                 '<i class="fa fa-comment-o" aria-hidden="true"></i> '+ data[i].titulo +
-                 '<br><span class="pull-right text-muted small">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
-                 '</span><br>'+
-               '</div>'+
-            ' </a>'+
+      /*   html2 = html2+ '<li style="background-color: #DBE6E2;">'+
+                           '<div class="dropdown-messages-box">'+
+                                '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
+                                    '<img class="img-thumbnail img-circle" alt="image"  src="'+data[i].avatar_img+'">'+
+                                '</a>'+
+                                '<div class="media-body">'+
+                                    '<p style="font-size: 13px;">Nueva notificación de:<strong> '+data[i].name+'<br></strong></p>'+
+                                     '<p style="font-size: 12px;">'+data[i].titulo+'</p>'+
+                                    '<small class="text-muted ">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
+                                  '</small>'+
+                                '</div>'+
+                            '</div>'+
+                        '<br></li>'+
+         '</li><li class="divider"></li>';*/
+
+         html2 = html2 + '<li >'+
+                           '<div class="dropdown-messages-box">'+
+                                '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
+                                    '<img alt="image" class="img-circle" src="'+data[i].avatar_img+'">'+
+                                '</a>'+
+                                '<div class="media-body">'+
+                                    'Nueva notificación de: <strong>'+data[i].name+'<br></strong>'+
+                                     '<p>'+data[i].titulo+'</p>'+
+                                    '<small class="text-muted">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
+                                  '</small>'+
+                                '</div>'+
+                            '</div>'+
+                        '</li>'+
          '</li><li class="divider"></li>';
 
        }
@@ -360,23 +389,28 @@ function obtenerSecuencia(){
 
          $("#num").append(con);
           for (var i = 0; i < data.length; i++) {
-            html2 = html2 + '<li>'+
-              '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'">'+
-              '<div>'+
-                    '<i class="fa fa-comment-o" aria-hidden="true"></i> '+ data[i].titulo +
-                    '<br><span class="pull-right text-muted small">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
-                    '</span><br>'+
-                  '</div>'+
-               ' </a>'+
-            '</li><li class="divider"></li>';
+            html2 = html2 + '<li >'+
+                           '<div class="dropdown-messages-box">'+
+                                '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
+                                    '<img alt="image" class="img-circle" src="'+data[i].avatar_img+'">'+
+                                '</a>'+
+                                '<div class="media-body">'+
+                                    'Nueva notificación de: <strong>'+data[i].name+'<br></strong>'+
+                                     '<p>'+data[i].titulo+'</p>'+
+                                    '<small class="text-muted">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
+                                  '</small>'+
+                                '</div>'+
+                            '</div>'+
+                        '</li>'+
+         '</li><li class="divider"></li>';
 
           }
           $("#notisalv").append(html2);
           //Bienvenida();
 
-          Push.create('YETI-TASK dice: Nueva notificación',{
+          Push.create('Nueva notificación de: '+data[0].name,{
              body: data[0].titulo,
-             icon:  'yeti.png',
+             icon:  data[0].avatar_img,
              timeout : 15000,
              onclick: function(){
               //  window.location='"{{Request::root()}}/nueva-notificacion/'+data[0].codigo_noty+'"';

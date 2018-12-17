@@ -176,13 +176,6 @@ class NotyController extends Controller
    }
 
 
-
-
-
-
-
-
-
    public  function notificationPUSH() {
        $user_id = Auth::user()->id;
         $noty = DB::table('notificacion_user')->orderBy('id','desc')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();
@@ -190,12 +183,22 @@ class NotyController extends Controller
       if(count($noty) > 0){
          foreach ($noty as $key => $value) {
          $informacion[$key] =  DB::table('notificacion')->where('codigo_noty', $value->notificacion_id)->first();
+        // $informacion['user'][$key] = DB::table('users')->where('id', $informacion[$key]->creador)->first();
+
+
+       $informacion[$key] = DB::table('notificacion')
+            ->join('users', 'users.id', '=', 'notificacion.creador')
+            ->select('notificacion.*', 'users.name', 'users.avatar_img')
+            ->where('codigo_noty', $value->notificacion_id)
+            ->first();
+
        }
     }else{
      $informacion = array();
     }
-
        echo json_encode($informacion);
+
+    
       // return Response::json($informacion);
     }
 
