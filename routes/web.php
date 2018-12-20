@@ -61,4 +61,7 @@ Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')
 //PUSH
 Route::get('push', 'Notificaciones\NotyController@notificationPUSH')->name('push');
 
+//MAIL
+Route::get('mail/send', 'Email\EmailController@send');
+
 

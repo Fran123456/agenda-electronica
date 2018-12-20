@@ -176,6 +176,8 @@ class NotyController extends Controller
    }
 
 
+
+
    public  function notificationPUSH() {
        $user_id = Auth::user()->id;
         $noty = DB::table('notificacion_user')->orderBy('id','desc')->where('user_id', $user_id)->where('estado', 'SIN LEER')->get();

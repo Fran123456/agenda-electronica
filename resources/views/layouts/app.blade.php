@@ -280,14 +280,6 @@
     Push.Permission.request();
   }
 
- function Bienvenida(){
-   Push.create('Bienvenido {{Auth::user()->name}}',{
-      body: 'Hola de nuevo, te saluda YETI-TASK',
-      icon:  'yeti.png',
-      timeout : 9000,
-      vibrate: ['100', '100', '100'],
-    })
- }
 
 
                          
