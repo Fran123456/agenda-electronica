@@ -28,24 +28,21 @@ class Email extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build() //para tareas
     {
        // return $this->view('view.name');
 
                     return $this->from('support@yetitask.djfrankremixer.com')
-                    ->view('mail.mail')
-                    ->text('mail.text')
-                    ->with(
+                    ->view('mail.new_task_view')
+                    ->text('mail.new_task_text');
+                    /*->with(
                       [
                             'testVarOne' => '1',
                             'testVarTwo' => '2',
-                      ])
-                      ->attach(public_path('/img').'/angular_logo.png', [
+                      ])*/
+                      /*->attach(public_path('/img').'/angular_logo.png', [
                               'as' => 'angular_logo.png',
                               'mime' => 'image/png',
-                      ]);
-
-
-
+                      ])*/;
     }
 }

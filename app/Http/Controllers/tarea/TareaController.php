@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
+use App\Mail\Email;
+use Illuminate\Support\Facades\Mail;
+
 class TareaController extends Controller
 {
 
@@ -75,7 +78,7 @@ class TareaController extends Controller
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
      $codigoNoty = $this->code('Noty');
      $tituloGenerico = strtoupper(Auth::user()->name) . " TE ASIGNO UNA NUEVA TAREA";
-     $noty = Notificacion::create([
+       $noty = Notificacion::create([
          'codigo_noty' => $codigoNoty,
          'titulo' => $tituloGenerico,
          'cuerpo' => $request['mensaje'],
@@ -87,15 +90,39 @@ class TareaController extends Controller
 
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
      for ($i=0; $i <count($users) ; $i++) {
-          $notyUsuarios =  Notificacion_Usuario::create([
+         $notyUsuarios =  Notificacion_Usuario::create([
            'notificacion_id' => $codigoNoty,
            'user_id' => $users[$i],
            'estado' => 'SIN LEER'
           ]);
+
+          $to = User::where('id', $users[$i])->first();
+         
+
+       $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
+
+
      }
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
       return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente");
     }
+
+
+   public function mail_newTask($to, $titulo, $data, $fromEmail,  $path, $TaskSenderName, $TaskSenderEmail, $senderName, $receiverName){
+        $objDemo = new \stdClass();
+        $objDemo->titulo = $titulo;
+        $objDemo->data = $data;
+        $objDemo->fromEmail = $fromEmail;
+        $objDemo->path  = $path;
+
+        $objDemo->TaskSenderName = $TaskSenderName;
+        $objDemo->TaskSenderEmail = $TaskSenderEmail; 
+        
+        $objDemo->sender = $senderName;
+        $objDemo->receiver = $receiverName;
+        Mail::to($to)->send(new Email($objDemo));
+   }
+
 
     /**
      * Display the specified resource.
