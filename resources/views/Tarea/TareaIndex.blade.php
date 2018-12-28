@@ -19,6 +19,9 @@
   .d{
     background-color: #EF9292;
   }
+  .pa{
+    padding: 20px;
+  }
 
 
   .container {
@@ -91,9 +94,9 @@
 
      <div class="col-lg-12 col-ms-12 col-xs-12">
                <div class="ibox float-e-margins" >
-                        
+
                         <div class="ibox-content" >
-                            
+
                             <div class="table-responsive">
                                 <table  class="table table-striped" id="asueto">
                                     <thead>
@@ -102,14 +105,8 @@
                                             <th >Título</th>
                                             <th class="text-center" width="60">Estado</th>
                                             <th class="text-center" width="100">Fecha finalización</th>
-                                            <th class="text-center" width="40">Iniciar</th>
-                                            <th class="text-center" width="40">En proceso</th>
-                                            <th class="text-center" width="40">Finalizar</th>
-                                            <th class="text-center" width="30">Ver</th>
-                                             @if(Auth::user()->rol =="super")
-                                            <th class="text-center" width="30">Editar</th>
-                                            <th class="text-center" width="30">Eliminar</th>
-                                            @endif
+                                            <th class="text-center" width="40">Acción de estados</th>
+                                            <th class="text-center" width="30">Control</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,44 +125,51 @@
                                           @endif
                                             <td>{{ $value->fecha_finalizacion}}</td>
 
-                                         @if($value->estado =="No terminada")
-                                             <td><button disabled="" class="btn btn-danger btn-circle btn-outline" href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}">
-                                             <i class="fa fa-play" aria-hidden="true"></i> </button></td>
 
 
-                                              <td><button disabled  class="btn btn-warning btn-circle" href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}">
-                                             <i class="fa fa-clock-o" aria-hidden="true"></i> </button></td>
+                                        <td>
+                                          <!-- Single button -->
+                                         <div class="btn-group">
+                                           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             Cambio estados <span class="caret"></span>
+                                           </button>
+                                           <ul class="dropdown-menu">
+                                                @if($value->estado =="No terminada")
+                                                    <li class="pa">No hay opciones para una tarea no terminada</li>
+                                                @else
+                                                    <li><a  href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}"><i class="fa fa-play" aria-hidden="true"></i>   Iniciar </a></li>
+                                                    <li><a href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}"><i class="fa fa-clock-o" aria-hidden="true"></i>  En proceso</a></li>
+                                                    <li><a  href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}"><i class="fa fa-check" aria-hidden="true"></i>  Finalizado</a></li>
+                                               @endif
+                                           </ul>
+                                         </div>
+                                        </td>
 
-                                            <td><button disabled  class="btn btn-primary btn-circle" href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}">
-                                              <i class="fa fa-check" aria-hidden="true"></i></button></td>
-                                          @else
-                                             <td><a  class="btn btn-danger btn-circle dim btn-outline" href="{{route('cambiar-estado-inicio',$value->codigo_tarea)}}">
-                                             <i class="fa fa-play" aria-hidden="true"></i> </a></td>
+                                        <td>
+                                          <!-- Single button -->
+                                          <div class="btn-group ">
+                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fa fa-pencil" aria-hidden="true"></i> Opciones generales<span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                              <li><a class="btn" href="{{route('Tareas.show',$value->codigo_tarea)}}"><i class="fa fa-eye" aria-hidden="true"></i> ver</a></li>
+                                                @if(Auth::user()->rol =="super")
+                                                    <li ><a class="btn" href=""><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></li>
 
-                                              <td><a  class="btn btn-warning btn-circle" href="{{route('cambiar-estado-proceso',$value->codigo_tarea)}}">
-                                             <i class="fa fa-clock-o" aria-hidden="true"></i> </a></td>
+                                                    <li >
+                                                      {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                           <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn">
+                                                                 <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+                                                           </button>
+                                                       {!! Form::close() !!}
+                                                    </li>
+                                                @endif
 
-                                            <td><a  class="btn btn-primary btn-circle" href="{{route('cambiar-estado-finalizado',$value->codigo_tarea)}}">
-                                              <i class="fa fa-check" aria-hidden="true"></i></a></td>
-
-                                           
-                                          @endif
-
-                                           <td><a  class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
-                                              <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                            </ul>
+                                          </div>
+                                        </td>
 
 
-                                            @if(Auth::user()->rol =="super")
-                                            <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
-                                              <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                                            <td>
-                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                                                          <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                {!! Form::close() !!}
-                                             </td>
-                                             @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
