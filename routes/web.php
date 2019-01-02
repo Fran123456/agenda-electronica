@@ -46,6 +46,11 @@ Route::get('cambiar-estado-inicio/{id}', 'tarea\TareaController@cambio_estado_in
 
 Route::get('Mis-tareas', 'tarea\TareaController@MyTask')->name('Mis-tareas');
 Route::get('tareas-no-finalizadas', 'tarea\TareaController@tareas_No_finalizada')->name('tareas-no-finalizadas');
+Route::get('tareas-sin-iniciar', 'tarea\TareaController@tareas_sin_iniciar')->name('tareas-sin-iniciar');
+Route::get('tareas-en-proceso', 'tarea\TareaController@tareas_proceso')->name('tareas-en-proceso');
+Route::get('tareas-finalizadas', 'tarea\TareaController@tareas_fin')->name('tareas-finalizadas');
+
+
 
 
 //administracion de tareas

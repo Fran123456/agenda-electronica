@@ -9,6 +9,7 @@ use App\Notificacion;
 use App\Tarea_Usuario;
 use App\User;
 use App\Tarea;
+use App\DiasAsueto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,33 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
+    $soldado = 0; //determina si el siguiente dia no es asueto
+    $fecha_final = null;
+    $fecha = $request['fecha'];
+    //echo date("Y-m-d",strtotime($fecha."+ 1 days"));
+    $asuetos = DiasAsueto::where('fecha', $fecha)->get();
+
+    if(count($asuetos) == 0){
+      $soldado = 1;
+    }else{
+      $soldado = 0;
+    }
+
+    while($soldado == 0){
+       $fecha =  date("Y-m-d",strtotime($fecha."+ 1 days"));
+       $asuetos = DiasAsueto::where('fecha', $fecha)->get();
+          if(count($asuetos) == 0){
+            $soldado = 1;
+          }else{
+            $soldado = 0;
+          }
+    }
+
+    //echo date("d-m-Y",strtotime($fecha."+ 1 days")); 
+    //echo date("d-m-Y", strtotime("+1 day"));  
+
+
+
       //CREACION DE TAREA//
      $codigoTarea = $this->code('Tarea');
       $Tarea = Tarea::create([
@@ -60,7 +88,7 @@ class TareaController extends Controller
           'Titulo'=>$request['titulo'],
           'Cuerpo'=>$request['descripcion'],
           'estado'=>$request['estado'],
-          'fecha_finalizacion'=>$request['fecha'],
+          'fecha_finalizacion'=>$fecha,
           'creador' => Auth::user()->id,
       ]);
       //CREACION DE TAREA//
@@ -73,6 +101,7 @@ class TareaController extends Controller
            'user_id' => $users[$i]
           ]);
      }
+     
      //CREACION DE TAREAS POR USUARIO//
 
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
@@ -290,6 +319,26 @@ class TareaController extends Controller
         $titulo = "Tareas no finalizadas";
         return view('Tarea.TareaNoFinIndex' , compact('tareas', 'titulo'));
    }
+
+
+   public function tareas_sin_iniciar(){
+        $tareas = Tarea::where('estado','Inicio')->get();
+        $titulo = "Tareas sin iniciar";
+        return view('Tarea.TareaInicioIndex' , compact('tareas', 'titulo'));
+   }
+
+     public function tareas_proceso(){
+        $tareas = Tarea::where('estado','Proceso')->get();
+        $titulo = "Tareas en proceso";
+        return view('Tarea.TareaProcesoIndex' , compact('tareas', 'titulo'));
+   }
+
+    public function tareas_fin(){
+        $tareas = Tarea::where('estado','Finalizado')->get();
+        $titulo = "Tareas finalizadas";
+        return view('Tarea.TareaFinIndex' , compact('tareas', 'titulo'));
+   }
+    
     
 
 

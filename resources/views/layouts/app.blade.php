@@ -108,12 +108,11 @@
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
-                          <li><a href="dashboard_2.html">Tareas sin iniciar</a></li>
-                          <li><a href="dashboard_2.html">Tareas en proceso</a></li>
-                          <li><a href="dashboard_3.html">Tareas finalizadas</a></li>
-                          <li><a href="dashboard_4_1.html">Tareas no cumplidas</a></li>
+                          <li><a href="{{route('tareas-sin-iniciar')}}">Tareas sin iniciar</a></li>
+                          <li><a href="{{route('tareas-en-proceso')}}">Tareas en proceso</a></li>
+                          <li><a href="{{route('tareas-finalizadas')}}">Tareas finalizadas</a></li>
                          <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
-                           <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
+                          <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
                         @else
                         <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @endif
