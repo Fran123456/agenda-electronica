@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <style type="text/css">
     .wrapper-content {
     padding: 10px 10px 10px;

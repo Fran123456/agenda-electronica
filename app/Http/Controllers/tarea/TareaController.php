@@ -119,19 +119,21 @@ class TareaController extends Controller
 
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
      for ($i=0; $i <count($users) ; $i++) {
-         $notyUsuarios =  Notificacion_Usuario::create([
-           'notificacion_id' => $codigoNoty,
-           'user_id' => $users[$i],
-           'estado' => 'SIN LEER'
-          ]);
+          if($users[$i] != Auth::user()->id){
+             $notyUsuarios =  Notificacion_Usuario::create([
+             'notificacion_id' => $codigoNoty,
+             'user_id' => $users[$i],
+             'estado' => 'SIN LEER'
+            ]);
 
-          $to = User::where('id', $users[$i])->first();
+            $to = User::where('id', $users[$i])->first();
+           
+
+           $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
+       }
          
-
-       $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
-
-
      }
+
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
       return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente");
     }

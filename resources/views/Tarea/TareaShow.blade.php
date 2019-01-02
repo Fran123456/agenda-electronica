@@ -22,7 +22,7 @@
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i>NOTIFICACIÓN</h5>
+                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i>TAREA</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>

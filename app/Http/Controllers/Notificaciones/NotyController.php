@@ -147,6 +147,7 @@ class NotyController extends Controller
        $notificacion = Notificacion::where('codigo_noty' , $id)->first();
        $creador = User::where('id' , $notificacion->creador)->first();
        $tarea = Tarea::where('codigo_tarea', $notificacion->tarea_id)->first();
+
        $colaboradores = Notificacion_Usuario::where('notificacion_id', $id)->get();
 
 
@@ -156,8 +157,10 @@ class NotyController extends Controller
        }
 
       //actualizacion de notificaciones.
-      DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->update(['estado' => "LEIDA"]);
+       DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->update(['estado' => "LEIDA"]);
 
+
+  
        return view('Notificaciones.NotificacionCreate', compact('notificacion', 'creador', 'tarea', 'perfiles'));
     }
 
