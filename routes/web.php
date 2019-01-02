@@ -56,6 +56,8 @@ Route::get('Tareas-sin-iniciar', 'tarea\TareaController@MyTask_incio')->name('Ta
 Route::resource('Notificaciones', 'Notificaciones\NotyController');
 Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notificacion')->name('nueva-notificacion');
 Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')->name('notificaciones-enviadas');
+Route::get('delete-noti/{id}', 'Notificaciones\NotyController@destroy_me')->name('delete-noti');
+Route::get('delete-noti-send/{id}', 'Notificaciones\NotyController@destroy_send')->name('delete-noti-send');
 
 
 //PUSH

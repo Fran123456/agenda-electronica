@@ -128,7 +128,17 @@ class NotyController extends Controller
      */
     public function destroy($id)
     {
-        //
+     
+    }
+
+    public function destroy_me($id){
+       DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->delete();
+       return back()->with('eliminado','Eliminado con exito');
+    }
+
+    public function destroy_send($id){
+        DB::table('notificacion')->where('codigo_noty', $id)->delete();
+       return back()->with('eliminado','Eliminado con exito');
     }
 
 
