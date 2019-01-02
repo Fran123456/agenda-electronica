@@ -49,6 +49,10 @@
   width: 370px;
   min-width: 0;
 }
+
+
+/*configuraciones de color rojo*/
+
 </style>
 
 {!!Noty::__off()!!}
@@ -59,7 +63,6 @@
 <!--Pedimos permisos-->
 </head>
 <body>
-
   <div id="wrapper">
       <nav class="navbar-default navbar-static-side" role="navigation">
           <div class="sidebar-collapse">
