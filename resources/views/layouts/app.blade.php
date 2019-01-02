@@ -51,10 +51,7 @@
 }
 
 
-/*configuraciones de color rojo*/
-
 </style>
-
 {!!Noty::__off()!!}
 
 <script type="text/javascript" src="{{asset('js/push.min.js')}}"></script>
