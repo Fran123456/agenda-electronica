@@ -130,6 +130,10 @@
                   <li>
                     <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                   </li>
+
+                  <li>
+                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                  </li>
                   @endif
 
 

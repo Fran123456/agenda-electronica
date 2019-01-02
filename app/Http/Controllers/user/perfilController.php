@@ -28,7 +28,8 @@ class perfilController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('users.UserIndex', compact('users'));
     }
 
     /**
@@ -38,7 +39,8 @@ class perfilController extends Controller
      */
     public function create()
     {
-        //
+        $avatars = Avatar::all();
+        return view('users.UserCreate', compact('avatars'));
     }
 
     /**
