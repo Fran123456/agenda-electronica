@@ -88,7 +88,8 @@
                                         @foreach($days as $key => $value)
                                         <tr>
                                             <td>{{$key +1}}</td>
-                                            <td>{{$value->fecha}}</td>
+                                            <td>{{date("d-m-Y",strtotime($value->fecha)) }}</td>
+                                            
                                             <td>{{ $value->descripcion}}</td>
                                             <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
                                               <i class="fa fa-pencil" aria-hidden="true"></i></a></td>

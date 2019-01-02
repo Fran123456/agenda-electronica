@@ -111,7 +111,7 @@
                                             <td>{{$value->Titulo}}</td>
                                               <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
 
-                                            <td>{{$value->fecha_finalizacion}}</td>
+                                            <td>{{date("d-m-Y",strtotime($value->fecha_finalizacion)) }}</td>
                                               
                                           <td><a  class="btn btn-info" href="">
                                               <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
