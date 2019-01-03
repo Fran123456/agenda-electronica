@@ -54,8 +54,8 @@ Route::get('tareas-sin-iniciar', 'tarea\TareaController@tareas_sin_iniciar')->na
 Route::get('tareas-en-proceso', 'tarea\TareaController@tareas_proceso')->name('tareas-en-proceso');
 Route::get('tareas-finalizadas', 'tarea\TareaController@tareas_fin')->name('tareas-finalizadas');
 
-
-
+Route::get('reprogramar-tarea/{id}', 'tarea\TareaController@reprogramar_task')->name('reprogramar-tarea');
+Route::post('programarTask/{id}', 'tarea\TareaController@update')->name('programarTask');
 
 //administracion de tareas
 Route::get('Tareas-sin-iniciar', 'tarea\TareaController@MyTask_incio')->name('Tareas-sin-iniciar');

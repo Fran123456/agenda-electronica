@@ -26,7 +26,7 @@
                                     <div class="col-lg-10">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                              <input type="text" name="titulo" value="{{ old('titulo') }}" required class="form-control" value="">
+                                              <input  type="text" name="titulo" value="{{$tarea->Titulo}}" required class="form-control" value="">
                                           </div>
                                     </div>
                                  </div>
@@ -35,7 +35,7 @@
                                     <div class="col-lg-4">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                              <input type="date" name="fecha" required class="form-control" value="">
+                                              <input type="date" name="fecha" value="{{$tarea->fecha_finalizacion}}" required class="form-control" value="">
                                           </div>
                                     </div>
 
@@ -43,21 +43,39 @@
                                      <div class="col-lg-4">
                                            <div class="input-group date">
                                                <span class="input-group-addon"><i class="fa fa-check-circle-o" aria-hidden="true"></i></i></span>
-                                               <input type="text" readonly   name="estado" value="Inicio" class="form-control">
+                                               <select name="estado" class="form-control">
+                                                 <option value="Inicio">Inicio</option>
+                                                 <option value="Proceso">Proceso</option>
+                                                 <option value="Proceso">Finalizado</option>
+                                               </select>
                                            </div>
                                      </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Descripción:</label>
                                     <div class="col-lg-10">
-                                        <textarea id="editor1" required name="descripcion" rows="8" class="form-control"></textarea>
+                                        <textarea id="editor1" required name="descripcion" rows="8" class="form-control">{{$tarea->Cuerpo}}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Usuarios asignados:</label>
                                     <div class="col-lg-10">
-                                              <select size="7" id="select" required class="form-control" name="users[]" multiple>
+                                              <select size="7"  id="select" required class="form-control" name="users[]" multiple>
+                                                 @foreach($users  as $key => $value)
+                                                    @for($i = 0; $i< count($usersA); $i++)
+                                                        @if($usersA[$i]['user_id'] == $value->id)
+                                                          {{ $soldado = 1}}
+                                                        @else
+                                                          {{ $soldado = 0}}
+                                                        @endif
+                                                    @endfor
 
+                                                        @if($soldado == 1)
+                                                          <option selected="" value="{{$value->id}}">{{$value->name}}</option>
+                                                        @else
+                                                          <option  value="{{$value->id}}">{{$value->name}}</option>
+                                                        @endif
+                                                 @endforeach
                                               </select>
                                     </div>
                                  </div>
@@ -85,39 +103,6 @@
    CKEDITOR.replace( 'editor1' );
 </script>
 
-<script type="text/javascript">
-/*$.ajax({
-   type: 'ajax',
-   method: 'post',
-   url: 'bodega_Controller/get_codigos',
-   data: {dato: dato},
-   async: false,
-   dataType: 'json',
-   success: function(data){
-   },
-   error: function(){
-       alert("error");
-   }
-});*/
 
-var html = "";
-$.ajax({
-   type: 'ajax',
-   method: 'get',
-   url: '{{route('listarUsers')}}',
-   async: false,
-   dataType: 'json',
-   success: function(data){
-    for (var i = 0; i < data.length; i++) {
-      html = html + '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-    }
-    console.log(html);
-    $('#select').append(html);
-   },
-   error: function(){
-       alert("error");
-   }
-});
-</script>
 
 @endsection

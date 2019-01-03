@@ -113,11 +113,10 @@
 
                                             <td>{{date("d-m-Y",strtotime($value->fecha_finalizacion)) }}</td>
                                               
-                                          <td><a  class="btn btn-info" href="">
+                                          <td><a  class="btn btn-info" href="{{route('reprogramar-tarea', $value->codigo_tarea)}}">
                                               <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
                                           
                                           
-
                                             <td><!-- Single button -->
                                               <div class="btn-group ">
                                                 <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

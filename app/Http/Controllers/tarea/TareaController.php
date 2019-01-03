@@ -194,10 +194,86 @@ class TareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) //actualiza pero dirigido a modificar la fecha y los usuarios de la tarea
     {
-        //
+
+      DB::table('tareas_usuarios')->where('tarea_id', $id)->delete();
+
+
+      $soldado = 0; //determina si el siguiente dia no es asueto
+      $fecha =$request->fecha;
+      $asuetos = DiasAsueto::where('fecha', $fecha)->get();
+
+      if(count($asuetos) == 0){
+        $soldado = 1;
+      }else{
+        $soldado = 0;
+      }
+
+      while($soldado == 0){
+         $fecha =  date("Y-m-d",strtotime($fecha."+ 1 days"));
+         $asuetos = DiasAsueto::where('fecha', $fecha)->get();
+            if(count($asuetos) == 0){
+              $soldado = 1;
+            }else{
+              $soldado = 0;
+            }
+      }
+      
+            DB::table('tareas')
+            ->where('codigo_tarea', $id)
+            ->update(
+              [
+                'Titulo' => $request->titulo ,
+                'Cuerpo' => $request->descripcion,
+                'estado' => $request->estado,
+                'fecha_finalizacion' => $fecha,
+              ]);
+
+     
+
+
+     //CREACION DE TAREAS POR USUARIO//
+     $users = $request->users;
+     for ($i=0; $i <count($users) ; $i++) {
+          $tareasUsuario = Tarea_Usuario::create([
+           'tarea_id' => $id,
+           'user_id' => $users[$i]
+          ]);
+     }
+     
+     //CREACION DE TAREAS POR USUARIO//
+
+     //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
+     $codigoNoty = $this->code('Noty');
+     $tituloGenerico = strtoupper(Auth::user()->name) . " MODIFICO FECHA DE LA TAREA NO FINALIZADA";
+       $noty = Notificacion::create([
+         'codigo_noty' => $codigoNoty,
+         'titulo' => $tituloGenerico,
+         'cuerpo' => $request['mensaje'],
+         'creador' => Auth::user()->id,
+         'tarea_id' => $id,
+         'tipo_noti' => 'tarea'
+       ]);
+     //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
+
+     //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
+     for ($i=0; $i <count($users) ; $i++) {
+          if($users[$i] != Auth::user()->id){
+             $notyUsuarios =  Notificacion_Usuario::create([
+             'notificacion_id' => $codigoNoty,
+             'user_id' => $users[$i],
+             'estado' => 'SIN LEER'
+            ]);
+
+            $to = User::where('id', $users[$i])->first();
+           
+           $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
+       }
     }
+
+    return redirect()->route('Tareas.index')->with('editado', "Tarea editada correctamente");
+  }
 
     /**
      * Remove the specified resource from storage.
@@ -207,8 +283,10 @@ class TareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
+
+
 
 
   //METODOS PROPIOS
@@ -217,7 +295,16 @@ class TareaController extends Controller
     echo json_encode($users);
   }
 
-  public function MyTask(){
+  public function reprogramar_task($id){
+
+     $tarea = Tarea::where('codigo_tarea', $id)->first();
+     $usersA = Tarea_Usuario::where('tarea_id', $id)->get()->toArray();
+     $users = User::where('rol', '!=' , 'soporte')->get();
+
+    return view('Tarea.TareaReprogramar', compact('tarea', 'usersA', 'users'));
+  }
+
+  public function MyTask(){ //mis tareas muestra las tareas asignadas al usuario que se ha logeado
       $titulo ="Gestión de mis tareas asignadas";
         $tareasxuser = Tarea_Usuario::where('user_id', Auth::user()->id)->get();
         
