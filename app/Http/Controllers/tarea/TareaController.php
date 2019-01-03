@@ -283,9 +283,9 @@ class TareaController extends Controller
      */
     public function destroy($id)
     {
-        
+        DB::table('tareas')->where('codigo_tarea', $id)->delete();
+        return back()->with('eliminado', "Tarea eliminada correctamente");
     }
-
 
 
 

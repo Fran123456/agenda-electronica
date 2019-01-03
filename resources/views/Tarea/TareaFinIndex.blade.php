@@ -157,7 +157,7 @@
                                                     <li ><a class="btn" href=""><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></li>
 
                                                     <li >
-                                                      {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                      {!! Form::open(['route' => ['Tareas.destroy', $value->codigo_tarea], 'method' => 'DELETE']) !!}
                                                            <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn">
                                                                  <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
                                                            </button>
