@@ -29,6 +29,10 @@ Route::resource('avatar', 'Avatar\AvatarController');
 //perfil y edicion de perfil
 Route::resource('Perfil', 'user\perfilController');
 route::post('/updatePerfil/{id}','user\perfilController@update')->name('updatePerfil');
+route::get('actualizar-perfil/{id}' ,'user\perfilController@edit_All')->name('actualizar-perfil');
+route::post('/update_all/{id}','user\perfilController@update_all')->name('update_all');
+
+
 //perfil y edicion de perfil
 
 //rutas para dias libre

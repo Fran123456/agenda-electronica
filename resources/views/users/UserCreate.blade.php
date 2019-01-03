@@ -37,7 +37,7 @@
                                        <div class="" id="">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-                                              <input required="" type="text" name="name" class="form-control" value="">
+                                              <input required="" type="mail" name="correo" class="form-control" value="">
                                           </div>
                                       </div>
                                     </div>
@@ -48,16 +48,26 @@
                                        <div class="" id="">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                                              <input required="" type="text" name="name" class="form-control" value="">
+                                              <input required="" type="password" name="pass" class="form-control" value="">
                                           </div>
                                       </div>
                                     </div>
                                 </div>
 
-                                
+                                <div class="form-group"><label class="col-lg-2 control-label">Rol:</label>
+                                    <div class="col-lg-10">
+                                       <div class="" id="">
+                                          <div class="input-group date">
+                                              <span class="input-group-addon"><i class="fa fa-check-square" aria-hidden="true"></i></span>
+                                              <select class="form-control" name="rolxx">
+                                                <option value="super">Super usuario</option>
+                                                <option value="common-user">common-user</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
 
-
-                                
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
@@ -70,15 +80,5 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('css/plugins/datapicker/datepicker3.css')}}">
-<script src="{{asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
-<script type="text/javascript">
-$('#data_1 .input-group.date').datepicker({
-    todayBtn: "linked",
-    keyboardNavigation: false,
-    forceParse: false,
-    calendarWeeks: true,
-    autoclose: true
-});
-</script>
+
 @endsection

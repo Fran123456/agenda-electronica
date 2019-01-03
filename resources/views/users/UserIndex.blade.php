@@ -104,10 +104,10 @@
                                                <button disabled="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                              </td>
                                              @else
-                                              <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
+                                              <td><a class="btn btn-warning" href="{{route('actualizar-perfil',$value->id)}}">
                                               <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                               <td>
-                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                               {!! Form::open(['route' => ['Perfil.destroy', $value->id], 'method' => 'DELETE']) !!}
                                                     <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
                                                           <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
