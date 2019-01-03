@@ -129,7 +129,7 @@ class TareaController extends Controller
             $to = User::where('id', $users[$i])->first();
            
 
-           $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
+        //   $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
        }
          
      }
@@ -184,7 +184,11 @@ class TareaController extends Controller
      */
     public function edit($id)
     {
-        //
+      $tarea = Tarea::where('codigo_tarea', $id)->first();
+      $usersA = Tarea_Usuario::where('tarea_id', $id)->get()->toArray();
+      $users = User::where('rol', '!=' , 'soporte')->get();
+
+     return view('Tarea.TareaEditx', compact('tarea', 'usersA', 'users'));
     }
 
     /**
@@ -246,7 +250,7 @@ class TareaController extends Controller
 
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
      $codigoNoty = $this->code('Noty');
-     $tituloGenerico = strtoupper(Auth::user()->name) . " MODIFICO FECHA DE LA TAREA NO FINALIZADA";
+     $tituloGenerico = strtoupper(Auth::user()->name) . " HA MODIFICADO LA TAREA";
        $noty = Notificacion::create([
          'codigo_noty' => $codigoNoty,
          'titulo' => $tituloGenerico,
@@ -268,7 +272,7 @@ class TareaController extends Controller
 
             $to = User::where('id', $users[$i])->first();
            
-           $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
+        //   $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
        }
     }
 

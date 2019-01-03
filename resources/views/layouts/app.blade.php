@@ -142,6 +142,9 @@
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
+                          @if(Auth::user()->rol == 'super')
+                          <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones del sistema</a></li>
+                          @endif
                       </ul>
                   </li>
 

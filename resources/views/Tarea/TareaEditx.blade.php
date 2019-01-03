@@ -11,7 +11,7 @@
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i> Nueva tarea</h5>
+                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i> Editar una tarea</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" action="{{route('Tareas.store')}}" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{route('programarTask', $tarea->codigo_tarea)}}" method="post" enctype="multipart/form-data">
                                  {{ csrf_field() }}
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Título:</label>
@@ -60,11 +60,12 @@
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Usuarios asignados:</label>
                                     <div class="col-lg-10">
-                                              <select size="7"  id="select" required class="form-control" name="users[]" multiple>
+                                              <select size="7"   required class="form-control" name="users[]" multiple>
                                                  @foreach($users  as $key => $value)
                                                     @for($i = 0; $i< count($usersA); $i++)
                                                         @if($usersA[$i]['user_id'] == $value->id)
                                                           {{ $soldado = 1}}
+                                                          @break
                                                         @else
                                                           {{ $soldado = 0}}
                                                         @endif
@@ -83,14 +84,15 @@
                                  <div class="form-group">
                                     <label class="col-lg-2 control-label">Mensaje de notificación:</label>
                                      <div class="col-lg-10">
-                                        <textarea name="mensaje" class="form-control" rows="8" required></textarea>
+                                        <textarea name="mensaje" class="form-control" rows="8" required>La tarea ha sido modificada
+                                        </textarea>
                                      </div>
                                   </div>
 
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-sm btn-success" type="submit">Crear tarea</button>
+                                        <button class="btn btn-sm btn-success" type="submit">Editar</button>
                                     </div>
                                 </div>
                             </form>
