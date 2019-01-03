@@ -100,9 +100,17 @@
                                               <td>
                                               <button disabled="" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                               </td>
-                                            <td>
+                                             <td>
                                                <button disabled="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                              </td>
+                                             @elseif($value->id == Auth::user()->id)
+
+                                             <td><a class="btn btn-warning" href="{{route('actualizar-perfil',$value->id)}}">
+                                              <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                              <td>
+                                               <button disabled="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                             </td>
+
                                              @else
                                               <td><a class="btn btn-warning" href="{{route('actualizar-perfil',$value->id)}}">
                                               <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
