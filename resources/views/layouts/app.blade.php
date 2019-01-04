@@ -220,10 +220,10 @@
 
           <div class="footer">
                   <div class="pull-right">
-                      10GB of <strong>250GB</strong> Free.
+                      Gestión de tareas
                   </div>
                   <div>
-                      <strong>Copyright</strong> Example Company &copy; 2014-2017
+                      <strong>Copyright</strong> YETI-TASK &copy; 2019
                   </div>
           </div>
 
