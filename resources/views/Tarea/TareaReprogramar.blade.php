@@ -11,7 +11,7 @@
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i> Nueva tarea</h5>
+                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i> Editar una tarea</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -19,14 +19,14 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" action="{{route('Tareas.store')}}" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{route('programarTask', $tarea->codigo_tarea)}}" method="post" enctype="multipart/form-data">
                                  {{ csrf_field() }}
                                 <div class="form-group">
-                                   <label class="col-lg-2 control-label" >Título:</label>
+                                   <label class="col-lg-2 control-label">Título:</label>
                                     <div class="col-lg-10">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                              <input data-emojiable="true" type="text" name="titulo" value="{{ old('titulo') }}" required class="form-control" value="">
+                                              <input  type="text" name="titulo" value="{{$tarea->Titulo}}" required class="form-control" value="">
                                           </div>
                                     </div>
                                  </div>
@@ -35,7 +35,7 @@
                                     <div class="col-lg-4">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                              <input type="date" name="fecha" required class="form-control" value="">
+                                              <input type="date" name="fecha" value="{{$tarea->fecha_finalizacion}}" required class="form-control" value="">
                                           </div>
                                     </div>
 
@@ -43,23 +43,40 @@
                                      <div class="col-lg-4">
                                            <div class="input-group date">
                                                <span class="input-group-addon"><i class="fa fa-check-circle-o" aria-hidden="true"></i></i></span>
-                                               <input type="text" readonly   name="estado" value="Inicio" class="form-control">
+                                               <select name="estado" class="form-control">
+                                                 <option value="Inicio">Inicio</option>
+                                                 <option value="Proceso">Proceso</option>
+                                                 <option value="Proceso">Finalizado</option>
+                                               </select>
                                            </div>
                                      </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Descripción:</label>
                                     <div class="col-lg-10">
-                                        <textarea  id="editor1" required name="descripcion" rows="8" class="form-control"></textarea>
+                                        <textarea id="editor1" required name="descripcion" rows="8" class="form-control">{{$tarea->Cuerpo}}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Usuarios asignados:</label>
                                     <div class="col-lg-10">
+                                              <select size="7"   required class="form-control" name="users[]" multiple>
+                                                 @foreach($users  as $key => $value)
+                                                    @for($i = 0; $i< count($usersA); $i++)
+                                                        @if($usersA[$i]['user_id'] == $value->id)
+                                                          {{ $soldado = 1}}
+                                                          @break
+                                                        @else
+                                                          {{ $soldado = 0}}
+                                                        @endif
+                                                    @endfor
 
-                                              <select size="7" id="select" required class="form-control" name="users[]" multiple>
-
-
+                                                        @if($soldado == 1)
+                                                          <option selected="" value="{{$value->id}}">{{$value->name}}</option>
+                                                        @else
+                                                          <option  value="{{$value->id}}">{{$value->name}}</option>
+                                                        @endif
+                                                 @endforeach
                                               </select>
                                     </div>
                                  </div>
@@ -67,14 +84,15 @@
                                  <div class="form-group">
                                     <label class="col-lg-2 control-label">Mensaje de notificación:</label>
                                      <div class="col-lg-10">
-                                        <textarea data-emojiable="true" name="mensaje" class="form-control textarea-control" rows="8" required></textarea>
+                                        <textarea name="mensaje" class="form-control" rows="8" required>Se ha reprogramado la tarea. 
+                                        </textarea>
                                      </div>
                                   </div>
 
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-sm btn-success" type="submit">Crear tarea</button>
+                                        <button class="btn btn-sm btn-success" type="submit">Reprogramar</button>
                                     </div>
                                 </div>
                             </form>
@@ -87,39 +105,6 @@
    CKEDITOR.replace( 'editor1' );
 </script>
 
-<script type="text/javascript">
-/*$.ajax({
-   type: 'ajax',
-   method: 'post',
-   url: 'bodega_Controller/get_codigos',
-   data: {dato: dato},
-   async: false,
-   dataType: 'json',
-   success: function(data){
-   },
-   error: function(){
-       alert("error");
-   }
-});*/
 
-var html = "";
-$.ajax({
-   type: 'ajax',
-   method: 'get',
-   url: '{{route('listarUsers')}}',
-   async: false,
-   dataType: 'json',
-   success: function(data){
-    for (var i = 0; i < data.length; i++) {
-      html = html + '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-    }
-    console.log(html);
-    $('#select').append(html);
-   },
-   error: function(){
-       alert("error");
-   }
-});
-</script>
 
 @endsection

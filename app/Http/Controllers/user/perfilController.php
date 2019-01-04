@@ -13,6 +13,7 @@ use App\Tarea_Usuario;
 use App\Tarea;
 use App\DiasAsueto;
 use Illuminate\Support\Facades\DB;
+use Hash;
 
 class perfilController extends Controller
 {
@@ -28,7 +29,8 @@ class perfilController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('users.UserIndex', compact('users'));
     }
 
     /**
@@ -38,7 +40,8 @@ class perfilController extends Controller
      */
     public function create()
     {
-        //
+        $avatars = Avatar::all();
+        return view('users.UserCreate', compact('avatars'));
     }
 
     /**
@@ -49,7 +52,15 @@ class perfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       User::create([
+          'name' => $request->name,
+          'email' => $request->correo,
+          'avatar_img' => 'https://i.ibb.co/P5p1trd/contacts2.png',
+          'rol' => $request->rolxx,
+          'password' => Hash::make($request->pass)
+       ]);
+
+     return redirect()->route('Perfil.index')->with('agregado', "Usuario registrado correctamente");
     }
 
     /**
@@ -94,9 +105,15 @@ class perfilController extends Controller
     {
         $perfil = User::find($id);
         $urls = Avatar::all();
-        //$urls = array('perfil/plume.png','perfil/pvz2.png','perfil/pyrojump.png','perfil/quadropus.png','perfil/scribblenauts.png','perfil/seesmic.png','perfil/sonic.png');
-
         return view('users.verPerfil', compact('perfil','urls'));
+    }
+
+    public function edit_All($id){
+        
+        $perfil = User::find($id);
+        $urls = Avatar::all();
+        $op = array('super', 'common-user');
+        return view('users.editUser', compact('perfil','urls', 'op'));
     }
 
     /**
@@ -119,6 +136,17 @@ class perfilController extends Controller
 
     }
 
+
+
+    public function update_all(Request $request, $id)
+    {
+
+        $perfil = User::find($id);
+        $perfil->fill($request->all())->save();
+      return redirect()->route('Perfil.index', $id)->with('agregado', 'Perfil editado correctamente');
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -127,6 +155,8 @@ class perfilController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return back()->with('eliminado','Eliminado con exito');
+
     }
 }

@@ -84,7 +84,7 @@
                                                       </div>
                                                   </div>
                                                
-                                                  <div class="well"><H4>COLABORADORES:</H4>
+                                                 <!-- <div class="well"><H4>COLABORADORES:</H4>
                                                       
                                                       <div class="container">
                                                           <div class="row">
@@ -104,7 +104,7 @@
                                                           </div>
                                                         </div>                                                        
 
-                                                  </div>
+                                                  </div>-->
 
                                           </div>
                                            @endif

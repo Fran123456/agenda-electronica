@@ -113,11 +113,10 @@
 
                                             <td>{{date("d-m-Y",strtotime($value->fecha_finalizacion)) }}</td>
                                               
-                                          <td><a  class="btn btn-info" href="">
+                                          <td><a  class="btn btn-info" href="{{route('reprogramar-tarea', $value->codigo_tarea)}}">
                                               <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
                                           
                                           
-
                                             <td><!-- Single button -->
                                               <div class="btn-group ">
                                                 <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,10 +125,8 @@
                                                 <ul class="dropdown-menu">
                                                   <li><a class="btn" href="{{route('Tareas.show',$value->codigo_tarea)}}"><i class="fa fa-eye" aria-hidden="true"></i> ver</a></li>
                                                     @if(Auth::user()->rol =="super")
-                                                        <li ><a class="btn" href=""><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></li>
-
                                                         <li >
-                                                          {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                          {!! Form::open(['route' => ['Tareas.destroy', $value->codigo_tarea], 'method' => 'DELETE']) !!}
                                                                <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn">
                                                                      <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
                                                                </button>

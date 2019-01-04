@@ -34,6 +34,11 @@ class NotyController extends Controller
         return view('MyNotificaciones.NotificacionIndex', compact('noty', 'notyAll'));
     }
 
+    public function notificaciones_sistema(){
+       $misNotis = Notificacion::where('creador' , 1)->get();
+       return view('MyNotificaciones.sistemaAll', compact('misNotis'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -147,6 +152,7 @@ class NotyController extends Controller
        $notificacion = Notificacion::where('codigo_noty' , $id)->first();
        $creador = User::where('id' , $notificacion->creador)->first();
        $tarea = Tarea::where('codigo_tarea', $notificacion->tarea_id)->first();
+
        $colaboradores = Notificacion_Usuario::where('notificacion_id', $id)->get();
 
 
@@ -156,8 +162,10 @@ class NotyController extends Controller
        }
 
       //actualizacion de notificaciones.
-      DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->update(['estado' => "LEIDA"]);
+       DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->update(['estado' => "LEIDA"]);
 
+
+  
        return view('Notificaciones.NotificacionCreate', compact('notificacion', 'creador', 'tarea', 'perfiles'));
     }
 
@@ -184,8 +192,6 @@ class NotyController extends Controller
     $variable = $prefijo . "-". $uno . "-" . $number . "-". $dos . "-". $number2. "-". $tres;
     return $variable;
    }
-
-
 
 
    public  function notificationPUSH() {

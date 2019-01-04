@@ -29,6 +29,10 @@ Route::resource('avatar', 'Avatar\AvatarController');
 //perfil y edicion de perfil
 Route::resource('Perfil', 'user\perfilController');
 route::post('/updatePerfil/{id}','user\perfilController@update')->name('updatePerfil');
+route::get('actualizar-perfil/{id}' ,'user\perfilController@edit_All')->name('actualizar-perfil');
+route::post('/update_all/{id}','user\perfilController@update_all')->name('update_all');
+
+
 //perfil y edicion de perfil
 
 //rutas para dias libre
@@ -50,8 +54,8 @@ Route::get('tareas-sin-iniciar', 'tarea\TareaController@tareas_sin_iniciar')->na
 Route::get('tareas-en-proceso', 'tarea\TareaController@tareas_proceso')->name('tareas-en-proceso');
 Route::get('tareas-finalizadas', 'tarea\TareaController@tareas_fin')->name('tareas-finalizadas');
 
-
-
+Route::get('reprogramar-tarea/{id}', 'tarea\TareaController@reprogramar_task')->name('reprogramar-tarea');
+Route::post('programarTask/{id}', 'tarea\TareaController@update')->name('programarTask');
 
 //administracion de tareas
 Route::get('Tareas-sin-iniciar', 'tarea\TareaController@MyTask_incio')->name('Tareas-sin-iniciar');
@@ -63,6 +67,8 @@ Route::get('nueva-notificacion/{id}', 'Notificaciones\NotyController@leer_notifi
 Route::get('notificaciones-enviadas', 'Notificaciones\NotyController@send_noty')->name('notificaciones-enviadas');
 Route::get('delete-noti/{id}', 'Notificaciones\NotyController@destroy_me')->name('delete-noti');
 Route::get('delete-noti-send/{id}', 'Notificaciones\NotyController@destroy_send')->name('delete-noti-send');
+Route::get('notificaciones-sistema', 'Notificaciones\NotyController@notificaciones_sistema')->name('notificaciones-sistema');
+
 
 
 //PUSH
