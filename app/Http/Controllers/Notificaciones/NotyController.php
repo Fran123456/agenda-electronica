@@ -34,6 +34,11 @@ class NotyController extends Controller
         return view('MyNotificaciones.NotificacionIndex', compact('noty', 'notyAll'));
     }
 
+    public function notificaciones_sistema(){
+       $misNotis = Notificacion::where('creador' , 1)->get();
+       return view('MyNotificaciones.sistemaAll', compact('misNotis'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

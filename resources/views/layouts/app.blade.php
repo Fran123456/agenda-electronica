@@ -143,7 +143,7 @@
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
                           @if(Auth::user()->rol == 'super')
-                          <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones del sistema</a></li>
+                          <li><a href="{{ route('notificaciones-sistema')}}">Notificaciones del sistema</a></li>
                           @endif
                       </ul>
                   </li>
@@ -317,20 +317,7 @@ function obtener(){
        
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
-      /*   html2 = html2+ '<li style="background-color: #DBE6E2;">'+
-                           '<div class="dropdown-messages-box">'+
-                                '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
-                                    '<img class="img-thumbnail img-circle" alt="image"  src="'+data[i].avatar_img+'">'+
-                                '</a>'+
-                                '<div class="media-body">'+
-                                    '<p style="font-size: 13px;">Nueva notificación de:<strong> '+data[i].name+'<br></strong></p>'+
-                                     '<p style="font-size: 12px;">'+data[i].titulo+'</p>'+
-                                    '<small class="text-muted ">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
-                                  '</small>'+
-                                '</div>'+
-                            '</div>'+
-                        '<br></li>'+
-         '</li><li class="divider"></li>';*/
+
 
          html2 = html2 + '<li >'+
                            '<div class="dropdown-messages-box">'+

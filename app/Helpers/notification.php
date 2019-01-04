@@ -104,7 +104,7 @@ class Noty {
          'codigo_noty' => $codigoNoty,
          'titulo' => $tituloGenerico,
          'cuerpo' => $mensaje,
-         'creador' =>  7,
+         'creador' =>  1,
          'tarea_id' => $tarea->codigo_tarea,
          'tipo_noti' => 'generada-users'
        ]);
@@ -124,6 +124,8 @@ class Noty {
       }
    //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
 
+      
+
    }
 
    public static function Send_Noty_Admin($id_tarea , $id){
@@ -134,7 +136,7 @@ class Noty {
          'codigo_noty' => $codigoNoty,
          'titulo' => $tituloGenerico,
          'cuerpo' => $mensaje,
-         'creador' =>  7,
+         'creador' =>  1,
          'tarea_id' => $id_tarea,
          'tipo_noti' => 'generada'
        ]);
