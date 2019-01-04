@@ -36,6 +36,13 @@
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
 
+
+
+    <link href="{{asset('emoji/css/emoji.css')}}" rel="stylesheet">
+    <script src="{{asset('emoji/js/config.js')}}"></script>
+    <script src="{{asset('emoji/js/util.js')}}"></script>
+    <script src="{{asset('emoji/js/jquery.emojiarea.js')}}"></script>
+    <script src="{{asset('emoji/js/emoji-picker.js')}}"></script>
 <!--PLANTILLA------------------------------------------------------------------------>
 <style media="screen">
 .minimalize-styl-2 {
@@ -51,8 +58,67 @@
 }
 
 
+.emoji-picker-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    font-size: 20px;
+    opacity: 0.7;
+    z-index: 100;
+    transition: none;
+    color: black;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.emoji-menu {
+  position: absolute;
+  right: 0;
+  z-index: 999;
+  width: 225px;
+  overflow: hidden;
+  border: 1px #dfdfdf solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 </style>
 {!!Noty::__off()!!}
+
+
+<script>
+      $(function() {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '../emoji/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+      });
+    </script>
+    <script>
+      // Google Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49610253-3', 'auto');
+      ga('send', 'pageview');
+    </script>
 
 <script type="text/javascript" src="{{asset('js/push.min.js')}}"></script>
 
