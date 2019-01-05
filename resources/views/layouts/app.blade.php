@@ -97,17 +97,14 @@
                       </div>
                   </li>
 
-                       <li>
+                     <li>
                     <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
 
+                 @if(Auth::user()->rol =="super" || Auth::user()->rol =="common-user")
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
-
-
-
-
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
@@ -116,39 +113,47 @@
                           <li><a href="{{route('tareas-finalizadas')}}">Tareas finalizadas</a></li>
                          <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                           <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
-                        @else
+                        @elseif(Auth::user()->rol =="common-user")
                         <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @endif
                       </ul>
                   </li>
+                @endif
 
-                  @if(Auth::user()->rol =="super")
-                  <li>
-                    <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
-                  </li>
+                  @if(Auth::user()->rol =="super" || Auth::user()->rol =="soporte")
+                    @if(Auth::user()->rol =="super")
+                    <li>
+                      <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
-                  </li>
+                    <li>
+                      <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
-                  </li>
+                    <li>
+                      <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                    </li>
+                    @else
+                      <li>
+                        <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                      </li>
+                    @endif
                   @endif
 
-
+                   @if(Auth::user()->rol !="soporte")
                   <li>
                     <a href="Tareas1.index"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
-                          @if(Auth::user()->rol == 'super')
+                        @if(Auth::user()->rol == 'super')
                           <li><a href="{{ route('notificaciones-sistema')}}">Notificaciones del sistema</a></li>
                           @endif
                       </ul>
                   </li>
+                  @endif
 
-
+                   @if(Auth::user()->rol !="soporte")
                    <li>
                     <a href=""><i class="fa fa-user" aria-hidden="true"></i> <span class="nav-label">Mi perfil</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
@@ -156,6 +161,7 @@
                           <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Editar perfil</a></li>
                       </ul>
                   </li>
+                  @endif
 
 
               </ul>
@@ -291,7 +297,7 @@
 
 
 
-                         
+
 
 
 
@@ -314,7 +320,7 @@ function obtener(){
        con = data.length;
 
          $("#num").append(con);
-       
+
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
 
@@ -339,8 +345,8 @@ function obtener(){
      }else{
       $('#notisalv').append('<h3>No hay notificaciones</h3>');
      }
- 
-      
+
+
 
      },
      error: function(){
