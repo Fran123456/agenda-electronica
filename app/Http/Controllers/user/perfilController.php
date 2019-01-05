@@ -70,7 +70,7 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
        $allTask = count(Tarea_Usuario::where('user_id', $id)->get());
        $Task = Tarea_Usuario::where('user_id', $id)->get();
 
@@ -109,11 +109,23 @@ class perfilController extends Controller
     }
 
     public function edit_All($id){
-        
+
         $perfil = User::find($id);
         $urls = Avatar::all();
         $op = array('super', 'common-user');
         return view('users.editUser', compact('perfil','urls', 'op'));
+    }
+
+    public function edit_password($id){
+      $user = User::where('id' , $id)->first();
+      return view('users.editPassword', compact('id','user'));
+
+    }
+
+    public function update_password(Request $request, $id){
+      User::where('id' , $id)
+      ->update(['password' => Hash::make($request->pass)]);
+      return redirect()->route('Perfil.index', $id)->with('agregado', 'Contraseña actualizada');
     }
 
     /**
@@ -128,12 +140,7 @@ class perfilController extends Controller
 
         $perfil = User::find($id);
         $perfil->fill($request->all())->save();
-      /*$perfil->name = $request->get('name');
-        $perfil->email = $request->get('email');
-        $perfil->img = $request->get('img');*/
-
-      return redirect()->route('Perfil.edit', $id)->with('agregado', 'Perfil editado correctamente');
-
+        return redirect()->route('Perfil.edit', $id)->with('agregado', 'Perfil editado correctamente');
     }
 
 

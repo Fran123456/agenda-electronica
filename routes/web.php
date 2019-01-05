@@ -31,8 +31,8 @@ Route::resource('Perfil', 'user\perfilController');
 route::post('/updatePerfil/{id}','user\perfilController@update')->name('updatePerfil');
 route::get('actualizar-perfil/{id}' ,'user\perfilController@edit_All')->name('actualizar-perfil');
 route::post('/update_all/{id}','user\perfilController@update_all')->name('update_all');
-
-
+route::get('actualizar-password/{id}' ,'user\perfilController@edit_password')->name('actualizar-password');
+route::post('updatePassword/{id}' ,'user\perfilController@update_password')->name('updatePassword');
 //perfil y edicion de perfil
 
 //rutas para dias libre
@@ -76,5 +76,3 @@ Route::get('push', 'Notificaciones\NotyController@notificationPUSH')->name('push
 
 //MAIL
 Route::get('mail/send', 'Email\EmailController@send');
-
-

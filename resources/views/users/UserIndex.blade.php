@@ -82,6 +82,7 @@
                                             <th >Avatar</th>
                                             <th>Correo</th>
                                             <th>Rol</th>
+                                            <th width="50">Contraseña</th>
                                             <th width="50">Editar</th>
                                             <th width="50">Eliminar</th>
                                         </tr>
@@ -90,13 +91,17 @@
                                         @foreach($users as $key => $value)
                                         <tr>
                                             <td>{{$key +1}}</td>
-                                            
+
                                              <td>{{ $value->name}}</td>
                                               <td class="text-center"><img  src="{{ $value->avatar_img}}" width="50" height="50" ></td>
                                             <td>{{ $value->email}}</td>
                                             <td>{{$value->rol}}</td>
 
+
                                             @if($value->rol =="soporte")
+                                            <td>
+                                               <button disabled="" class="btn btn-sm btn-info"><i class="fa fa-unlock-alt" aria-hidden="true"></i></button>
+                                             </td>
                                               <td>
                                               <button disabled="" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                               </td>
@@ -104,14 +109,20 @@
                                                <button disabled="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                              </td>
                                              @elseif($value->id == Auth::user()->id)
+                                              <td>
+                                                <button disabled="" class="btn btn-sm btn-info"><i class="fa fa-unlock-alt" aria-hidden="true"></i></button>
+                                              </td>
 
                                              <td><a class="btn btn-warning" href="{{route('actualizar-perfil',$value->id)}}">
                                               <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                               <td>
                                                <button disabled="" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                              </td>
-
                                              @else
+
+                                             <td><a class="btn btn-info" href="{{route('actualizar-password',$value->id)}}">
+                                               <i class="fa fa-unlock-alt" aria-hidden="true"></i></a></td>
+
                                               <td><a class="btn btn-warning" href="{{route('actualizar-perfil',$value->id)}}">
                                               <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                                               <td>
