@@ -22,11 +22,11 @@
                             <form class="form-horizontal" action="{{route('Tareas.store')}}" method="post" enctype="multipart/form-data">
                                  {{ csrf_field() }}
                                 <div class="form-group">
-                                   <label class="col-lg-2 control-label">Título:</label>
+                                   <label class="col-lg-2 control-label" >Título:</label>
                                     <div class="col-lg-10">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                              <input type="text" name="titulo" value="{{ old('titulo') }}" required class="form-control" value="">
+                                              <input data-emojiable="true" type="text" name="titulo" value="{{ old('titulo') }}" required class="form-control" value="">
                                           </div>
                                     </div>
                                  </div>
@@ -49,14 +49,16 @@
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Descripción:</label>
                                     <div class="col-lg-10">
-                                        <textarea id="editor1" required name="descripcion" rows="8" class="form-control"></textarea>
+                                        <textarea  id="editor1" required name="descripcion" rows="8" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Usuarios asignados:</label>
                                     <div class="col-lg-10">
+
                                               <select size="7" id="select" required class="form-control" name="users[]" multiple>
+
 
                                               </select>
                                     </div>
@@ -65,7 +67,7 @@
                                  <div class="form-group">
                                     <label class="col-lg-2 control-label">Mensaje de notificación:</label>
                                      <div class="col-lg-10">
-                                        <textarea name="mensaje" class="form-control" rows="8" required></textarea>
+                                        <textarea data-emojiable="true" name="mensaje" class="form-control textarea-control" rows="8" required></textarea>
                                      </div>
                                   </div>
 

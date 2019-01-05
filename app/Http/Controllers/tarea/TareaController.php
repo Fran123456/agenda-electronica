@@ -54,6 +54,8 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
+   
+
     $soldado = 0; //determina si el siguiente dia no es asueto
     $fecha_final = null;
     $fecha = $request['fecha'];
@@ -135,7 +137,7 @@ class TareaController extends Controller
      }
 
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
-      return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente");
+      return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente"); 
     }
 
 
