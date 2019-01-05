@@ -64,7 +64,7 @@
                                     @foreach($dias as $value)
                                     <div class="feed-element">
                                         <div class="media-body ">
-                                            {{$value->descripcion}} - <strong>{{$value->fecha}}</strong> 
+                                            {{$value->descripcion}} - <strong>{{ date("d-m-Y",strtotime($value->fecha))}}</strong> 
                                         </div>
                                     </div>
                                     @endforeach

@@ -100,11 +100,8 @@
                                             <th class="text-center" width="60">Estado</th>
                                             <th class="text-center" width="100">Fecha finalización</th>
                                             <th class="text-center" width="40">Reprogramar</th>
-                                            <th class="text-center" width="30">Ver</th>
-                                             @if(Auth::user()->rol =="super")
-                                            <th class="text-center" width="30">Editar</th>
-                                            <th class="text-center" width="30">Eliminar</th>
-                                            @endif
+                                            <th class="text-center" width="30">Opciones generales</th>
+                                         
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -114,26 +111,32 @@
                                             <td>{{$value->Titulo}}</td>
                                               <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
 
-                                            <td>{{$value->fecha_finalizacion}}</td>
+                                            <td>{{date("d-m-Y",strtotime($value->fecha_finalizacion)) }}</td>
                                               
-                                          <td><a  class="btn btn-info" href="">
+                                          <td><a  class="btn btn-info" href="{{route('reprogramar-tarea', $value->codigo_tarea)}}">
                                               <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
                                           
-                                           <td><a  class="btn btn-success" href="{{route('Tareas.show',$value->codigo_tarea)}}">
-                                              <i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                          
+                                            <td><!-- Single button -->
+                                              <div class="btn-group ">
+                                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  <i class="fa fa-pencil" aria-hidden="true"></i> Opciones generales<span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                  <li><a class="btn" href="{{route('Tareas.show',$value->codigo_tarea)}}"><i class="fa fa-eye" aria-hidden="true"></i> ver</a></li>
+                                                    @if(Auth::user()->rol =="super")
+                                                        <li >
+                                                          {!! Form::open(['route' => ['Tareas.destroy', $value->codigo_tarea], 'method' => 'DELETE']) !!}
+                                                               <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn">
+                                                                     <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+                                                               </button>
+                                                           {!! Form::close() !!}
+                                                        </li>
+                                                    @endif
 
-
-                                            @if(Auth::user()->rol =="super")
-                                            <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
-                                              <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                                            <td>
-                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                                                          <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                {!! Form::close() !!}
-                                             </td>
-                                             @endif
+                                                </ul>
+                                              </div>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

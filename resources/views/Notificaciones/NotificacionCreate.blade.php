@@ -84,12 +84,12 @@
                                                       </div>
                                                   </div>
                                                
-                                                  <div class="well"><H4>COLABORADORES:</H4>
+                                                 <!-- <div class="well"><H4>COLABORADORES:</H4>
                                                       
                                                       <div class="container">
                                                           <div class="row">
                                                             @for($i = 0; $i <count($perfiles); $i++)
-                                                            <div class="col-md-2 bordes">
+                                                            <div class="col-md-3 bordes">
                                                                     <div class="espacios text-center">
                                                                         <h5 class="">{{$perfiles[$i]->name}}</h5>
                                                                         <img width="50px" height="50px" src="{{ $perfiles[$i]->avatar_img }}">
@@ -104,7 +104,7 @@
                                                           </div>
                                                         </div>                                                        
 
-                                                  </div>
+                                                  </div>-->
 
                                           </div>
                                            @endif

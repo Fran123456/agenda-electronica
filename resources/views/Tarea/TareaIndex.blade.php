@@ -123,7 +123,10 @@
                                            @else
                                             <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
                                           @endif
-                                            <td>{{ $value->fecha_finalizacion}}</td>
+
+
+
+                                            <td>{{ date("d-m-Y",strtotime($value->fecha_finalizacion))    }}</td>
 
 
 
@@ -154,10 +157,10 @@
                                             <ul class="dropdown-menu">
                                               <li><a class="btn" href="{{route('Tareas.show',$value->codigo_tarea)}}"><i class="fa fa-eye" aria-hidden="true"></i> ver</a></li>
                                                 @if(Auth::user()->rol =="super")
-                                                    <li ><a class="btn" href=""><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></li>
+                                                    <li ><a class="btn" href="{{route('Tareas.edit' , $value->codigo_tarea)}}"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></li>
 
                                                     <li >
-                                                      {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                      {!! Form::open(['route' => ['Tareas.destroy', $value->codigo_tarea], 'method' => 'DELETE']) !!}
                                                            <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn">
                                                                  <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
                                                            </button>

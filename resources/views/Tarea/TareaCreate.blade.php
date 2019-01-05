@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                    <label class="col-lg-2 control-label">Usuarios asignados:</label>
                                     <div class="col-lg-10">
-                                              <select id="select" required class="form-control" name="users[]" multiple>
+                                              <select size="7" id="select" required class="form-control" name="users[]" multiple>
 
                                               </select>
                                     </div>

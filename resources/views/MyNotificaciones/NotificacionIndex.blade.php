@@ -95,11 +95,8 @@
                                             <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->notificacion_id)}}">
                                               <i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                             <td>
-                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                                                          <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                {!! Form::close() !!}
+                                                    <a class="btn btn-danger" href="{{route('delete-noti',$value->notificacion_id)}}">
+                                                     <i class="fa fa-trash" aria-hidden="true"></i></a>
                                              </td>
                                         </tr>
                                         @endforeach

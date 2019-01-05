@@ -22,7 +22,7 @@
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i>NOTIFICACIÓN</h5>
+                            <h5><i class="fa fa-thumb-tack" aria-hidden="true"></i>TAREA</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -56,7 +56,7 @@
                                                       <div class="container">
                                                           <div class="row">
                                                             @for($i = 0; $i <count($perfiles); $i++)
-                                                            <div class="col-md-2 bordes">
+                                                            <div class="col-md-3 bordes">
                                                                     <div class="espacios text-center">
                                                                         <h5 class="">{{$perfiles[$i]->name}}</h5>
                                                                         <img width="50px" height="50px" src="{{ $perfiles[$i]->avatar_img }}">
@@ -77,7 +77,7 @@
                                                               </div>
                                                             @endfor
                                                              @if($cont != '/')
-                                                              <div class="col-md-2 bordes">
+                                                              <div class="col-md-3 bordes">
                                                                     <div class="espacios text-center">
                                                                         <h5 class="">{{$jefe->name}}</h5>
                                                                         <img width="50px" height="50px" src="{{ $jefe->avatar_img }}">

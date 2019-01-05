@@ -49,6 +49,10 @@
   width: 370px;
   min-width: 0;
 }
+
+
+/*configuraciones de color rojo*/
+
 </style>
 
 {!!Noty::__off()!!}
@@ -59,7 +63,6 @@
 <!--Pedimos permisos-->
 </head>
 <body>
-
   <div id="wrapper">
       <nav class="navbar-default navbar-static-side" role="navigation">
           <div class="sidebar-collapse">
@@ -108,12 +111,11 @@
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
-                          <li><a href="dashboard_2.html">Tareas sin iniciar</a></li>
-                          <li><a href="dashboard_2.html">Tareas en proceso</a></li>
-                          <li><a href="dashboard_3.html">Tareas finalizadas</a></li>
-                          <li><a href="dashboard_4_1.html">Tareas no cumplidas</a></li>
+                          <li><a href="{{route('tareas-sin-iniciar')}}">Tareas sin iniciar</a></li>
+                          <li><a href="{{route('tareas-en-proceso')}}">Tareas en proceso</a></li>
+                          <li><a href="{{route('tareas-finalizadas')}}">Tareas finalizadas</a></li>
                          <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
-                           <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
+                          <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
                         @else
                         <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @endif
@@ -128,6 +130,10 @@
                   <li>
                     <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                   </li>
+
+                  <li>
+                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                  </li>
                   @endif
 
 
@@ -136,6 +142,9 @@
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
+                          @if(Auth::user()->rol == 'super')
+                          <li><a href="{{ route('notificaciones-sistema')}}">Notificaciones del sistema</a></li>
+                          @endif
                       </ul>
                   </li>
 
@@ -211,10 +220,10 @@
 
           <div class="footer">
                   <div class="pull-right">
-                      10GB of <strong>250GB</strong> Free.
+                      Gestión de tareas
                   </div>
                   <div>
-                      <strong>Copyright</strong> Example Company &copy; 2014-2017
+                      <strong>Copyright</strong> YETI-TASK &copy; 2019
                   </div>
           </div>
 
@@ -308,20 +317,7 @@ function obtener(){
        
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
-      /*   html2 = html2+ '<li style="background-color: #DBE6E2;">'+
-                           '<div class="dropdown-messages-box">'+
-                                '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
-                                    '<img class="img-thumbnail img-circle" alt="image"  src="'+data[i].avatar_img+'">'+
-                                '</a>'+
-                                '<div class="media-body">'+
-                                    '<p style="font-size: 13px;">Nueva notificación de:<strong> '+data[i].name+'<br></strong></p>'+
-                                     '<p style="font-size: 12px;">'+data[i].titulo+'</p>'+
-                                    '<small class="text-muted ">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
-                                  '</small>'+
-                                '</div>'+
-                            '</div>'+
-                        '<br></li>'+
-         '</li><li class="divider"></li>';*/
+
 
          html2 = html2 + '<li >'+
                            '<div class="dropdown-messages-box">'+
