@@ -42,7 +42,7 @@
        @endif
     </div>
 
-    
+
     <div class="col-md-6 col-ms-6 col-xs-6">
         <h3>Gestión de avatars</h3>
     </div>
@@ -52,13 +52,13 @@
         <br>
     </div>
 
-   
+
 
  <div class="col-lg-12 col-ms-12 col-xs-12">
                <div class="ibox float-e-margins" >
                         <div class="ibox-content" >
                             <div class="table-responsive">
-                              <table class="table table-bordered table-hover table-striped" id="avatar2">
+                              <table class="table table-bordered table-hover table-striped" id="asueto">
 
                                   <thead>
                                       <tr class="">
@@ -75,10 +75,10 @@
                                           <td class="text-center">
                                              <img height="60px" width="60px" src="{{ $value->url }}"></a>
                                           </td>
-                                          <td>{{$value->nombre}}</td>             
+                                          <td>{{$value->nombre}}</td>
                                           <td>
-                                           <button type="submit" class="btn btn-sm btn-danger"> Eliminar</button> 
-                                           </td>                       
+                                           <button type="submit" class="btn btn-sm btn-danger"> Eliminar</button>
+                                           </td>
                                       </tr>
                                       @endforeach
                                   </tbody>
@@ -95,7 +95,7 @@
 
 
 
-                           
+
 </div>
 
 
