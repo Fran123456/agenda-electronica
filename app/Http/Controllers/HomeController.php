@@ -44,8 +44,8 @@ class HomeController extends Controller
                  }
                 }
         }
-       
-  
+
+
         $actividadesHoy = $this->__todayForUser();
         if($actividadesHoy != null){
              foreach ($actividadesHoy as $key => $value) {
@@ -58,7 +58,7 @@ class HomeController extends Controller
         }else{
           $users = array();
         }
-       
+
        return view('home', compact('actividadesHoy','users','actividadesHoyA','usersA'));
 
 
@@ -89,7 +89,7 @@ class HomeController extends Controller
             $tareasActuales[$cont] = $aux;
             $cont++;
            }
-            
+
         }
 
       return $tareasActuales;
@@ -103,4 +103,7 @@ class HomeController extends Controller
        $actual = $year . '-' . $mouth . '-' . $day; //fecha actual de hoy
        return $actual;
     }
+
+
+
 }

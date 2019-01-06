@@ -12,9 +12,14 @@
 */
 
 Route::get('/', function () {
-  //  return view('welcome');
-    return redirect('/login');
+    return redirect('installation');
 });
+
+
+//__instalacion
+Route::get('installation', 'install_Controller@__instalacion1')->name('installation');
+Route::get('listo', 'install_Controller@listo')->name('listo');
+//__instalacion
 
 
 Auth::routes();
