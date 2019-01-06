@@ -54,7 +54,7 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-   
+
 
     $soldado = 0; //determina si el siguiente dia no es asueto
     $fecha_final = null;
@@ -78,8 +78,8 @@ class TareaController extends Controller
           }
     }
 
-    //echo date("d-m-Y",strtotime($fecha."+ 1 days")); 
-    //echo date("d-m-Y", strtotime("+1 day"));  
+    //echo date("d-m-Y",strtotime($fecha."+ 1 days"));
+    //echo date("d-m-Y", strtotime("+1 day"));
 
 
 
@@ -103,7 +103,7 @@ class TareaController extends Controller
            'user_id' => $users[$i]
           ]);
      }
-     
+
      //CREACION DE TAREAS POR USUARIO//
 
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
@@ -129,15 +129,15 @@ class TareaController extends Controller
             ]);
 
             $to = User::where('id', $users[$i])->first();
-           
+
 
         //   $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
        }
-         
+
      }
 
      //CREACION DE NOTIFICACION POR USUARIO EN EL SISTEMA
-      return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente"); 
+      return redirect()->route('Tareas.index')->with('agregado', "Elemento agregado correctamente");
     }
 
 
@@ -149,8 +149,8 @@ class TareaController extends Controller
         $objDemo->path  = $path;
 
         $objDemo->TaskSenderName = $TaskSenderName;
-        $objDemo->TaskSenderEmail = $TaskSenderEmail; 
-        
+        $objDemo->TaskSenderEmail = $TaskSenderEmail;
+
         $objDemo->sender = $senderName;
         $objDemo->receiver = $receiverName;
         Mail::to($to)->send(new Email($objDemo));
@@ -167,7 +167,7 @@ class TareaController extends Controller
     {
         $tarea = Tarea::where('codigo_tarea', $id)->first();
         $colaboradores = Tarea_Usuario::where('tarea_id', $id)->get();
- 
+
        $perfiles = array();
        foreach ($colaboradores as $key => $value) {
          $perfiles[$key] = User::where('id', $value->user_id)->first();
@@ -225,7 +225,7 @@ class TareaController extends Controller
               $soldado = 0;
             }
       }
-      
+
             DB::table('tareas')
             ->where('codigo_tarea', $id)
             ->update(
@@ -236,7 +236,7 @@ class TareaController extends Controller
                 'fecha_finalizacion' => $fecha,
               ]);
 
-     
+
 
 
      //CREACION DE TAREAS POR USUARIO//
@@ -247,7 +247,7 @@ class TareaController extends Controller
            'user_id' => $users[$i]
           ]);
      }
-     
+
      //CREACION DE TAREAS POR USUARIO//
 
      //CREACION DE NOTIFICACION GENERICA EN EL SISTEMA
@@ -273,7 +273,7 @@ class TareaController extends Controller
             ]);
 
             $to = User::where('id', $users[$i])->first();
-           
+
         //   $this->mail_newTask($to->email, $tituloGenerico , $request['mensaje'], 'support@yetitask.djfrankremixer.com'  ,'yeti.png',  Auth::user()->name, Auth::user()->email, ' Soporte YETI-TASK', $to->name);
        }
     }
@@ -297,7 +297,7 @@ class TareaController extends Controller
 
   //METODOS PROPIOS
   public function list_users(){
-    $users = User::all();
+    $users = User::where('id' ,'!=' ,1)->get();
     echo json_encode($users);
   }
 
@@ -313,12 +313,12 @@ class TareaController extends Controller
   public function MyTask(){ //mis tareas muestra las tareas asignadas al usuario que se ha logeado
       $titulo ="Gestión de mis tareas asignadas";
         $tareasxuser = Tarea_Usuario::where('user_id', Auth::user()->id)->get();
-        
+
         $tareas = array();
         foreach ($tareasxuser as $key => $value) {
           $tareas[$key] = Tarea::where('codigo_tarea', $value->tarea_id)->first();
         }
-        
+
         return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
   }
 
@@ -342,7 +342,7 @@ class TareaController extends Controller
       $this->SendNotificacionAll($id, $mensaje, $titulo);
 
      return back()->with('editado', "Elemento agregado correctamente");
-      
+
    }
 
    public function cambio_estado_proceso($id){
@@ -367,7 +367,7 @@ class TareaController extends Controller
       return back()->with('editado', "Elemento agregado correctamente");
    }
 
-   
+
 
    //genera notificacion al cambiar de estado
    public function SendNotificacionAll($id_tarea, $mensaje = null, $titulo = null){
@@ -405,7 +405,7 @@ class TareaController extends Controller
 
    }
 
-   //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO 
+   //ESTA FUNCION VA SERVIR PARA CAMBIAR AL ESTADO NO TERNINADO
    //LO HARA COMPRANDO LAS FECHAS
 
 
@@ -433,8 +433,8 @@ class TareaController extends Controller
         $titulo = "Tareas finalizadas";
         return view('Tarea.TareaFinIndex' , compact('tareas', 'titulo'));
    }
-    
-    
+
+
 
 
 
