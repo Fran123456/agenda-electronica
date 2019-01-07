@@ -10,7 +10,7 @@
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Agrega un día de asueto</h5>
+                            <h5>Agrega una nota</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -18,22 +18,12 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" action="{{route('dayOFF.store')}}" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="{{route('guardarNota')}}" method="post" enctype="multipart/form-data">
                                  {{ csrf_field() }}
 
-                                 <div class="form-group"><label class="col-lg-2 control-label">Fecha:</label>
-                                    <div class="col-lg-10">
-                                       <div class="" id="">
-                                          <div class="input-group date">
-                                              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                              <input type="date" name="fecha" class="form-control" value="">
-                                              <input type="hidden" name="grupo" value="{{Auth::user()->grupo}}" class="form-control" value="">
-                                          </div>
-                                      </div>
-                                    </div>
-                                </div>
+                                 
 
-                                <div class="form-group"><label class="col-lg-2 control-label">descripción:</label>
+                                <div class="form-group"><label class="col-lg-2 control-label">Contenido:</label>
                                     <div class="col-lg-10">
                                         <textarea name="descripcion" rows="8" class="form-control"></textarea>
                                     </div>

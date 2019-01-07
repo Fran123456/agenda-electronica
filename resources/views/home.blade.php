@@ -33,6 +33,53 @@ ul.notes li div {
 <script src="{{asset('CLNDR-master/src/clndr.js')}}"></script>
 <script src="{{asset('CLNDR-master/demo/demo.js')}}"></script>
 
+
+
+
+
+<div>
+      <script type="text/javascript">
+      toastr.options = {
+           "closeButton": true,
+           "debug": false,
+           "progressBar": false,
+           "preventDuplicates": false,
+           "positionClass": "toast-top-center",
+           "showDuration": "400",
+           "hideDuration": "1000",
+           "timeOut": "7000",
+           "extendedTimeOut": "1000",
+           "showEasing": "swing",
+           "hideEasing": "linear",
+           "showMethod": "fadeIn",
+           "hideMethod": "fadeOut"
+         }
+      </script>
+        @if(session('agregado'))
+          <script type="text/javascript">
+                        toastr.success("Nota agregada correctamente", "Exito");
+          </script>
+       @endif
+
+     
+
+      @if(session('eliminado'))
+        <script type="text/javascript">
+               toastr.error("Nota eliminada", "Exito");
+        </script>
+      @endif
+
+    </div>
+
+
+
+
+
+
+
+
+
+
  <div class="col-md-5">
                    <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -56,25 +103,23 @@ ul.notes li div {
           </div>
 
           <div class="col-md-7">
-            <div class="text-center"><h3>Mis notas</h3></div>
+            <div class="text-center"><h3>Mis notas</h3> <a href="{{route('nueva-nota')}}"><i class="fa fa-plus-square" aria-hidden="true"></i></a> </div>
               <div class="wrapper wrapper-content animated fadeInUp">
                     <ul class="notes">
+                        @if(count($notas) == 0)
+                          <div class="well text-center">No hay notas</div>
+                        @else
+                        @foreach($notas as $value)
                         <li>
                             <div>
-                                <small>12:03:28 12-04-2014</small>
-                                <h5 style="padding-top: 16px">Long established fact</h5>
-                                The years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                <a href="#"><i class="fa fa-trash-o "></i></a>
+                                <small>{{$value->created_at}}</small>
+                                <br>
+                                {{$value->contenido}}
+                                <a href="{{route('eliminar-nota', $value->id)}}"><i class="fa fa-trash-o "></i></a>
                             </div>
                         </li>
-                        <li>
-                            <div>
-                                <small>11:08:33 16-04-2014</small>
-                                <h5 style="padding-top: 16px">Latin professor at Hampden-Sydney </h5>
-                                The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                <a href="#"><i class="fa fa-trash-o "></i></a>
-                            </div>
-                        </li>
+                        @endforeach
+                       @endif
                     </ul>
                 </div>
           </div>

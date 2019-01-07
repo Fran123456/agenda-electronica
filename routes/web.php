@@ -78,6 +78,10 @@ Route::get('delete-noti-send/{id}', 'Notificaciones\NotyController@destroy_send'
 Route::get('notificaciones-sistema', 'Notificaciones\NotyController@notificaciones_sistema')->name('notificaciones-sistema');
 
 
+//notas
+Route::get('nueva-nota', 'HomeController@form_nota')->name('nueva-nota');
+Route::post('guardarNota', 'HomeController@guardarNota')->name('guardarNota');
+Route::get('eliminar-nota/{id}', 'HomeController@eliminar_nota')->name('eliminar-nota');
 
 //PUSH
 Route::get('push', 'Notificaciones\NotyController@notificationPUSH')->name('push');
