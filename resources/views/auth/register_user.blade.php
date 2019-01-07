@@ -84,9 +84,9 @@
                         <div class="form-group">
                             <label for="password-confirm" class="col-md-4 control-label">Codigo de grupo</label>
                             <div class="col-md-6">
-                                <input  type="text" class="form-control" name="grupo" value="{{$codigo}}" readonly required>
-                                <input  type="hidden" class="form-control" name="rol" value="super" readonly required>
-                                <input  type="hidden" class="form-control" name="soldado" value="si" >
+                                <input  type="text" class="form-control" name="grupo" readonly value="{{$id}}"required>
+                                <input   type="hidden" class="form-control" name="rol"  value="common-user">
+                               <input  type="hidden" class="form-control" name="soldado" value="no" >
                             </div>
                         </div>
 

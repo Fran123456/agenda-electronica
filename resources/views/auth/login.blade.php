@@ -96,9 +96,36 @@ form label {
 form button:hover, form button:active {
   background-color: #1ab369;
 }
+
+.autoform{
+  padding-left: 20px;
+  padding-right:  40px;
+  padding-top:  90px;
+  padding-bottom: 10px;
+
+}
+
+.autoform2{
+  padding-left: 20px;
+  padding-right:  40px;
+  padding-top:  40px;
+  padding-bottom: 10px;
+
+}
 </style>
 
+
+<div class="text-right autoform">
+  <a style="border: 2px white solid" class="btn btn-primary" href="{{route('bienvenido-grupo')}}"><img height="70" width="70" src="{{asset('yeti.png')}}" alt="" class="img-rounded">Registrate</a>
+</div>
+
+<div class="text-right autoform2">
+  <a style="border: 2px white solid" class="btn btn-primary" href="{{route('registe-grupo')}}"><img height="70" width="70" src="{{asset('yeti.png')}}" alt="" class="img-rounded">Registra un grupo</a>
+</div>
+
 <div class=" row">
+
+
   <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
     <div class="svgContainer">

@@ -63,6 +63,10 @@ class perfilController extends Controller
      return redirect()->route('Perfil.index')->with('agregado', "Usuario registrado correctamente");
     }
 
+
+
+    
+
     /**
      * Display the specified resource.
      *
@@ -70,7 +74,7 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
        $allTask = count(Tarea_Usuario::where('user_id', $id)->get());
        $Task = Tarea_Usuario::where('user_id', $id)->get();
 
@@ -109,7 +113,7 @@ class perfilController extends Controller
     }
 
     public function edit_All($id){
-        
+
         $perfil = User::find($id);
         $urls = Avatar::all();
         $op = array('super', 'common-user');
