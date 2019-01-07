@@ -1,13 +1,15 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- phpMyAdmin SQL Dump
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2019 a las 08:18:21
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 7.1.2
+-- Tiempo de generación: 07-01-2019 a las 23:07:39
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -76,6 +78,7 @@ CREATE TABLE `diasasueto` (
   `id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
   `descripcion` text,
+  `grupo` varchar(250) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -84,10 +87,11 @@ CREATE TABLE `diasasueto` (
 -- Volcado de datos para la tabla `diasasueto`
 --
 
-INSERT INTO `diasasueto` (`id`, `fecha`, `descripcion`, `created_at`, `updated_at`) VALUES
-(4, '2019-01-31', 'Primero de diciembre es asueto', '2018-12-01 06:01:54', '2019-01-02 13:41:47'),
-(5, '2019-02-01', 'Asueto general', '2019-01-02 13:57:52', '2019-01-02 13:58:24'),
-(6, '2019-02-02', 'Asueto general', '2019-01-02 14:02:27', '2019-01-02 14:02:44');
+INSERT INTO `diasasueto` (`id`, `fecha`, `descripcion`, `grupo`, `created_at`, `updated_at`) VALUES
+(4, '2019-01-31', 'Primero de diciembre es asueto', 'fjpDt559vTyE', '2018-12-01 06:01:54', '2019-01-02 13:41:47'),
+(5, '2019-02-01', 'Asueto general', 'fjpDt559vTyE', '2019-01-02 13:57:52', '2019-01-02 13:58:24'),
+(6, '2019-02-02', 'Asueto general', 'fjpDt559vTyE', '2019-01-02 14:02:27', '2019-01-02 14:02:44'),
+(7, '2019-01-24', 'Vacación de un día', 'FagdL273TwqL', '2019-01-07 11:04:32', '2019-01-07 11:04:32');
 
 -- --------------------------------------------------------
 
@@ -105,8 +109,8 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id`, `codigo`) VALUES
-(1, 'FVLA134'),
-(2, 'IpR3o432oDgN');
+(3, 'fjpDt559vTyE'),
+(4, 'FagdL273TwqL');
 
 -- --------------------------------------------------------
 
@@ -149,6 +153,29 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notas`
+--
+
+CREATE TABLE `notas` (
+  `id` int(11) NOT NULL,
+  `contenido` text CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci,
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notas`
+--
+
+INSERT INTO `notas` (`id`, `contenido`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, '😱 esta nota es con emoji 😌☺️🙈😒👌🐤🐀', 17, '2019-01-07 14:40:07', '2019-01-07 14:40:07'),
+(5, '😱', 18, '2019-01-07 14:44:24', '2019-01-07 14:44:24'),
+(6, '😔', 18, '2019-01-07 16:07:03', '2019-01-07 16:07:03');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `notificacion`
 --
 
@@ -169,21 +196,10 @@ CREATE TABLE `notificacion` (
 --
 
 INSERT INTO `notificacion` (`id`, `codigo_noty`, `titulo`, `cuerpo`, `creador`, `tarea_id`, `tipo_noti`, `created_at`, `updated_at`) VALUES
-(4, 'Noty-sIgKWr2Xhd-5882381-6648-NUKlX-11456-Lmb3uA', 'FRANCISCO NAVAS HA MODIFICADO LA TAREA', 'Se ha reprogramado la tarea.', 7, 'Tarea-sycxSeVChM-5633251-4128-P97LD-25211-Rdv8lC', 'tarea', '2019-01-04 14:10:47', '2019-01-04 14:10:47'),
-(5, 'Noty-CcbjpkZAta-5310094-5610-I5Aye-96828-uEaIiZ', 'CAMBIO DE ESTADO EN TAREA', 'Vladimir Molina ha cambiado el estado de la tarea ha EN PROCESO.', 3, 'Tarea-sycxSeVChM-5633251-4128-P97LD-25211-Rdv8lC', 'cambio\r\n         ', '2019-01-04 14:11:48', '2019-01-04 14:11:48'),
-(6, 'Noty-iT2twgZrL7-2612053-8156-oK4U5-46822-CSEy3L', 'CAMBIO DE ESTADO EN TAREA', 'Vladimir Molina ha cambiado el estado de la tarea ha FINALIZADO.', 3, 'Tarea-sycxSeVChM-5633251-4128-P97LD-25211-Rdv8lC', 'cambio\r\n         ', '2019-01-04 14:12:14', '2019-01-04 14:12:14'),
-(9, 'Noty-8Q31dIMTiq-7963348-4476-xpshN-25537-ocLQBp', 'FRANCISCO NAVAS TE ASIGNO UNA NUEVA TAREA', 'Tarea  2 asignada', 7, 'Tarea-37b8mc0UiY-3802926-7095-v9ogN-26556-4PTUpK', 'tarea', '2019-01-04 14:21:12', '2019-01-04 14:21:12'),
-(10, 'Noty-GpagVPfxeR-4445355-1865-hrlCR-51308-hYaDyn', 'FRANCISCO NAVAS TE ASIGNO UNA NUEVA TAREA', 'Asignaci?n de tarea 3', 7, 'Tarea-Zy9WVnsEXr-5166075-7136-Z4mwR-75152-cLbzsa', 'tarea', '2019-01-04 14:22:03', '2019-01-04 14:22:03'),
-(11, 'Noty-AtcWgU3QkE-4261978-7554-qF1Cv-94123-4gbMye', 'FRANCISCO NAVAS HA MODIFICADO LA TAREA', 'La tarea ha sido modificada: Se edito el contenido', 7, 'Tarea-Zy9WVnsEXr-5166075-7136-Z4mwR-75152-cLbzsa', 'tarea', '2019-01-04 14:24:34', '2019-01-04 14:24:34'),
-(12, 'Noty-vkDbsWyL3K-5043096-3860-ZhLSp-67308-DzTV6w', 'FRANCISCO NAVAS HA MODIFICADO LA TAREA', 'La tarea ha sido modificada', 7, 'Tarea-37b8mc0UiY-3802926-7095-v9ogN-26556-4PTUpK', 'tarea', '2019-01-04 14:25:21', '2019-01-04 14:25:21'),
-(13, 'Noty-YFlkdsXHW1-6362604-6635-1hwZX-37349-02laL3', 'FRANCISCO NAVAS HA MODIFICADO LA TAREA', 'La tarea ha sido modificada', 7, 'Tarea-37b8mc0UiY-3802926-7095-v9ogN-26556-4PTUpK', 'tarea', '2019-01-04 14:25:30', '2019-01-04 14:25:30'),
-(14, 'Noty-QCTvVjXJkK-3958877-2038-7c0hR-38912-JAFjVP', 'FRANCISCO NAVAS TE ASIGNO UNA NUEVA TAREA', 'Nueva tarea asignada ☺️🙈', 7, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 'tarea', '2019-01-04 16:35:28', '2019-01-04 16:35:28'),
-(15, 'Noty-pFEHSJz2wo-4602081-5047-6nA3i-59671-1l3ItE', 'LA TAREA NO HA SIDO FINALIZADA', 'LA TAREA NO HA PODIDO SER FINALIZADA, SE LES NOTIFICARA CUANDO SEA NUEVAMENTE PROGRAMADA A LOS USUARIOS QUE SE LES ASIGNE. <br><br> Feliz Día.', 1, 'Tarea-ArvG6Lp9ZS-7963353-3036-zl5Jh-97634-qhWU63', 'generada-users', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
-(16, 'Noty-i2aresEP5x-6215726-8504-81dmz-67831-kfZrL4', 'LA TAREA NO SE FINALIZO, PUEDE REPROGRAMARLA.', 'La tarea no ha podido ser finalizada en la fecha estipulada, de ser necesario puede volver a reprogramar la tarea con los mismos colaboradores o diferentes. <br><br> Feliz día.', 1, 'Tarea-ArvG6Lp9ZS-7963353-3036-zl5Jh-97634-qhWU63', 'generada', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
-(17, 'Noty-Jo7mAbjUZi-8287371-3299-WdewV-75879-sOrJXA', 'LA TAREA NO HA SIDO FINALIZADA', 'LA TAREA NO HA PODIDO SER FINALIZADA, SE LES NOTIFICARA CUANDO SEA NUEVAMENTE PROGRAMADA A LOS USUARIOS QUE SE LES ASIGNE. <br><br> Feliz Día.', 1, 'Tarea-Gm9caz8Yd3-3981260-2313-0DOki-33261-i5ewJp', 'generada-users', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
-(18, 'Noty-ks1wyTDAj5-3730286-5505-OQyd7-67342-NWXmug', 'LA TAREA NO SE FINALIZO, PUEDE REPROGRAMARLA.', 'La tarea no ha podido ser finalizada en la fecha estipulada, de ser necesario puede volver a reprogramar la tarea con los mismos colaboradores o diferentes. <br><br> Feliz día.', 1, 'Tarea-Gm9caz8Yd3-3981260-2313-0DOki-33261-i5ewJp', 'generada', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
-(19, 'Noty-p6FAi7vhJl-7355495-4195-6wDx2-60044-lxV40n', 'LA TAREA NO HA SIDO FINALIZADA', 'LA TAREA NO HA PODIDO SER FINALIZADA, SE LES NOTIFICARA CUANDO SEA NUEVAMENTE PROGRAMADA A LOS USUARIOS QUE SE LES ASIGNE. <br><br> Feliz Día.', 1, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 'generada-users', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
-(20, 'Noty-zmdXs9rDeH-7433236-8657-fsKGl-86712-KWGE6t', 'LA TAREA NO SE FINALIZO, PUEDE REPROGRAMARLA.', 'La tarea no ha podido ser finalizada en la fecha estipulada, de ser necesario puede volver a reprogramar la tarea con los mismos colaboradores o diferentes. <br><br> Feliz día.', 1, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 'generada', '2019-01-05 17:00:34', '2019-01-05 17:00:34');
+(1, 'Noty-TJP5iropSV-7257473-4703-mWPSJ-97625-9Y2dQB', 'FRANCISCO NAVAS TE ASIGNO UNA NUEVA TAREA', 'Nueva tarea 😱 por Francisco 😡', 14, 'Tarea-b1Png7sF5B-2802712-2832-vX8JF-50098-0DNfUL', 'tarea', '2019-01-07 10:35:40', '2019-01-07 10:35:40'),
+(2, 'Noty-K6m4la0WcV-8425014-9120-d23AK-44757-kG6Nae', 'DIANA ARGUETA TE ASIGNO UNA NUEVA TAREA', 'Hola Dario, te anexo lo que es la tarea de Enero 😱', 17, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 'tarea', '2019-01-07 10:50:11', '2019-01-07 10:50:11'),
+(3, 'Noty-s84wQqMdHi-7802150-4087-J5uj3-88840-ewUlR9', 'DIANA ARGUETA HA MODIFICADO LA TAREA', 'La tarea ha sido modificada', 17, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 'tarea', '2019-01-07 11:07:27', '2019-01-07 11:07:27'),
+(4, 'Noty-ZFeNj7AiO8-2741196-9977-QpDuT-78996-SQ6ZbM', 'CAMBIO DE ESTADO EN TAREA', 'Dario Alvarez ha cambiado el estado de la tarea ha EN PROCESO.', 18, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 'cambio\r\n         ', '2019-01-07 14:43:26', '2019-01-07 14:43:26');
 
 -- --------------------------------------------------------
 
@@ -199,6 +215,17 @@ CREATE TABLE `notificacion_user` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notificacion_user`
+--
+
+INSERT INTO `notificacion_user` (`id`, `notificacion_id`, `user_id`, `estado`, `created_at`, `updated_at`) VALUES
+(41, 'Noty-TJP5iropSV-7257473-4703-mWPSJ-97625-9Y2dQB', 15, 'SIN LEER', '2019-01-07 10:35:40', '2019-01-07 10:35:40'),
+(42, 'Noty-TJP5iropSV-7257473-4703-mWPSJ-97625-9Y2dQB', 16, 'SIN LEER', '2019-01-07 10:35:41', '2019-01-07 10:35:41'),
+(43, 'Noty-K6m4la0WcV-8425014-9120-d23AK-44757-kG6Nae', 18, 'SIN LEER', '2019-01-07 10:50:11', '2019-01-07 10:50:11'),
+(44, 'Noty-s84wQqMdHi-7802150-4087-J5uj3-88840-ewUlR9', 18, 'SIN LEER', '2019-01-07 11:07:27', '2019-01-07 11:07:27'),
+(45, 'Noty-ZFeNj7AiO8-2741196-9977-QpDuT-78996-SQ6ZbM', 17, 'SIN LEER', '2019-01-07 14:43:26', '2019-01-07 14:43:26');
 
 -- --------------------------------------------------------
 
@@ -226,9 +253,18 @@ CREATE TABLE `tareas` (
   `estado` varchar(200) DEFAULT NULL,
   `fecha_finalizacion` date DEFAULT NULL,
   `creador` int(11) DEFAULT NULL,
+  `grupo` varchar(250) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`id`, `codigo_tarea`, `Titulo`, `Cuerpo`, `estado`, `fecha_finalizacion`, `creador`, `grupo`, `created_at`, `updated_at`) VALUES
+(17, 'Tarea-b1Png7sF5B-2802712-2832-vX8JF-50098-0DNfUL', 'Primera tarea asignada por Francisco 😝', '<ul>\r\n	<li>item 1</li>\r\n	<li>item 2</li>\r\n	<li>item 3</li>\r\n</ul>', 'Inicio', '2019-01-07', 14, 'fjpDt559vTyE', '2019-01-07 10:35:40', '2019-01-07 10:35:40'),
+(18, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 'Tarea de Enero 😉', '<ol>\r\n	<li>item 1</li>\r\n	<li>item 2</li>\r\n	<li>item 3</li>\r\n</ol>', 'Proceso', '2019-01-07', 17, 'FagdL273TwqL', '2019-01-07 10:50:11', '2019-01-07 10:50:11');
 
 -- --------------------------------------------------------
 
@@ -243,6 +279,16 @@ CREATE TABLE `tareas_usuarios` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tareas_usuarios`
+--
+
+INSERT INTO `tareas_usuarios` (`id`, `tarea_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(72, 'Tarea-b1Png7sF5B-2802712-2832-vX8JF-50098-0DNfUL', 15, '2019-01-07 10:35:40', '2019-01-07 10:35:40'),
+(73, 'Tarea-b1Png7sF5B-2802712-2832-vX8JF-50098-0DNfUL', 16, '2019-01-07 10:35:40', '2019-01-07 10:35:40'),
+(75, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 17, '2019-01-07 11:07:27', '2019-01-07 11:07:27'),
+(76, 'Tarea-ICqgvT2kEx-5313821-4570-QGjMz-43931-TJudop', 18, '2019-01-07 11:07:27', '2019-01-07 11:07:27');
 
 -- --------------------------------------------------------
 
@@ -268,7 +314,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `avatar_img`, `rol`, `password`, `grupo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Soporte YETI-TASK', 'support@yetitask.djfrankremixer.com', 'http://127.0.0.1:8000/avatars/bauzb6ypxBC5j7Svbwq68tnPnvyg7U3u78ou5XoL.png', 'soporte', '$2y$10$o8.LYj2e3trTVgVazK0IHeY7l8yg/.ZM7DGNonWnRQovOV5Cm2pT6', NULL, '5diCog0lX42fuEh8CmKqfO5SDNxo7ZYUQ8tT9zR1dWq2sHf8ex5BkoRPIaeE', '2018-12-07 17:09:06', '2019-01-06 01:33:04');
+(1, 'Soporte YETI-TASK', 'support@yetitask.djfrankremixer.com', 'http://127.0.0.1:8000/avatars/bauzb6ypxBC5j7Svbwq68tnPnvyg7U3u78ou5XoL.png', 'soporte', '$2y$10$o8.LYj2e3trTVgVazK0IHeY7l8yg/.ZM7DGNonWnRQovOV5Cm2pT6', NULL, '5diCog0lX42fuEh8CmKqfO5SDNxo7ZYUQ8tT9zR1dWq2sHf8ex5BkoRPIaeE', '2018-12-07 17:09:06', '2019-01-06 01:33:04'),
+(14, 'Francisco Navas', 'navasfran98@gmail.com', 'http://127.0.0.1:8000/avatars/bMUzgQoodN7bJ81WLCg7pXMcjClVsWB7geSED1H6.png', 'super', '$2y$10$FgNeR22EtDR48Fh0oSeoK.hdyZf2EUxL/GaGQ9lEGgo7p.fQk.5D2', 'fjpDt559vTyE', 'VT9d8QSwHp6r0xr0FCcXdYAXNytpsk6JfD39OzaEO7k0JhIbG4xrVyspwZ1s', '2019-01-07 15:09:13', '2019-01-07 15:36:21'),
+(15, 'Karla Margarita', 'karla@gmail.com', 'http://127.0.0.1:8000/avatars/tJwxKdkKeyFsvNdOCRGfhuKrvIkAGZGodxlrp9k0.png', 'common-user', '$2y$10$DR2SD8osptrxjp.GtntC6OTaNXlPvShCRn9BV42icto2PfnipIIEm', 'fjpDt559vTyE', 'AIwSbEYWCXsBeOVJtIsD2hZtDHTisCQeSpqplMBSjCOpQCxVLP4TpGH2BxBs', '2019-01-07 15:35:47', '2019-01-07 15:36:39'),
+(16, 'Rosa Fernandez', 'rosa@gmail.com', 'http://127.0.0.1:8000/avatars/FkyrbP6Uo29GalWgtwOdycXDgnUn8FZRWUtomj4B.png', 'common-user', '$2y$10$iIMbnKoB1jJnPL5FVqsEhO1wLzgNR6gjHxy8zm.1Kg8ZFwU3HpEZ.', 'fjpDt559vTyE', '3Z3qmyRuyVXUFeTJ0iBhPEEoz0LvYf9cWX8n8k93RWHiPfFfQQLIWZjmwWgI', '2019-01-07 15:37:09', '2019-01-07 15:37:43'),
+(17, 'Diana Argueta', 'diana@gmail.com', 'http://127.0.0.1:8000/avatars/Umt55ggrOEG4TvpoOQGIZdqrkIHCZ3T4PiMIGfhE.png', 'super', '$2y$10$8JYRXYRS6HQ5XXkDI.kHIOOGUEZPLN3kUKZWU8WurC7y9bUahRz1i', 'FagdL273TwqL', '7rkeeD4XwbjB2PjgSLhhMjUBsFw769fRr0GkEfVzd193kB3nK8qje3oanyyr', '2019-01-07 15:38:10', '2019-01-07 15:38:18'),
+(18, 'Dario Alvarez', 'dario@gmail.com', 'https://i.ibb.co/P5p1trd/contacts2.png', 'common-user', '$2y$10$Ml1f9vjS/TgBd8lU95UY2uffA5oenOb43ETvo38LOVGnE1i0pP6hS', 'FagdL273TwqL', 'viCytc9KiFjThTVpSO8i2hf6e6EL9L7FBn2QcjE54jvuK0HyN9Dw9FnkvzoZ', '2019-01-07 16:34:02', '2019-01-07 16:34:02');
 
 --
 -- Índices para tablas volcadas
@@ -303,6 +354,12 @@ ALTER TABLE `instalacion`
 -- Indices de la tabla `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `notas`
+--
+ALTER TABLE `notas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -360,51 +417,67 @@ ALTER TABLE `users`
 --
 ALTER TABLE `avatar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
 --
 -- AUTO_INCREMENT de la tabla `diasasueto`
 --
 ALTER TABLE `diasasueto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `instalacion`
 --
 ALTER TABLE `instalacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `notificacion_user`
 --
 ALTER TABLE `notificacion_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT de la tabla `tareas_usuarios`
 --
 ALTER TABLE `tareas_usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -434,6 +507,7 @@ ALTER TABLE `tareas_usuarios`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`avatar_img`) REFERENCES `avatar` (`url`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
