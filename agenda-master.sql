@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2019 a las 08:18:21
+-- Tiempo de generación: 07-01-2019 a las 06:18:58
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.2
 
@@ -88,25 +88,6 @@ INSERT INTO `diasasueto` (`id`, `fecha`, `descripcion`, `created_at`, `updated_a
 (4, '2019-01-31', 'Primero de diciembre es asueto', '2018-12-01 06:01:54', '2019-01-02 13:41:47'),
 (5, '2019-02-01', 'Asueto general', '2019-01-02 13:57:52', '2019-01-02 13:58:24'),
 (6, '2019-02-02', 'Asueto general', '2019-01-02 14:02:27', '2019-01-02 14:02:44');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupo`
---
-
-CREATE TABLE `grupo` (
-  `id` int(11) NOT NULL,
-  `codigo` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `grupo`
---
-
-INSERT INTO `grupo` (`id`, `codigo`) VALUES
-(1, 'FVLA134'),
-(2, 'IpR3o432oDgN');
 
 -- --------------------------------------------------------
 
@@ -200,6 +181,43 @@ CREATE TABLE `notificacion_user` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `notificacion_user`
+--
+
+INSERT INTO `notificacion_user` (`id`, `notificacion_id`, `user_id`, `estado`, `created_at`, `updated_at`) VALUES
+(5, 'Noty-sIgKWr2Xhd-5882381-6648-NUKlX-11456-Lmb3uA', 3, 'LEIDA', '2019-01-04 14:10:47', '2019-01-04 14:10:47'),
+(6, 'Noty-CcbjpkZAta-5310094-5610-I5Aye-96828-uEaIiZ', 7, 'SIN LEER', '2019-01-04 14:11:48', '2019-01-04 14:11:48'),
+(7, 'Noty-iT2twgZrL7-2612053-8156-oK4U5-46822-CSEy3L', 7, 'SIN LEER', '2019-01-04 14:12:14', '2019-01-04 14:12:14'),
+(11, 'Noty-8Q31dIMTiq-7963348-4476-xpshN-25537-ocLQBp', 2, 'SIN LEER', '2019-01-04 14:21:12', '2019-01-04 14:21:12'),
+(12, 'Noty-8Q31dIMTiq-7963348-4476-xpshN-25537-ocLQBp', 4, 'SIN LEER', '2019-01-04 14:21:12', '2019-01-04 14:21:12'),
+(13, 'Noty-8Q31dIMTiq-7963348-4476-xpshN-25537-ocLQBp', 5, 'SIN LEER', '2019-01-04 14:21:12', '2019-01-04 14:21:12'),
+(14, 'Noty-GpagVPfxeR-4445355-1865-hrlCR-51308-hYaDyn', 2, 'SIN LEER', '2019-01-04 14:22:03', '2019-01-04 14:22:03'),
+(15, 'Noty-GpagVPfxeR-4445355-1865-hrlCR-51308-hYaDyn', 3, 'LEIDA', '2019-01-04 14:22:03', '2019-01-04 14:22:03'),
+(16, 'Noty-GpagVPfxeR-4445355-1865-hrlCR-51308-hYaDyn', 4, 'SIN LEER', '2019-01-04 14:22:03', '2019-01-04 14:22:03'),
+(17, 'Noty-GpagVPfxeR-4445355-1865-hrlCR-51308-hYaDyn', 5, 'SIN LEER', '2019-01-04 14:22:03', '2019-01-04 14:22:03'),
+(18, 'Noty-AtcWgU3QkE-4261978-7554-qF1Cv-94123-4gbMye', 2, 'SIN LEER', '2019-01-04 14:24:34', '2019-01-04 14:24:34'),
+(19, 'Noty-AtcWgU3QkE-4261978-7554-qF1Cv-94123-4gbMye', 3, 'LEIDA', '2019-01-04 14:24:34', '2019-01-04 14:24:34'),
+(20, 'Noty-AtcWgU3QkE-4261978-7554-qF1Cv-94123-4gbMye', 4, 'SIN LEER', '2019-01-04 14:24:34', '2019-01-04 14:24:34'),
+(21, 'Noty-AtcWgU3QkE-4261978-7554-qF1Cv-94123-4gbMye', 5, 'SIN LEER', '2019-01-04 14:24:34', '2019-01-04 14:24:34'),
+(22, 'Noty-vkDbsWyL3K-5043096-3860-ZhLSp-67308-DzTV6w', 2, 'SIN LEER', '2019-01-04 14:25:21', '2019-01-04 14:25:21'),
+(23, 'Noty-vkDbsWyL3K-5043096-3860-ZhLSp-67308-DzTV6w', 4, 'SIN LEER', '2019-01-04 14:25:21', '2019-01-04 14:25:21'),
+(24, 'Noty-vkDbsWyL3K-5043096-3860-ZhLSp-67308-DzTV6w', 5, 'SIN LEER', '2019-01-04 14:25:21', '2019-01-04 14:25:21'),
+(25, 'Noty-YFlkdsXHW1-6362604-6635-1hwZX-37349-02laL3', 2, 'SIN LEER', '2019-01-04 14:25:30', '2019-01-04 14:25:30'),
+(26, 'Noty-YFlkdsXHW1-6362604-6635-1hwZX-37349-02laL3', 4, 'SIN LEER', '2019-01-04 14:25:30', '2019-01-04 14:25:30'),
+(27, 'Noty-YFlkdsXHW1-6362604-6635-1hwZX-37349-02laL3', 5, 'SIN LEER', '2019-01-04 14:25:30', '2019-01-04 14:25:30'),
+(28, 'Noty-QCTvVjXJkK-3958877-2038-7c0hR-38912-JAFjVP', 6, 'SIN LEER', '2019-01-04 16:35:28', '2019-01-04 16:35:28'),
+(29, 'Noty-QCTvVjXJkK-3958877-2038-7c0hR-38912-JAFjVP', 7, 'SIN LEER', '2019-01-04 16:35:34', '2019-01-04 16:35:34'),
+(30, 'Noty-pFEHSJz2wo-4602081-5047-6nA3i-59671-1l3ItE', 6, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(31, 'Noty-pFEHSJz2wo-4602081-5047-6nA3i-59671-1l3ItE', 7, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(32, 'Noty-i2aresEP5x-6215726-8504-81dmz-67831-kfZrL4', 7, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(33, 'Noty-Jo7mAbjUZi-8287371-3299-WdewV-75879-sOrJXA', 6, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(34, 'Noty-Jo7mAbjUZi-8287371-3299-WdewV-75879-sOrJXA', 7, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(35, 'Noty-ks1wyTDAj5-3730286-5505-OQyd7-67342-NWXmug', 7, 'LEIDA', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(36, 'Noty-p6FAi7vhJl-7355495-4195-6wDx2-60044-lxV40n', 6, 'SIN LEER', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(37, 'Noty-p6FAi7vhJl-7355495-4195-6wDx2-60044-lxV40n', 7, 'LEIDA', '2019-01-05 17:00:34', '2019-01-05 17:00:34'),
+(38, 'Noty-zmdXs9rDeH-7433236-8657-fsKGl-86712-KWGE6t', 7, 'LEIDA', '2019-01-05 17:00:34', '2019-01-05 17:00:34');
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +248,14 @@ CREATE TABLE `tareas` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`id`, `codigo_tarea`, `Titulo`, `Cuerpo`, `estado`, `fecha_finalizacion`, `creador`, `created_at`, `updated_at`) VALUES
+(13, 'Tarea-Gm9caz8Yd3-3981260-2313-0DOki-33261-i5ewJp', 'Tarea nueva 😱', '<h1><strong>Tareas</strong></h1>\r\n\r\n<ol>\r\n	<li>Item 1</li>\r\n	<li>Item 2</li>\r\n	<li>Item 3</li>\r\n</ol>', 'No terminada', '2019-01-04', 7, '2019-01-04 16:34:23', '2019-01-04 16:34:23'),
+(14, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 'Tarea nueva 😱', '<h1><strong>Tareas</strong></h1>\r\n\r\n<ol>\r\n	<li>Item 1</li>\r\n	<li>Item 2</li>\r\n	<li>Item 3</li>\r\n</ol>', 'No terminada', '2019-01-04', 7, '2019-01-04 16:35:27', '2019-01-04 16:35:27');
+
 -- --------------------------------------------------------
 
 --
@@ -244,6 +270,16 @@ CREATE TABLE `tareas_usuarios` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tareas_usuarios`
+--
+
+INSERT INTO `tareas_usuarios` (`id`, `tarea_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(65, 'Tarea-Gm9caz8Yd3-3981260-2313-0DOki-33261-i5ewJp', 6, '2019-01-04 16:34:23', '2019-01-04 16:34:23'),
+(66, 'Tarea-Gm9caz8Yd3-3981260-2313-0DOki-33261-i5ewJp', 7, '2019-01-04 16:34:23', '2019-01-04 16:34:23'),
+(67, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 6, '2019-01-04 16:35:27', '2019-01-04 16:35:27'),
+(68, 'Tarea-LuN1qFod8V-5796547-5161-AHtCx-74207-4ofv6s', 7, '2019-01-04 16:35:28', '2019-01-04 16:35:28');
+
 -- --------------------------------------------------------
 
 --
@@ -257,7 +293,6 @@ CREATE TABLE `users` (
   `avatar_img` varchar(300) CHARACTER SET latin1 DEFAULT NULL,
   `rol` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grupo` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -267,8 +302,14 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `avatar_img`, `rol`, `password`, `grupo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Soporte YETI-TASK', 'support@yetitask.djfrankremixer.com', 'http://127.0.0.1:8000/avatars/bauzb6ypxBC5j7Svbwq68tnPnvyg7U3u78ou5XoL.png', 'soporte', '$2y$10$o8.LYj2e3trTVgVazK0IHeY7l8yg/.ZM7DGNonWnRQovOV5Cm2pT6', NULL, '5diCog0lX42fuEh8CmKqfO5SDNxo7ZYUQ8tT9zR1dWq2sHf8ex5BkoRPIaeE', '2018-12-07 17:09:06', '2019-01-06 01:33:04');
+INSERT INTO `users` (`id`, `name`, `email`, `avatar_img`, `rol`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Soporte YETI-TASK', 'support@yetitask.djfrankremixer.com', 'http://127.0.0.1:8000/avatars/bauzb6ypxBC5j7Svbwq68tnPnvyg7U3u78ou5XoL.png', 'soporte', '$2y$10$o8.LYj2e3trTVgVazK0IHeY7l8yg/.ZM7DGNonWnRQovOV5Cm2pT6', '5diCog0lX42fuEh8CmKqfO5SDNxo7ZYUQ8tT9zR1dWq2sHf8ex5BkoRPIaeE', '2018-12-07 17:09:06', '2019-01-06 01:33:04'),
+(2, 'Karla Hernández', 'karla@gmail.com', 'http://127.0.0.1:8000/avatars/fHKZnzZRie4m23InFuJWSmplHSmfDjTHt8WCYgy4.png', 'common-user', '$2y$10$Kq0vU4j5RPFV5Gnfm0bXS.5Y.5w.09pML3YqSD7DcrFuJu.EN/px6', 'wECotVSPcDYgdNg02Oo3e5HQ3Rm9wvVXemQAkgaQDEs8XVYE0IrhuQdGmvte', '2018-12-02 17:29:39', '2019-01-05 23:49:24'),
+(3, 'Vladimir Molina', 'vladimir1996amz@gmail.com', 'http://127.0.0.1:8000/avatars/bMUzgQoodN7bJ81WLCg7pXMcjClVsWB7geSED1H6.png', 'common-user', '$2y$10$KM2peERuKfCtcNMGJo17z.ZwUsHn/gT8MrJpX5bOJNIhmeVDLj9j6', 'b86vWRx836gwIPKA7ezdbrBboo2RBypQT0g7HH8TshXelDFxKIIHam5d5rWJ', '2018-12-04 01:07:22', '2019-01-04 20:11:37'),
+(4, 'Daniela Garcia', 'daniela@gmail.com', 'http://127.0.0.1:8000/avatars/tJwxKdkKeyFsvNdOCRGfhuKrvIkAGZGodxlrp9k0.png', 'common-user', '$2y$10$VfLdNzb8hFwXXk96cPjjeuxtlqx/3JCqIiah5PmADN8xUVmv7wCV.', 'Q5ShTPTtDvhGFsJY5rbH6WTxsOImKS4MeaKo7dFQCzrihO5SEzqoAYnggJ8i', '2018-12-04 02:02:54', '2018-12-04 02:03:08'),
+(5, 'Diana Argueta', 'diana@gmail.com', 'http://127.0.0.1:8000/avatars/jE7SsCFx7o2RgGLctnYD9SMBJRhRpqLhBcnOv2q1.png', 'common-user', '$2y$10$YyHwkdoNgUig7nQVlfqsDuenu8M31gGCer.m9PNhjNJVMWDoC84wO', 'wc3N4m2uBGtcjbueSAvBtM8DSxK3D8fSI5pj2cDY6wKw5foBvVXT2Ik1feP8', '2018-12-06 01:21:47', '2018-12-06 01:22:10'),
+(6, 'Franco Zuniga', 'zuniga12@gmail.com', 'http://127.0.0.1:8000/avatars/abKvopJbdkr9iTXvXDxthtj8LvawaTqOLI9w9fD4.png', 'common-user', '$2y$10$Rx7A9V5YMosh2wQwVh3rKuVkNPATQ/O7QG/wxJ0mXrdDLNqBUiCcW.Bu', '5UdVJ2Hsq5ZUAy9DxmAHzx5uEggDT60ZU4ODMAnaVJcK1n48CkyjM028dRPH', '2018-12-06 01:22:57', '2018-12-06 01:23:08'),
+(7, 'Francisco Navas', 'navasfran98@gmail.com', 'http://127.0.0.1:8000/avatars/1n20hAkIOIOqUq8BQ63tpCmdfOXJLLEpbZ60XusI.png', 'super', '$2y$10$Rx7A9V5YMosh2wQwVh3rKuVkNPATQ/O7QG/wxJ0mXrdDLNqBUiCcW', 'cyLaEVfERgVs57YCSckPsw7JeC9sYGih1ACbSCgHzMIkfHcDP8jGzs6qG64P', '2018-11-30 17:47:36', '2019-01-03 22:55:09');
 
 --
 -- Índices para tablas volcadas
@@ -285,12 +326,6 @@ ALTER TABLE `avatar`
 -- Indices de la tabla `diasasueto`
 --
 ALTER TABLE `diasasueto`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `grupo`
---
-ALTER TABLE `grupo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -366,11 +401,6 @@ ALTER TABLE `avatar`
 ALTER TABLE `diasasueto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
 -- AUTO_INCREMENT de la tabla `instalacion`
 --
 ALTER TABLE `instalacion`
@@ -404,7 +434,7 @@ ALTER TABLE `tareas_usuarios`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --
