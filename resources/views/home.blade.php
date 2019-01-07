@@ -2,22 +2,85 @@
 
 @section('content')
 
-
 <style type="text/css">
     .wrapper-content {
     padding: 10px 10px 10px;
 }
+
+
+
+ul.notes li div {
+    text-decoration: none;
+    color: #000;
+    background: #ffc;
+    display: block;
+    height: 210px;
+    width: 230px;
+    padding: 1em;
+    -moz-box-shadow: 5px 5px 7px #212121;
+    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    -moz-transition: -moz-transform 0.15s linear;
+    -o-transition: -o-transform 0.15s linear;
+    -webkit-transition: -webkit-transform 0.15s linear;
+}
 </style>
 
 
-<div class="container" >
-    <div class="text-center"><h3>Chat grupal</h3></div>
-    <div class="row">
-            <div class="col-md-12" >
-                <iframe style="border: 2px solid #C1EBD5" src="https://www4.cbox.ws/box/?boxid=4341309&boxtag=Fq3FmW" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe> 
-            </div>
-        </div> 
-</div>
+<link rel="stylesheet" type="text/css" href="{{asset('CLNDR-master/demo/css/clndr.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="{{asset('CLNDR-master/src/clndr.js')}}"></script>
+<script src="{{asset('CLNDR-master/demo/demo.js')}}"></script>
+
+ <div class="col-md-5">
+                   <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>CALENDARIO</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                               
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                                     <div class="cal1"></div>
+                                    <div class="cal2">
+                                        <script type="text/template" id="template-calendar">
+                                        </script>
+                                     </div>
+       
+                        </div>
+                    </div>
+          </div>
+
+          <div class="col-md-7">
+            <div class="text-center"><h3>Mis notas</h3></div>
+              <div class="wrapper wrapper-content animated fadeInUp">
+                    <ul class="notes">
+                        <li>
+                            <div>
+                                <small>12:03:28 12-04-2014</small>
+                                <h5 style="padding-top: 16px">Long established fact</h5>
+                                The years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                <a href="#"><i class="fa fa-trash-o "></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <small>11:08:33 16-04-2014</small>
+                                <h5 style="padding-top: 16px">Latin professor at Hampden-Sydney </h5>
+                                The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                <a href="#"><i class="fa fa-trash-o "></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+          </div>
+
+
+
 
 
 <!-- Smartsupp Live Chat script -->
@@ -154,5 +217,7 @@ window.smartsupp||(function(d) {
         </div>  
 </div>
 
-
+  <!-- Custom and plugin javascript -->
+    <script src="{{asset('js/inspinia.js')}}"></script>
+    <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>
 @endsection
