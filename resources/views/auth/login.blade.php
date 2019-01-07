@@ -110,18 +110,47 @@ form button:hover, form button:active {
   padding-right:  40px;
   padding-top:  40px;
   padding-bottom: 10px;
-
 }
+
+.btnotros {
+  display: block;
+  margin: 0;
+  padding-bottom:  30px;
+  background-color: #4b647c;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: none;
+  width: 100%;
+  height: 35px;
+  font-size: 1em;
+  color: #FFF;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background-color .2s ease-out;
+}
+.btnotros:hover , a:active{
+  display: block;
+  margin: 0;
+  padding-bottom:  30px;
+  background-color: #1ab369;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: none;
+  width: 100%;
+  height: 35px;
+  font-size: 1em;
+  color: #FFF;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background-color .2s ease-out;
+}
+
 </style>
 
 
-<div class="text-right autoform">
-  <a style="border: 2px white solid" class="btn btn-primary" href="{{route('bienvenido-grupo')}}"><img height="70" width="70" src="{{asset('yeti.png')}}" alt="" class="img-rounded">Registrate</a>
-</div>
 
-<div class="text-right autoform2">
-  <a style="border: 2px white solid" class="btn btn-primary" href="{{route('registe-grupo')}}"><img height="70" width="70" src="{{asset('yeti.png')}}" alt="" class="img-rounded">Registra un grupo</a>
-</div>
 
 <div class=" row">
 
@@ -129,6 +158,8 @@ form button:hover, form button:active {
   <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
     <div class="svgContainer">
+
+
       <div>
         <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
           <defs>
@@ -247,6 +278,13 @@ form button:hover, form button:active {
     <div class="inputGroup inputGroup3">
       <button id="login" type="submit">Ingresa</button>
     </div>
+
+
+<div class="text-center">  <a style="border: 2px white solid" class="btn btnotros" href="{{route('bienvenido-grupo')}}">Registrate</a>
+
+  <a style="border: 2px white solid" class="btn btnotros" href="{{route('registe-grupo')}}">Registrate con un grupo</a></div>
+
+
   </form>
 </div>
 

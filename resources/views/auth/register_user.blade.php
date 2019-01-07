@@ -13,17 +13,14 @@
           <br>
             <div class="panel panel-default">
 
-                <div class="panel-heading">Registrate</div>
+                <div class="panel-heading">Registrate <div class="text-right" ><a href="{{route('bienvenido-grupo')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></div></div>
                 <div class="panel-body">
                   <div class="">
                     <div class="row">
-                      <div class="col-md-4 text-right">
+                      <div class="col-md-12 text-center">
                         <img height="110" width="110" src="{{asset('yeti.png')}}" alt="">
                       </div>
-                      <div class="col-md-8 text-left">
-                        <br><br>
-                        <a class=" btn btn-primary" href="#" class=""><i class="fa fa-users" aria-hidden="true"></i> Registra un grupo</a>
-                      </div>
+                      
                       <br>
                       <br>
                     </div>

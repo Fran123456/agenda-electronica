@@ -13,21 +13,19 @@
           <br>
             <div class="panel panel-default">
 
-                <div class="panel-heading">Registrate</div>
+                <div class="panel-heading">Registrate <div class="text-right" ><a href="{{route('login')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></div></div>
                 <div class="panel-body">
                   <div class="">
                     <div class="row">
-                      <div class="col-md-4 text-right">
+                      <div class="col-md-12 text-center">
                         <img height="110" width="110" src="{{asset('yeti.png')}}" alt="">
                       </div>
-                      <div class="col-md-8 text-left">
-                        <br><br>
-                        <a class=" btn btn-primary" href="#" class=""><i class="fa fa-users" aria-hidden="true"></i> Registra un grupo</a>
-                      </div>
-                      <br>
-                      <br>
+
                     </div>
                   </div>
+
+                  <br>
+                      <br>
 
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
@@ -82,7 +80,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Codigo de grupo</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Codigo de tu grupo</label>
                             <div class="col-md-6">
                                 <input  type="text" class="form-control" name="grupo" value="{{$codigo}}" readonly required>
                                 <input  type="hidden" class="form-control" name="rol" value="super" readonly required>
