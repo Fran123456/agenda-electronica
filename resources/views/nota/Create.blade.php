@@ -25,7 +25,7 @@
 
                                 <div class="form-group"><label class="col-lg-2 control-label">Contenido:</label>
                                     <div class="col-lg-10">
-                                        <textarea name="descripcion" rows="8" class="form-control"></textarea>
+                                        <textarea data-emojiable="true" name="descripcion" rows="8" class="form-control"></textarea>
                                     </div>
                                 </div>
 
