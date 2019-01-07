@@ -35,7 +35,7 @@
                                     <div class="col-lg-4">
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                              <input type="date" name="fecha" required class="form-control" value="">
+                                              <input value="{{ old('fecha') }}" type="date" name="fecha" required class="form-control" value="">
                                           </div>
                                     </div>
 
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Descripción:</label>
                                     <div class="col-lg-10">
-                                        <textarea  id="editor1" required name="descripcion" rows="8" class="form-control"></textarea>
+                                        <textarea  id="editor1" value="{{ old('descripcion') }}" required name="descripcion" rows="8" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <br>

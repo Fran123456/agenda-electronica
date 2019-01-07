@@ -67,8 +67,7 @@ class HomeController extends Controller
 
     public function __today(){
        $actual = $this->__ActualDate();
-       $tareas= Tarea::where('fecha_finalizacion',$actual)
-       ->get();//tareas que ya finalizaron pero no estan terminadas
+       $tareas= Tarea::where('fecha_finalizacion',$actual)->where('grupo' , Auth::user()->grupo)->get();//tareas que ya finalizaron pero no estan terminadas
       return $tareas;
     }
 

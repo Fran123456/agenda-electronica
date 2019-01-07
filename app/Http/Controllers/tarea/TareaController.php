@@ -31,7 +31,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::all();
+        $tareas = Tarea::where('grupo' , Auth::user()->grupo)->get();
         $titulo = "Gestión de tareas";
         return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
     }
@@ -92,6 +92,7 @@ class TareaController extends Controller
           'estado'=>$request['estado'],
           'fecha_finalizacion'=>$fecha,
           'creador' => Auth::user()->id,
+          'grupo' => Auth::user()->grupo,
       ]);
       //CREACION DE TAREA//
 
@@ -188,7 +189,7 @@ class TareaController extends Controller
     {
       $tarea = Tarea::where('codigo_tarea', $id)->first();
       $usersA = Tarea_Usuario::where('tarea_id', $id)->get()->toArray();
-      $users = User::where('rol', '!=' , 'soporte')->get();
+      $users = User::where('rol', '!=' , 'soporte')->where('grupo' , Auth::user()->grupo)->get();
 
      return view('Tarea.TareaEditx', compact('tarea', 'usersA', 'users'));
     }
@@ -297,7 +298,7 @@ class TareaController extends Controller
 
   //METODOS PROPIOS
   public function list_users(){
-    $users = User::where('id' ,'!=' ,1)->get();
+    $users = User::where('id' ,'!=' ,1)->Where('grupo' , Auth::user()->grupo)->get();
     echo json_encode($users);
   }
 
@@ -410,26 +411,31 @@ class TareaController extends Controller
 
 
    public function tareas_No_finalizada(){
-        $tareas = Tarea::where('estado','No terminada')->get();
+
+
+
+
+
+        $tareas = Tarea::where('estado','No terminada')->where('grupo' , Auth::user()->grupo)->get();
         $titulo = "Tareas no finalizadas";
         return view('Tarea.TareaNoFinIndex' , compact('tareas', 'titulo'));
    }
 
 
    public function tareas_sin_iniciar(){
-        $tareas = Tarea::where('estado','Inicio')->get();
+        $tareas = Tarea::where('estado','Inicio')->where('grupo' , Auth::user()->grupo)->get();
         $titulo = "Tareas sin iniciar";
         return view('Tarea.TareaInicioIndex' , compact('tareas', 'titulo'));
    }
 
      public function tareas_proceso(){
-        $tareas = Tarea::where('estado','Proceso')->get();
+        $tareas = Tarea::where('estado','Proceso')->where('grupo' , Auth::user()->grupo)->get();
         $titulo = "Tareas en proceso";
         return view('Tarea.TareaProcesoIndex' , compact('tareas', 'titulo'));
    }
 
     public function tareas_fin(){
-        $tareas = Tarea::where('estado','Finalizado')->get();
+        $tareas = Tarea::where('estado','Finalizado')->where('grupo' , Auth::user()->grupo)->get();
         $titulo = "Tareas finalizadas";
         return view('Tarea.TareaFinIndex' , compact('tareas', 'titulo'));
    }

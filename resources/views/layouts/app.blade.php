@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>Yeti-Task</title>
+<link rel="icon" type="image/png" href="{{asset('yeti.png')}}" />
     <!-- Styles -->
 
 
@@ -225,6 +225,8 @@
                       </ul>
                   </li>
                   @endif
+
+                  
 
 
               </ul>

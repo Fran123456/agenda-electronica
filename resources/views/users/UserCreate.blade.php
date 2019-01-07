@@ -68,6 +68,21 @@
                                     </div>
                                 </div>
 
+                                 <div class="form-group"><label class="col-lg-2 control-label">Codigo de grupo:</label>
+                                    <div class="col-lg-10">
+                                       <div class="" id="">
+                                          <div class="input-group date">
+                                              <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                              <input required="" type="text" readonly="" name="codigo" value="{{Auth::user()->grupo}}" class="form-control" value="">
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+
+
+
+
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
