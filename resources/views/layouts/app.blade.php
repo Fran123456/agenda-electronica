@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Yeti</title>
 
     <!-- Styles -->
 
@@ -101,13 +101,10 @@
                     <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
-
+                
+                  @if(Auth::user()->rol !="soporte")
                   <li>
-                      <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
-
-
-
-
+                      <a href=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
@@ -116,11 +113,12 @@
                           <li><a href="{{route('tareas-finalizadas')}}">Tareas finalizadas</a></li>
                          <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                           <li><a href="{{route('tareas-no-finalizadas')}}">Tareas no finalizadas</a></li>
-                        @else
+                        @elseif(Auth::user()->rol =="common-user")
                         <li><a href="{{route('Mis-tareas')}}">Mis tareas</a></li>
                         @endif
                       </ul>
                   </li>
+                  @endif
 
                   @if(Auth::user()->rol =="super")
                   <li>
@@ -134,11 +132,15 @@
                   <li>
                     <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
                   </li>
+                  @elseif(Auth::user()->rol =="soporte")
+                  <li>
+                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                  </li>
                   @endif
 
 
                   <li>
-                    <a href="Tareas1.index"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
+                    <a href=""><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
@@ -148,7 +150,7 @@
                       </ul>
                   </li>
 
-
+                   @if(Auth::user()->rol !="soporte")
                    <li>
                     <a href=""><i class="fa fa-user" aria-hidden="true"></i> <span class="nav-label">Mi perfil</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
@@ -156,6 +158,7 @@
                           <li><a href="{{route('Perfil.edit', Auth::user()->id) }}">Editar perfil</a></li>
                       </ul>
                   </li>
+                  @endif
 
 
               </ul>
