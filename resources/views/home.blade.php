@@ -2,26 +2,152 @@
 
 @section('content')
 
-
 <style type="text/css">
     .wrapper-content {
     padding: 10px 10px 10px;
 }
+
+
+
+ul.notes li div {
+    text-decoration: none;
+    color: #000;
+    background: #ffc;
+    display: block;
+    height: 210px;
+    width: 230px;
+    padding: 1em;
+    -moz-box-shadow: 5px 5px 7px #212121;
+    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    -moz-transition: -moz-transform 0.15s linear;
+    -o-transition: -o-transform 0.15s linear;
+    -webkit-transition: -webkit-transform 0.15s linear;
+}
 </style>
 
 
-<div class="container" >
-    <div class="text-center"><h3>Chat grupal</h3></div>
-    <div class="row">
-            <div class="col-md-12" >
-                <iframe style="border: 2px solid #C1EBD5" src="https://www4.cbox.ws/box/?boxid=4341309&boxtag=Fq3FmW" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe> 
-            </div>
-        </div> 
-</div>
+<link rel="stylesheet" type="text/css" href="{{asset('CLNDR-master/demo/css/clndr.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="{{asset('CLNDR-master/src/clndr.js')}}"></script>
+<script src="{{asset('CLNDR-master/demo/demo.js')}}"></script>
+
+
+
+
+
+<div>
+      <script type="text/javascript">
+      toastr.options = {
+           "closeButton": true,
+           "debug": false,
+           "progressBar": false,
+           "preventDuplicates": false,
+           "positionClass": "toast-top-center",
+           "showDuration": "400",
+           "hideDuration": "1000",
+           "timeOut": "7000",
+           "extendedTimeOut": "1000",
+           "showEasing": "swing",
+           "hideEasing": "linear",
+           "showMethod": "fadeIn",
+           "hideMethod": "fadeOut"
+         }
+      </script>
+        @if(session('agregado'))
+          <script type="text/javascript">
+                        toastr.success("Nota agregada correctamente", "Exito");
+          </script>
+       @endif
+
+     
+
+      @if(session('eliminado'))
+        <script type="text/javascript">
+               toastr.error("Nota eliminada", "Exito");
+        </script>
+      @endif
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+ <div class="col-md-5">
+                   <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>CALENDARIO</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                               
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                                     <div class="cal1"></div>
+                                    <div class="cal2">
+                                        <script type="text/template" id="template-calendar">
+                                        </script>
+                                     </div>
+       
+                        </div>
+                    </div>
+          </div>
+
+          <div class="col-md-7">
+            <div class="text-center"><h3>Mis notas</h3> <a href="{{route('nueva-nota')}}"><i class="fa fa-plus-square" aria-hidden="true"></i></a> </div>
+              <div class="wrapper wrapper-content animated fadeInUp">
+                    <ul class="notes">
+                        @if(count($notas) == 0)
+                          <div class="well text-center">No hay notas</div>
+                        @else
+                        @foreach($notas as $value)
+                        <li>
+                            <div>
+                                <small>{{$value->created_at}}</small>
+                                <br>
+                                {{$value->contenido}}
+                                <a href="{{route('eliminar-nota', $value->id)}}"><i class="fa fa-trash-o "></i></a>
+                            </div>
+                        </li>
+                        @endforeach
+                       @endif
+                    </ul>
+                </div>
+          </div>
+
+
+
+
+
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '0ff5e7ad595f03fd3ef4aca0a4bdc72398172fb0';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+
+
+
+
 
 
 <div class="container" style="padding-bottom: 50px; padding-top: 30px">
 @if(Auth::user()->rol == "super")
+
 
 <div class="row">
             <div class="col-lg-12">
@@ -136,5 +262,7 @@
         </div>  
 </div>
 
-
+  <!-- Custom and plugin javascript -->
+    <script src="{{asset('js/inspinia.js')}}"></script>
+    <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>
 @endsection

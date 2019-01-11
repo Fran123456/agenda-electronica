@@ -31,6 +31,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $notas = DB::table('notas')->where('user_id', Auth::user()->id)->get();
+
          $actividadesHoyA = array();
          $integrantesA = array();
          $usersA = array();
@@ -59,7 +62,7 @@ class HomeController extends Controller
           $users = array();
         }
        
-       return view('home', compact('actividadesHoy','users','actividadesHoyA','usersA'));
+       return view('home', compact('actividadesHoy','users','actividadesHoyA','usersA', 'notas'));
 
 
     }
@@ -67,8 +70,7 @@ class HomeController extends Controller
 
     public function __today(){
        $actual = $this->__ActualDate();
-       $tareas= Tarea::where('fecha_finalizacion',$actual)
-       ->get();//tareas que ya finalizaron pero no estan terminadas
+       $tareas= Tarea::where('fecha_finalizacion',$actual)->where('grupo' , Auth::user()->grupo)->get();//tareas que ya finalizaron pero no estan terminadas
       return $tareas;
     }
 
@@ -103,4 +105,28 @@ class HomeController extends Controller
        $actual = $year . '-' . $mouth . '-' . $day; //fecha actual de hoy
        return $actual;
     }
+
+
+    //NOTAS
+    public function form_nota(){
+      return view('nota.Create');
+    }
+
+
+    public function guardarNota(request $data){
+      
+        DB::table('notas')->insert(
+          ['contenido' => $data->descripcion  , 'user_id' => Auth::user()->id]
+        );
+
+        return redirect()->route('home')->with('agregado' , 'Nota agregada correctamente');
+    }
+
+    public function eliminar_nota($id){
+      DB::table('notas')->where('id', $id)->delete();
+      return back()->with('eliminado','Eliminado con exito');
+    }
+
+    
+
 }

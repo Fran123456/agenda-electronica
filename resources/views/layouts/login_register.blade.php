@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Yeti-Task</title>
+    <title>mobile</title>
 
     <!-- Styles -->
 

@@ -47,7 +47,7 @@
         <h3>Gestión de avatars</h3>
     </div>
     <div class="col-md-6 col-ms-6 col-xs-6 text-right">
-        <a href="{{route('avatar.create')}}" class="btn btn-success">Agrega</a>
+        <a  href="{{route('avatar.create')}}" class="btn btn-success">Agrega</a>
         <br>
         <br>
     </div>
@@ -77,7 +77,7 @@
                                           </td>
                                           <td>{{$value->nombre}}</td>             
                                           <td>
-                                           <button type="submit" class="btn btn-sm btn-danger"> Eliminar</button> 
+                                           <button disabled="" type="submit" class="btn btn-sm btn-danger"> Eliminar</button> 
                                            </td>                       
                                       </tr>
                                       @endforeach

@@ -96,12 +96,70 @@ form label {
 form button:hover, form button:active {
   background-color: #1ab369;
 }
+
+.autoform{
+  padding-left: 20px;
+  padding-right:  40px;
+  padding-top:  90px;
+  padding-bottom: 10px;
+
+}
+
+.autoform2{
+  padding-left: 20px;
+  padding-right:  40px;
+  padding-top:  40px;
+  padding-bottom: 10px;
+}
+
+.btnotros {
+  display: block;
+  margin: 0;
+  padding-bottom:  30px;
+  background-color: #4b647c;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: none;
+  width: 100%;
+  height: 35px;
+  font-size: 1em;
+  color: #FFF;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background-color .2s ease-out;
+}
+.btnotros:hover , a:active{
+  display: block;
+  margin: 0;
+  padding-bottom:  30px;
+  background-color: #1ab369;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: none;
+  width: 100%;
+  height: 35px;
+  font-size: 1em;
+  color: #FFF;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background-color .2s ease-out;
+}
+
 </style>
 
+
+
+
 <div class=" row">
+
+
   <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
     <div class="svgContainer">
+
+
       <div>
         <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
           <defs>
@@ -220,6 +278,13 @@ form button:hover, form button:active {
     <div class="inputGroup inputGroup3">
       <button id="login" type="submit">Ingresa</button>
     </div>
+
+
+<div class="text-center">  <a style="border: 2px white solid" class="btn btnotros" href="{{route('bienvenido-grupo')}}">Registrate</a>
+
+  <a style="border: 2px white solid" class="btn btnotros" href="{{route('registe-grupo')}}">Registrate con un grupo</a></div>
+
+
   </form>
 </div>
 

@@ -14,6 +14,7 @@ use App\Tarea;
 use App\DiasAsueto;
 use Illuminate\Support\Facades\DB;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class perfilController extends Controller
 {
@@ -29,7 +30,7 @@ class perfilController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('grupo', Auth::user()->grupo)->get();
         return view('users.UserIndex', compact('users'));
     }
 
@@ -57,11 +58,16 @@ class perfilController extends Controller
           'email' => $request->correo,
           'avatar_img' => 'https://i.ibb.co/P5p1trd/contacts2.png',
           'rol' => $request->rolxx,
-          'password' => Hash::make($request->pass)
+          'password' => Hash::make($request->pass),
+          'grupo' => $request->codigo,
        ]);
 
      return redirect()->route('Perfil.index')->with('agregado', "Usuario registrado correctamente");
     }
+
+
+
+    
 
     /**
      * Display the specified resource.
@@ -70,7 +76,7 @@ class perfilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
        $allTask = count(Tarea_Usuario::where('user_id', $id)->get());
        $Task = Tarea_Usuario::where('user_id', $id)->get();
 
@@ -78,18 +84,18 @@ class perfilController extends Controller
       $proceso = 0;
        foreach ($Task as $key => $value) {
            $aux = Tarea::where('codigo_tarea', $value->tarea_id)->first();
-            if($aux->estado = "Finalizado"){
+            if($aux->estado == "Finalizado"){
                $fin++;
             }
 
-            if($aux->estado = "Proceso"){
+            if($aux->estado == "Proceso"){
                $proceso++;
             }
 
        }
 
-       $dias = DiasAsueto::paginate(10);
-       $userschidos = User::paginate(10);
+       $dias = DiasAsueto::where('grupo' , Auth::user()->grupo)->paginate(10);
+       $userschidos = User::where('grupo', Auth::user()->grupo)->orWhere('id' ,1)->paginate(10);
 
        $miProfile = User::find($id);
         return view('users.All', compact('allTask', 'fin', 'proceso', 'id','dias', 'userschidos', 'miProfile'));
@@ -109,7 +115,7 @@ class perfilController extends Controller
     }
 
     public function edit_All($id){
-        
+
         $perfil = User::find($id);
         $urls = Avatar::all();
         $op = array('super', 'common-user');

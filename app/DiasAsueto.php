@@ -8,6 +8,5 @@ class DiasAsueto extends Model
 {
     protected $table = 'diasasueto';
     protected $fillable = [
-        'id','fecha' ,'descripcion'
-    ];
+        'id','fecha' ,'descripcion', 'grupo'];
 }

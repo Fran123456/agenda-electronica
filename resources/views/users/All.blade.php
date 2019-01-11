@@ -20,6 +20,7 @@
                             <div class="ibox-content profile-content">
                                 <h4><strong>{{$miProfile->name}}</strong></h4>
                                 <p><i class="fa fa-envelope"></i> {{$miProfile->email}}</p>
+                                <p><i class="fa fa-users" aria-hidden="true"></i></i> Codigo de grupo: <strong>{{$miProfile->grupo}}</strong></p>
                                 <div class="row m-t-lg">
                                     <div class="col-md-4">
                                         <span class="bar">5,3,9,6,5,9,7,3,5,2</span>

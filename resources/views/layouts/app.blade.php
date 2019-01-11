@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Yeti</title>
+    <title>Yeti-Task</title>
+<link rel="icon" type="image/png" href="{{asset('yeti.png')}}" />
 
     <!-- Styles -->
 
@@ -36,6 +37,13 @@
     <!-- Toastr -->
     <script src="{{asset('js/plugins/toastr/toastr.min.js')}}"></script>
 
+
+
+    <link href="{{asset('emoji/css/emoji.css')}}" rel="stylesheet">
+    <script src="{{asset('emoji/js/config.js')}}"></script>
+    <script src="{{asset('emoji/js/util.js')}}"></script>
+    <script src="{{asset('emoji/js/jquery.emojiarea.js')}}"></script>
+    <script src="{{asset('emoji/js/emoji-picker.js')}}"></script>
 <!--PLANTILLA------------------------------------------------------------------------>
 <style media="screen">
 .minimalize-styl-2 {
@@ -51,11 +59,67 @@
 }
 
 
-/*configuraciones de color rojo*/
+.emoji-picker-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    font-size: 20px;
+    opacity: 0.7;
+    z-index: 100;
+    transition: none;
+    color: black;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.emoji-menu {
+  position: absolute;
+  right: 0;
+  z-index: 999;
+  width: 225px;
+  overflow: hidden;
+  border: 1px #dfdfdf solid;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
 
 </style>
-
 {!!Noty::__off()!!}
+
+
+<script>
+      $(function() {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '../emoji/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+      });
+    </script>
+    <script>
+      // Google Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49610253-3', 'auto');
+      ga('send', 'pageview');
+    </script>
 
 <script type="text/javascript" src="{{asset('js/push.min.js')}}"></script>
 
@@ -97,14 +161,21 @@
                       </div>
                   </li>
 
-                       <li>
+                     <li>
                     <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
+<<<<<<< HEAD
                 
                   @if(Auth::user()->rol !="soporte")
                   <li>
                       <a href=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
+=======
+
+                 @if(Auth::user()->rol =="super" || Auth::user()->rol =="common-user")
+                  <li>
+                      <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
+>>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
@@ -118,17 +189,23 @@
                         @endif
                       </ul>
                   </li>
+<<<<<<< HEAD
                   @endif
+=======
+                @endif
+>>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
 
-                  @if(Auth::user()->rol =="super")
-                  <li>
-                    <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
-                  </li>
+                  @if(Auth::user()->rol =="super" || Auth::user()->rol =="soporte")
+                    @if(Auth::user()->rol =="super")
+                    <li>
+                      <a href="{{ route('dayOFF.index')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Días libres</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
-                  </li>
+                    <li>
+                      <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
+                    </li>
 
+<<<<<<< HEAD
                   <li>
                     <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
                   </li>
@@ -136,19 +213,30 @@
                   <li>
                     <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
                   </li>
+=======
+                    <li>
+                      <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                    </li>
+                    @else
+                      <li>
+                        <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
+                      </li>
+                    @endif
+>>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
                   @endif
 
-
+                   @if(Auth::user()->rol !="soporte")
                   <li>
                     <a href=""><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
-                          @if(Auth::user()->rol == 'super')
+                        @if(Auth::user()->rol == 'super')
                           <li><a href="{{ route('notificaciones-sistema')}}">Notificaciones del sistema</a></li>
                           @endif
                       </ul>
                   </li>
+                  @endif
 
                    @if(Auth::user()->rol !="soporte")
                    <li>
@@ -159,6 +247,11 @@
                       </ul>
                   </li>
                   @endif
+<<<<<<< HEAD
+=======
+
+                  
+>>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
 
 
               </ul>
@@ -294,7 +387,7 @@
 
 
 
-                         
+
 
 
 
@@ -317,7 +410,7 @@ function obtener(){
        con = data.length;
 
          $("#num").append(con);
-       
+
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
 
@@ -342,8 +435,8 @@ function obtener(){
      }else{
       $('#notisalv').append('<h3>No hay notificaciones</h3>');
      }
- 
-      
+
+
 
      },
      error: function(){

@@ -27,6 +27,7 @@
                                           <div class="input-group date">
                                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                               <input type="date" name="fecha" class="form-control" value="">
+                                              <input type="hidden" name="grupo" value="{{Auth::user()->grupo}}" class="form-control" value="">
                                           </div>
                                       </div>
                                     </div>

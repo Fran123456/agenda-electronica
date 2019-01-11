@@ -123,6 +123,9 @@
                                            @else
                                             <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
                                           @endif
+
+
+
                                             <td>{{ date("d-m-Y",strtotime($value->fecha_finalizacion))    }}</td>
 
 

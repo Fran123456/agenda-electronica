@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dias;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DiasAsueto;
+use Illuminate\Support\Facades\Auth;
 
 class DiasAsuetoController extends Controller
 {
@@ -20,7 +21,7 @@ class DiasAsuetoController extends Controller
      */
     public function index()
     {
-        $days = DiasAsueto::all();
+        $days = DiasAsueto::where('grupo' , Auth::user()->grupo)->get();
         return view('Asueto.AsuetoIndex', compact('days'));
     }
 

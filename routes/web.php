@@ -19,6 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//para registro de grupo
+route::get('bienvenido-grupo' ,'Auth\RegisterController@code_validate_form')->name('bienvenido-grupo');
+route::post('register_code' ,'Auth\RegisterController@validar_code')->name('register_code');
+route::get('Registro/{id}' ,'Auth\RegisterController@registro_form')->name('Registro');
+route::get('registe-grupo' ,'Auth\RegisterController@registro_form_grupo')->name('registe-grupo');
+
+//para registro de grupo
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 //rutas para avatar
@@ -70,11 +78,13 @@ Route::get('delete-noti-send/{id}', 'Notificaciones\NotyController@destroy_send'
 Route::get('notificaciones-sistema', 'Notificaciones\NotyController@notificaciones_sistema')->name('notificaciones-sistema');
 
 
+//notas
+Route::get('nueva-nota', 'HomeController@form_nota')->name('nueva-nota');
+Route::post('guardarNota', 'HomeController@guardarNota')->name('guardarNota');
+Route::get('eliminar-nota/{id}', 'HomeController@eliminar_nota')->name('eliminar-nota');
 
 //PUSH
 Route::get('push', 'Notificaciones\NotyController@notificationPUSH')->name('push');
 
 //MAIL
 Route::get('mail/send', 'Email\EmailController@send');
-
-
