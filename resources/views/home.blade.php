@@ -262,7 +262,5 @@ window.smartsupp||(function(d) {
         </div>  
 </div>
 
-  <!-- Custom and plugin javascript -->
-    <script src="{{asset('js/inspinia.js')}}"></script>
-    <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>
+
 @endsection

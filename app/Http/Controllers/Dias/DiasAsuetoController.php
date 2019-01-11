@@ -21,7 +21,7 @@ class DiasAsuetoController extends Controller
      */
     public function index()
     {
-        $days = DiasAsueto::where('grupo' , Auth::user()->grupo)->paginate(2);
+        $days = DiasAsueto::where('grupo' , Auth::user()->grupo)->paginate(8);
         return view('Asueto.AsuetoIndex', compact('days'));
     }
 

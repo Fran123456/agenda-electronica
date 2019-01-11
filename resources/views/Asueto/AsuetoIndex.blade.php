@@ -58,10 +58,10 @@
 
 
 
-    <div class="col-md-6 col-ms-6 col-xs-6">
+    <div class="col-md-6 col-ms-6 col-xs-12">
         <h3>Gestión de días no laborales</h3>
     </div>
-    <div class="col-md-6 col-ms-6 col-xs-6 text-right">
+    <div class="col-md-6 col-ms-6 col-xs-12 text-right">
         <a href="{{route('dayOFF.create')}}" class="btn btn-success">Agrega</a>
         <br>
         <br>
@@ -70,54 +70,14 @@
 
 
 
- <!--<div class="col-lg-12 col-ms-12 col-xs-12">
-               <div class="ibox float-e-margins" >
-                        <div class="ibox-content" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped" id="asueto">
-                                    <thead>
-                                        <tr class="">
-                                            <th width="60">N°</th>
-                                            <th width="80">Fecha</th>
-                                            <th>Descripción</th>
-                                            <th width="100">Editar</th>
-                                            <th width="100">Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($days as $key => $value)
-                                        <tr>
-                                            <td>{{$key +1}}</td>
-                                            <td>{{date("d-m-Y",strtotime($value->fecha)) }}</td>
-                                            
-                                            <td>{{ $value->descripcion}}</td>
-                                            <td><a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
-                                              <i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                                            <td>
-                                               {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
-                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
-                                                          <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                {!! Form::close() !!}
-                                             </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-             </div>
-       </div>-->
 
 
        @foreach($days as $key => $value)
-             <div class="col-md-3 col-sm-12 col-xs-12">
+             <div class="col-md-4 col-sm-12 col-xs-12"><br> <br> 
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <div class="product-imitation">
-                                [ INFO ]
-                            </div>
+                           
                             <div class="product-desc">
                                 <span class="product-price">
                                    {{date("d-m-Y",strtotime($value->fecha)) }}

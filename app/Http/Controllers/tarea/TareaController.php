@@ -31,7 +31,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::where('grupo' , Auth::user()->grupo)->get();
+        $tareas = Tarea::where('grupo' , Auth::user()->grupo)->paginate(8);
         $titulo = "Gestión de tareas";
         return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
     }
