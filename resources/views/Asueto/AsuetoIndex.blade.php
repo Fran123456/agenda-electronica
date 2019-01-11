@@ -70,7 +70,7 @@
 
 
 
- <div class="col-lg-12 col-ms-12 col-xs-12">
+ <!--<div class="col-lg-12 col-ms-12 col-xs-12">
                <div class="ibox float-e-margins" >
                         <div class="ibox-content" >
                             <div class="table-responsive">
@@ -107,7 +107,51 @@
                             </div>
                         </div>
              </div>
+       </div>-->
+
+
+       @foreach($days as $key => $value)
+             <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="product-imitation">
+                                [ INFO ]
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                   {{date("d-m-Y",strtotime($value->fecha)) }}
+                                </span>
+                                <a  class="product-name"> {{ $value->descripcion}}</a>
+                                
+                                
+                                 <div class="m-t text-righ">
+                                       <a class="btn btn-warning" href="{{route('dayOFF.edit',$value->id)}}">
+                                       <i class="fa fa-pencil" aria-hidden="true"></i> Editar</a> 
+                                   
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    {!! Form::open(['route' => ['dayOFF.destroy', $value->id], 'method' => 'DELETE']) !!}
+                                                    <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-sm btn-danger">
+                                                          <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+                                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       @endforeach
+
+       <div class="col-md-12">
+         {{$days->render()}}
        </div>
+
+       
+
+
+
 
 
 

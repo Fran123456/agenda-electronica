@@ -8,9 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Yeti-Task</title>
+    <title>Mobile</title>
 <link rel="icon" type="image/png" href="{{asset('yeti.png')}}" />
-
     <!-- Styles -->
 
 
@@ -52,13 +51,10 @@
   font-size: 14px;
   float: left;
 }
-
 .navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, .navbar-top-links .dropdown-alerts {
   width: 370px;
   min-width: 0;
 }
-
-
 .emoji-picker-icon {
     cursor: pointer;
     position: absolute;
@@ -75,7 +71,6 @@
     -o-user-select: none;
     user-select: none;
 }
-
 .emoji-menu {
   position: absolute;
   right: 0;
@@ -91,7 +86,6 @@
   -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
 }
-
 </style>
 {!!Noty::__off()!!}
 
@@ -116,7 +110,6 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-49610253-3', 'auto');
       ga('send', 'pageview');
     </script>
@@ -165,17 +158,10 @@
                     <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
-<<<<<<< HEAD
-                
-                  @if(Auth::user()->rol !="soporte")
-                  <li>
-                      <a href=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
-=======
 
                  @if(Auth::user()->rol =="super" || Auth::user()->rol =="common-user")
                   <li>
                       <a href="Tareas.index"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span class="nav-label">Tareas</span> <span class="fa arrow"></span></a>
->>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
                       <ul class="nav nav-second-level collapse">
                         @if(Auth::user()->rol =="super")
                           <li><a href="{{route('Tareas.index')}}">Todas las tareas</a></li>
@@ -189,11 +175,7 @@
                         @endif
                       </ul>
                   </li>
-<<<<<<< HEAD
-                  @endif
-=======
                 @endif
->>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
 
                   @if(Auth::user()->rol =="super" || Auth::user()->rol =="soporte")
                     @if(Auth::user()->rol =="super")
@@ -205,15 +187,6 @@
                       <a href="{{ route('avatar.index')}}"><i class="fa fa-smile-o" aria-hidden="true"></i> <span class="nav-label">Avatar</span></a>
                     </li>
 
-<<<<<<< HEAD
-                  <li>
-                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
-                  </li>
-                  @elseif(Auth::user()->rol =="soporte")
-                  <li>
-                    <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
-                  </li>
-=======
                     <li>
                       <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
                     </li>
@@ -222,12 +195,11 @@
                         <a href="{{ route('Perfil.index')}}"><i class="fa fa-users" aria-hidden="true"></i> <span class="nav-label">Usuarios</span></a>
                       </li>
                     @endif
->>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
                   @endif
 
                    @if(Auth::user()->rol !="soporte")
                   <li>
-                    <a href=""><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
+                    <a href="Tareas1.index"><i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav-label">Notificaciones</span> <span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="{{ route('Notificaciones.index')}}">Mis notificaciones</a></li>
                           <li><a href="{{ route('notificaciones-enviadas')}}">Notificaciones enviadas</a></li>
@@ -247,11 +219,8 @@
                       </ul>
                   </li>
                   @endif
-<<<<<<< HEAD
-=======
 
                   
->>>>>>> 2d4b1f028c8b9d292777431a05bc6dce80f8834f
 
 
               </ul>
@@ -384,17 +353,9 @@
   window.onload = function (){
     Push.Permission.request();
   }
-
-
-
-
-
-
-
 function obtener(){
  $('#notisalv').remove();
  $('#mayor').append('<ul class="dropdown-menu dropdown-alerts" id="notisalv"></ul>');
-
  $('#num').remove();
  $('#padreA').append('<span class="label label-primary" id="num"></span>');
   var html2 = "";
@@ -408,13 +369,9 @@ function obtener(){
      success: function(data){
       console.log(data);
        con = data.length;
-
          $("#num").append(con);
-
       if(con > 0 && con != 0){
          for (var i = 0; i < data.length; i++) {
-
-
          html2 = html2 + '<li >'+
                            '<div class="dropdown-messages-box">'+
                                 '<a href="{{Request::root()}}/nueva-notificacion/'+data[i].codigo_noty+'" class="pull-left">'+
@@ -429,15 +386,11 @@ function obtener(){
                             '</div>'+
                         '</li>'+
          '</li><li class="divider"></li>';
-
        }
        $("#notisalv").append(html2);
      }else{
       $('#notisalv').append('<h3>No hay notificaciones</h3>');
      }
-
-
-
      },
      error: function(){
          alert("error");
@@ -445,11 +398,8 @@ function obtener(){
   });
 }
 obtener();
-
-
 function obtenerSecuencia(){
  var numeroNoti = $('#num').text();
-
   var html2 = "";
   var con = 0;
    $.ajax({
@@ -460,17 +410,11 @@ function obtenerSecuencia(){
      dataType:  'json',
      success: function(data){
        con = data.length;
-
        if(con > numeroNoti){
-
          $('#notisalv').remove();
          $('#mayor').append('<ul class="dropdown-menu dropdown-alerts" id="notisalv"></ul>');
-
          $('#num').remove();
          $('#padreA').append('<span class="label label-primary" id="num"></span>');
-
-
-
          $("#num").append(con);
           for (var i = 0; i < data.length; i++) {
             html2 = html2 + '<li >'+
@@ -487,11 +431,9 @@ function obtenerSecuencia(){
                             '</div>'+
                         '</li>'+
          '</li><li class="divider"></li>';
-
           }
           $("#notisalv").append(html2);
           //Bienvenida();
-
           Push.create('Nueva notificación de: '+data[0].name,{
              body: data[0].titulo,
              icon:  data[0].avatar_img,
@@ -501,9 +443,7 @@ function obtenerSecuencia(){
              },
              vibrate: ['100', '100', '100'],
            })
-
        }
-
      },
      error: function(){
          alert("error");
@@ -511,7 +451,6 @@ function obtenerSecuencia(){
   });
 }
 setInterval(function(){ obtenerSecuencia(); }, 10000);
-
 </script>
 
 </body>
