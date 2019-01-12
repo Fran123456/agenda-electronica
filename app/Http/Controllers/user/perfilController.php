@@ -30,7 +30,7 @@ class perfilController extends Controller
      */
     public function index()
     {
-        $users = User::where('grupo', Auth::user()->grupo)->get();
+        $users = User::where('grupo', Auth::user()->grupo)->paginate(9);
         return view('users.UserIndex', compact('users'));
     }
 
@@ -67,7 +67,7 @@ class perfilController extends Controller
 
 
 
-    
+
 
     /**
      * Display the specified resource.

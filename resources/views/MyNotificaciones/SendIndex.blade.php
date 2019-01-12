@@ -15,6 +15,44 @@
   min-height: 568px;
   position: relative !important;
 }
+
+ul.notes li div a.data {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: inherit;
+}
+
+ul.notes li {
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    float: left;
+}
+
+ul.notes li div {
+    text-decoration: none;
+    color: #000;
+    background: #ffc;
+    display: block;
+    height: 180px;
+    width: 210px;
+    padding: 1em;
+    -moz-box-shadow: 5px 5px 7px #212121;
+    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    -moz-transition: -moz-transform 0.15s linear;
+    -o-transition: -o-transform 0.15s linear;
+    -webkit-transition: -webkit-transform 0.15s linear;
+}
+
+ul.notes li div {
+  -webkit-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -moz-transform: rotate(-6deg);
+  -ms-transform: rotate(-6deg);
+}
 </style>
 <div class="container">
 
@@ -58,10 +96,10 @@
 
 
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-xs-12">
         <h3>Gestión de notificaciones enviadas</h3>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-6 col-xs-12 text-right">
         <a href="{{route('Notificaciones.create')}}" class="btn btn-success"> <i class="fa fa-thumb-tack" aria-hidden="true"></i>
  Crear notificación</a>
         <br>
@@ -70,41 +108,42 @@
 
 
 
+    @foreach($misNotis as $key => $value)
+           <div class="col-md-3 col-xs-12">
+                         <div class="wrapper wrapper-content animated fadeInUp">
+                                   <ul class="notes">
+                                        <li>
+                                         <div>
 
-          <div class="col-lg-12 col-ms-12 col-xs-12">
-                   <div class="ibox float-e-margins" >
-                            <div class="ibox-content" >
-                                <div class="table-responsive">
-                                   <table class="table table-bordered table-hover table-striped" id="asueto">
-                                        <thead>
-                                            <tr class="">
-                                                <th width="60">N°</th>
-                                                <th >Título</th>
-                                                 <th>Fecha</th>
-                                                <th width="100">Ver</th>
-                                                <th width="100">Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($misNotis as $key => $value)
-                                            <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>{{$value->titulo}}</td>
-                                                <td>{{$value->created_at}}</td>
-                                                <td><a class="btn btn-info" href="{{route('nueva-notificacion',$value->codigo_noty)}}">
-                                                  <i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                                                <td>
-                                                    <a class="btn btn-danger" href="{{route('delete-noti-send',$value->codigo_noty)}}">
-                                                     <i class="fa fa-trash" aria-hidden="true"></i></a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                 </div>
-           </div>
+                                             <small>{{$value->created_at}}</small>
+                                             <br>
+                                             {{$value->titulo}}
+                                             <br><br>
+                                             Estado: {{ $value->estado}}
+
+
+
+                                                 <a class="data"  href="{{route('nueva-notificacion',$value->codigo_noty)}}">
+                                                   <i class="fa fa-eye" aria-hidden="true"></i></a>
+
+
+                                                 <a href="{{route('delete-noti-send',$value->codigo_noty)}}"><i class="fa fa-trash-o "></i></a>
+
+
+                                         </div>
+                                        </li>
+                                  </ul>
+                           </div>
+                     </div>
+     @endforeach
+    <br>
+    <div class="container text-center">
+      <div class="col-md-12">
+        {{$misNotis->render()}}
+      </div>
+    </div>
+
+<br>
 </div>
 
 

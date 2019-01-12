@@ -14,7 +14,7 @@
   }
 </style>
 
-<div class="container">
+<div class="">
     <div class="row">
         <div class="col-md-12">
 
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                                      
+
 
                             <div class=" animated fadeInRight">
                             <div class="mail-box-header">
@@ -67,8 +67,8 @@
                                           </div>
                                     @if($tarea != "")
                                           <div class="mail-attachment">
-                                             
-                                              <h4>Tarea asignada:</h4> 
+
+                                              <h4>Tarea asignada:</h4>
                                                   <div class="panel panel-primary">
                                                       <div class="panel-heading">
                                                           <h4>{{$tarea->Titulo}}</h4>
@@ -83,9 +83,9 @@
                                                           Estado: <span class="label label-default">{{ $tarea->estado}}</span>
                                                       </div>
                                                   </div>
-                                               
+
                                                  <!-- <div class="well"><H4>COLABORADORES:</H4>
-                                                      
+
                                                       <div class="container">
                                                           <div class="row">
                                                             @for($i = 0; $i <count($perfiles); $i++)
@@ -102,7 +102,7 @@
                                                               </div>
                                                               @endfor
                                                           </div>
-                                                        </div>                                                        
+                                                        </div>
 
                                                   </div>-->
 

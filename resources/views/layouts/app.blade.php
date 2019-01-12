@@ -155,7 +155,7 @@
                   </li>
 
                      <li>
-                    <a href="{{ route('home')}}"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
+                    <a href="{{ route('home')}}"><i class="fa fa-home" aria-hidden="true"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
 
@@ -220,7 +220,7 @@
                   </li>
                   @endif
 
-                  
+
 
 
               </ul>
@@ -379,7 +379,7 @@ function obtener(){
                                 '</a>'+
                                 '<div class="media-body">'+
                                     'Nueva notificación de: <strong>'+data[i].name+'<br></strong>'+
-                                     '<p>'+data[i].titulo+'</p>'+
+                                     '<br>'+data[i].titulo+
                                     '<small class="text-muted">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
                                   '</small>'+
                                 '</div>'+
@@ -424,7 +424,7 @@ function obtenerSecuencia(){
                                 '</a>'+
                                 '<div class="media-body">'+
                                     'Nueva notificación de: <strong>'+data[i].name+'<br></strong>'+
-                                     '<p>'+data[i].titulo+'</p>'+
+                                     '<br>'+data[i].titulo+''+
                                     '<small class="text-muted">'+data[i].created_at.substr(0,10)+' a las:'+data[i].created_at.substr(10,18)+
                                   '</small>'+
                                 '</div>'+

@@ -5,7 +5,7 @@
 <script src="{{asset('ckeditor/ckeditor.js')}}">
 
 </script>
-<div class="container">
+<div class="">
     <div class="row">
         <div class="col-md-12">
 

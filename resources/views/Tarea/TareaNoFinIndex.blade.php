@@ -21,7 +21,7 @@
   }
 
 
-  
+
   .container {
   padding-right:0px;
   padding-left: 0px;
@@ -88,7 +88,72 @@
     </div>
 
 
-  <div class="col-lg-12 col-ms-12 col-xs-12">
+
+    @foreach($tareas as $key => $value)
+               <div class="col-md-4 col-sm-12 col-xs-12"><br> <br>
+                      <div class="ibox">
+                          <div class="ibox-content product-box">
+
+
+                              <div class="product-desc">
+                                  <span class="product-price">
+                                    {{$value->Titulo}}
+                                  </span>
+                                   <div class="m-t text-righ">
+
+                                           <div>
+                                                <table class="table table-responsive">
+                                                    <tbody>
+                                                    <tr class="text-center">
+                                                            <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3>
+                                                              {!! Form::open(['route' => ['Tareas.destroy', $value->codigo_tarea], 'method' => 'DELETE']) !!}
+                                                                   <button onclick="return confirm('Estas seguro de Eliminar este Registro')" class="btn btn-danger btn-circle ">
+                                                                         <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                   </button>
+                                                               {!! Form::close() !!}
+                                                            </td>
+                                                    </tr>
+                                                    <tr class="text-center">
+                                                        <td>
+                                                          Finalizada:  {{ date("d-m-Y",strtotime($value->fecha_finalizacion))    }}
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                      <td class="text-center"><a  class="btn btn-warning" href="{{route('reprogramar-tarea', $value->codigo_tarea)}}">
+                                                          <i class="fa fa-clock-o" aria-hidden="true"></i> Reprogramar</a></td>
+                                                    </tr>
+
+                                                     @if(Auth::user()->rol =="super")
+                                                     <tr>
+                                                         <td class="text-center">
+                                                           <a class="btn btn-info btn-circle " href="{{route('Tareas.show',$value->codigo_tarea)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                         </td>
+                                                     </tr>
+                                                  @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+         @endforeach
+
+         <div class="col-md-12">
+           {{$tareas->render()}}
+         </div>
+
+
+
+
+
+
+
+
+  <!--<div class="col-lg-12 col-ms-12 col-xs-12">
                <div class="ibox float-e-margins" >
                         <div class="ibox-content" >
                             <div class="table-responsive">
@@ -101,7 +166,7 @@
                                             <th class="text-center" width="100">Fecha finalización</th>
                                             <th class="text-center" width="40">Reprogramar</th>
                                             <th class="text-center" width="30">Opciones generales</th>
-                                         
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -112,12 +177,12 @@
                                               <td class="d"><h3><span class="label label-danger">{{ $value->estado}}</span></h3></td>
 
                                             <td>{{date("d-m-Y",strtotime($value->fecha_finalizacion)) }}</td>
-                                              
+
                                           <td><a  class="btn btn-info" href="{{route('reprogramar-tarea', $value->codigo_tarea)}}">
                                               <i class="fa fa-clock-o" aria-hidden="true"></i></a></td>
-                                          
-                                          
-                                            <td><!-- Single button -->
+
+
+
                                               <div class="btn-group ">
                                                 <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                   <i class="fa fa-pencil" aria-hidden="true"></i> Opciones generales<span class="caret"></span>
@@ -144,7 +209,7 @@
                             </div>
                         </div>
              </div>
-       </div>
+       </div>-->
 
 
 

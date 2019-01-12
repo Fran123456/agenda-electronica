@@ -31,7 +31,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::where('grupo' , Auth::user()->grupo)->paginate(8);
+        $tareas = Tarea::where('grupo' , Auth::user()->grupo)->where('estado' , '!=', 'No terminada')->paginate(9);
         $titulo = "Gestión de tareas";
         return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
     }
@@ -313,14 +313,15 @@ class TareaController extends Controller
 
   public function MyTask(){ //mis tareas muestra las tareas asignadas al usuario que se ha logeado
       $titulo ="Gestión de mis tareas asignadas";
-        $tareasxuser = Tarea_Usuario::where('user_id', Auth::user()->id)->get();
+        $tareasxuser = Tarea_Usuario::where('user_id', Auth::user()->id)->paginate(9);
 
         $tareas = array();
         foreach ($tareasxuser as $key => $value) {
           $tareas[$key] = Tarea::where('codigo_tarea', $value->tarea_id)->first();
         }
 
-        return view('Tarea.TareaIndex' , compact('tareas', 'titulo'));
+
+        return view('Tarea.TareaMy' , compact('tareas', 'titulo','tareasxuser'));
   }
 
 
@@ -412,30 +413,26 @@ class TareaController extends Controller
 
    public function tareas_No_finalizada(){
 
-
-
-
-
-        $tareas = Tarea::where('estado','No terminada')->where('grupo' , Auth::user()->grupo)->get();
+        $tareas = Tarea::where('estado','No terminada')->where('grupo' , Auth::user()->grupo)->paginate(9);
         $titulo = "Tareas no finalizadas";
         return view('Tarea.TareaNoFinIndex' , compact('tareas', 'titulo'));
    }
 
 
    public function tareas_sin_iniciar(){
-        $tareas = Tarea::where('estado','Inicio')->where('grupo' , Auth::user()->grupo)->get();
+        $tareas = Tarea::where('estado','Inicio')->where('grupo' , Auth::user()->grupo)->paginate(9);
         $titulo = "Tareas sin iniciar";
         return view('Tarea.TareaInicioIndex' , compact('tareas', 'titulo'));
    }
 
      public function tareas_proceso(){
-        $tareas = Tarea::where('estado','Proceso')->where('grupo' , Auth::user()->grupo)->get();
+        $tareas = Tarea::where('estado','Proceso')->where('grupo' , Auth::user()->grupo)->paginate(9);
         $titulo = "Tareas en proceso";
         return view('Tarea.TareaProcesoIndex' , compact('tareas', 'titulo'));
    }
 
     public function tareas_fin(){
-        $tareas = Tarea::where('estado','Finalizado')->where('grupo' , Auth::user()->grupo)->get();
+        $tareas = Tarea::where('estado','Finalizado')->where('grupo' , Auth::user()->grupo)->paginate(9);
         $titulo = "Tareas finalizadas";
         return view('Tarea.TareaFinIndex' , compact('tareas', 'titulo'));
    }

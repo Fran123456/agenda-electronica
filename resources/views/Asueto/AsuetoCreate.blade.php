@@ -4,9 +4,9 @@
 
 
 
-<div class="container">
+<div class="">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 col-sx-12">
 
              <div class="ibox float-e-margins">
                         <div class="ibox-title">

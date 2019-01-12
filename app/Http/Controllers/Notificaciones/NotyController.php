@@ -23,7 +23,7 @@ class NotyController extends Controller
      */
     public function index()
     {
-        $noty = Notificacion_Usuario::orderBy('created_at','desc')->where('user_id' , Auth::user()->id)->get();
+        $noty = Notificacion_Usuario::orderBy('created_at','desc')->where('user_id' , Auth::user()->id)->paginate(12);
 
 
         $notyAll = array();
@@ -35,7 +35,7 @@ class NotyController extends Controller
     }
 
     public function notificaciones_sistema(){
-       $misNotis = Notificacion::where('creador' , 1)->get();
+       $misNotis = Notificacion::where('creador' , 1)->paginate(12);
        return view('MyNotificaciones.sistemaAll', compact('misNotis'));
     }
 
@@ -133,7 +133,7 @@ class NotyController extends Controller
      */
     public function destroy($id)
     {
-     
+
     }
 
     public function destroy_me($id){
@@ -165,14 +165,14 @@ class NotyController extends Controller
        DB::table('notificacion_user')->where('notificacion_id', $id)->where('user_id', Auth::user()->id)->update(['estado' => "LEIDA"]);
 
 
-  
+
        return view('Notificaciones.NotificacionCreate', compact('notificacion', 'creador', 'tarea', 'perfiles'));
     }
 
 
     public function send_noty(){
 
-        $misNotis = Notificacion::where('creador', Auth::user()->id)->get();
+        $misNotis = Notificacion::where('creador', Auth::user()->id)->paginate(12);
        /* $noty = Notificacion_Usuario::orderBy('created_at','desc')->where('user_id' , Auth::user()->id)->get();
         $notyAll = array();
         foreach ($noty as $key => $value) {
@@ -216,7 +216,7 @@ class NotyController extends Controller
     }
        echo json_encode($informacion);
 
-    
+
       // return Response::json($informacion);
     }
 

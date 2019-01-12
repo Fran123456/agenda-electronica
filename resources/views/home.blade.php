@@ -61,7 +61,7 @@ ul.notes li div {
           </script>
        @endif
 
-     
+
 
       @if(session('eliminado'))
         <script type="text/javascript">
@@ -77,52 +77,56 @@ ul.notes li div {
 
 
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 col-xs-12">
+                      <div class="ibox float-e-margins">
+                           <div class="ibox-title">
+                               <h5>CALENDARIO</h5>
+                               <div class="ibox-tools">
+                                   <a class="collapse-link">
+                                       <i class="fa fa-chevron-up"></i>
+                                   </a>
+
+                               </div>
+                           </div>
+                           <div class="ibox-content">
+                                        <div class="cal1"></div>
+                                       <div class="cal2">
+                                           <script type="text/template" id="template-calendar">
+                                           </script>
+                                        </div>
+
+                           </div>
+                       </div>
+             </div>
+
+             <div class="col-md-7 col-xs-12">
+               <div class="text-center"><h3>Mis notas</h3> <a href="{{route('nueva-nota')}}"><i class="fa fa-plus-square" aria-hidden="true"></i></a> </div>
+                 <div class="wrapper wrapper-content animated fadeInUp">
+                   @if(count($notas) == 0)
+                     <div class="well text-center">No hay notas</div>
+                   @else
+                       <ul class="notes">
+                           @foreach($notas as $value)
+                           <li>
+                               <div>
+                                   <small>{{$value->created_at}}</small>
+                                   <br>
+                                   {{$value->contenido}}
+                                   <a href="{{route('eliminar-nota', $value->id)}}"><i class="fa fa-trash-o "></i></a>
+                               </div>
+                           </li>
+                           @endforeach
+                          @endif
+                       </ul>
+                   </div>
+             </div>
+  </div>
+</div>
 
 
 
- <div class="col-md-5">
-                   <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>CALENDARIO</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                               
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                                     <div class="cal1"></div>
-                                    <div class="cal2">
-                                        <script type="text/template" id="template-calendar">
-                                        </script>
-                                     </div>
-       
-                        </div>
-                    </div>
-          </div>
-
-          <div class="col-md-7">
-            <div class="text-center"><h3>Mis notas</h3> <a href="{{route('nueva-nota')}}"><i class="fa fa-plus-square" aria-hidden="true"></i></a> </div>
-              <div class="wrapper wrapper-content animated fadeInUp">
-                    <ul class="notes">
-                        @if(count($notas) == 0)
-                          <div class="well text-center">No hay notas</div>
-                        @else
-                        @foreach($notas as $value)
-                        <li>
-                            <div>
-                                <small>{{$value->created_at}}</small>
-                                <br>
-                                {{$value->contenido}}
-                                <a href="{{route('eliminar-nota', $value->id)}}"><i class="fa fa-trash-o "></i></a>
-                            </div>
-                        </li>
-                        @endforeach
-                       @endif
-                    </ul>
-                </div>
-          </div>
 
 
 
@@ -140,127 +144,128 @@ window.smartsupp||(function(d) {
 })(document);
 </script>
 
-
-
-
-
-
-<div class="container" style="padding-bottom: 50px; padding-top: 30px">
 @if(Auth::user()->rol == "super")
-
-
-<div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Todas las tareas para finalizar hoy</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="project-list">
-                            @if(count($actividadesHoyA) > 0)
-                                <table class="table table-hover">
-                                    <tbody>
-                                        @foreach($actividadesHoyA as $key => $value)
-                                    <tr>
-                                        <td class="project-status">
-                                            @if($value->estado == "Inicio")
-                                            <span class="label label-default">{{$value->estado}}</span>
-                                            @elseif($value->estado == "Proceso")
-                                             <span class="label label-warning">{{$value->estado}}</span>
-                                            @elseif($value->estado == "Finalizado")
-                                             <span class="label label-primary">{{$value->estado}}</span>
-                                             @endif
-                                        </td>
-
-                                        <td class="project-title">
-                                            <a href="project_detail.html">{{$value->Titulo}}</a>
-                                            <br/>
-                                            <small>{{$value->fecha_finalizacion}}</small>
-                                        </td>
-                                        <td class="project-people">
-                                           @for($i=0; $i <count($usersA[$key]) ; $i++)
-                                         <!--  <span>{{$usersA[$key][$i]->name}}</span> -->
-                                            <a  data-toggle="tooltip" data-placement="left" title="{{$usersA[$key][$i]->name}}" href="{{route('Perfil.show',$usersA[$key][$i]->id)}}"><img alt="image" class="img-circle" src="{{asset($usersA[$key][$i]->avatar_img)}}"></a>
-                                           @endfor
-                                        </td>
-                                        <td class="project-actions">
-                                            <a href="{{route('Tareas.show',$value->codigo_tarea )}}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-                                            
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                                @else
-                                <h3>No hay tareas</h3>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>   
-
-
-@endif
-
-
-
-    <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Mis Tareas por finalizar hoy</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="project-list">
-                              @if(count($actividadesHoy) > 0)
-                                <table class="table table-hover">
-                                    <tbody>
-                                        @foreach($actividadesHoy as $key => $value)
-                                    <tr>
-                                        <td class="project-status">
-                                            @if($value->estado == "Inicio")
-                                            <span class="label label-default">{{$value->estado}}</span>
-                                            @elseif($value->estado == "Proceso")
-                                             <span class="label label-warning">{{$value->estado}}</span>
-                                            @elseif($value->estado == "Finalizado")
-                                             <span class="label label-primary">{{$value->estado}}</span>
-                                             @endif
-                                        </td>
-
-                                        <td class="project-title">
-                                            <a href="project_detail.html">{{$value->Titulo}}</a>
-                                            <br/>
-                                            <small>{{$value->fecha_finalizacion}}</small>
-                                        </td>
-                                        <td class="project-people">
-                                           @for($i=0; $i <count($users[$key]) ; $i++)
-                                         <!--  <span>{{$users[$key][$i]->name}}</span> -->
-                                            <a  data-toggle="tooltip" data-placement="left" title="{{$users[$key][$i]->name}}" href="{{route('Perfil.show',$users[$key][$i]->id)}}"><img alt="image" class="img-circle" src="{{asset($users[$key][$i]->avatar_img)}}"></a>
-                                           @endfor
-                                        </td>
-                                        <td class="project-actions">
-                                            <a href="{{route('Tareas.show',$value->codigo_tarea )}}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Ver </a>
-                                            
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                                @else
-                                <h3>No hay tareas</h3>
-                  
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
+<div class="text-center">
+  <hr style="border: 0.4px solid #E6E6E6">
+  <h3>Todas las tareas de hoy</h3>
+  <hr style="border: 0.4px solid #E6E6E6">
 </div>
+<div class="container">
+  <div class="row">
+      @if(count($actividadesHoyA) > 0)
+        @foreach($actividadesHoyA as $key => $value)
+          <div class="col-md-4 col-sm-12 col-xs-12"><br><br>
+                 <div class="ibox">
+                     <div class="ibox-content product-box">
+                         <div class="product-desc">
+                             <span class="product-price">
+                               {{$value->Titulo}}
+                             </span>
+                              <div class="m-t text-righ">
+                                           <table class="table table-responsive">
+                                               <tbody>
+                                               <tr class="text-center">
+                                                      @if($value->estado == "Inicio")
+                                                      <td class="a"><h2><span class="label label-default">{{ $value->estado}}</span></h2></td>
+                                                     @elseif($value->estado == "Proceso")
+                                                       <td class="b"><h2><span class="label label-warning">{{ $value->estado}}</span></h2></td>
+                                                     @elseif($value->estado == "Finalizado")
+                                                       <td class="c"><h2><span class="label label-primary">{{ $value->estado}}</span></h2></td>
+                                                      @else
+                                                       <td class="d"><h2><span class="label label-danger">{{ $value->estado}}</span></h2></td>
+                                                      @endif
+                                               </tr>
+                                               <tr class="text-center">
+                                                   <td>
+                                                     <a href="{{route('Tareas.show',$value->codigo_tarea )}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Ver </a>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                 <td class="project-people">
+                                                    @for($i=0; $i <count($usersA[$key]) ; $i++)
+
+                                                     <a  data-toggle="tooltip" data-placement="left" title="{{$usersA[$key][$i]->name}}" href="{{route('Perfil.show',$usersA[$key][$i]->id)}}"><img alt="image" class="img-circle" src="{{asset($usersA[$key][$i]->avatar_img)}}">
+                                                     </a>
+                                                    @endfor
+                                                 </td>
+                                               </tr>
+                                               </tbody>
+                                           </table>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+          @endforeach
+       @endif
+  </div>
+</div>
+@else
+ No hay tareas
+@endif
+<br>
+
+
+
+<div class="text-center">
+  <hr style="border: 0.4px solid #E6E6E6">
+  <h3>Mis tareas para hoy</h3>
+  <hr style="border: 0.4px solid #E6E6E6">
+</div>
+<div class="container">
+  <div class="row">
+      @if(count($actividadesHoy) > 0)
+        @foreach($actividadesHoy as $key => $value)
+          <div class="col-md-4 col-sm-12 col-xs-12"><br><br>
+                 <div class="ibox">
+                     <div class="ibox-content product-box">
+                         <div class="product-desc">
+                             <span class="product-price">
+                               {{$value->Titulo}}
+                             </span>
+                              <div class="m-t text-righ">
+                                           <table class="table table-responsive">
+                                               <tbody>
+                                               <tr class="text-center">
+                                                      @if($value->estado == "Inicio")
+                                                      <td class="a"><h2><span class="label label-default">{{ $value->estado}}</span></h2></td>
+                                                     @elseif($value->estado == "Proceso")
+                                                       <td class="b"><h2><span class="label label-warning">{{ $value->estado}}</span></h2></td>
+                                                     @elseif($value->estado == "Finalizado")
+                                                       <td class="c"><h2><span class="label label-primary">{{ $value->estado}}</span></h2></td>
+                                                      @else
+                                                       <td class="d"><h2><span class="label label-danger">{{ $value->estado}}</span></h2></td>
+                                                      @endif
+                                               </tr>
+                                               <tr class="text-center">
+                                                   <td>
+                                                     <a href="{{route('Tareas.show',$value->codigo_tarea )}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Ver </a>
+                                                   </td>
+                                               </tr>
+                                               <tr>
+                                                 <td class="project-people">
+                                                   @for($i=0; $i <count($users[$key]) ; $i++)
+
+                                                    <a  data-toggle="tooltip" data-placement="left" title="{{$users[$key][$i]->name}}" href="{{route('Perfil.show',$users[$key][$i]->id)}}"><img alt="image" class="img-circle" src="{{asset($users[$key][$i]->avatar_img)}}"></a>
+                                                   @endfor
+                                                 </td>
+                                               </tr>
+                                               </tbody>
+                                           </table>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+          @endforeach
+       @endif
+  </div>
+</div>
+
+
+<br><br>
+
+
 
 
 @endsection

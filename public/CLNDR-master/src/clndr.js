@@ -38,15 +38,16 @@
     // Namespace
     var pluginName = 'clndr';
 
+
     // This is the default calendar template. This can be overridden.
     var clndrTemplate =
         "<div class='clndr-controls'>" +
             "<div class='clndr-control-button'>" +
-                "<span class='clndr-previous-button'>Anterior</span>" +
+                "<span class='clndr-previous-button'> <i class='fa fa-chevron-left' aria-hidden='true'></i></span>" +
             "</div>" +
             "<div class='month'><%= month %> <%= year %></div>" +
             "<div class='clndr-control-button rightalign'>" +
-                "<span class='clndr-next-button'>Siguiente</span>" +
+                "<span class='clndr-next-button'><i class='fa fa-chevron-right'></i></span>" +
             "</div>" +
         "</div>" +
         "<table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>" +
